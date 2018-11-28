@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:padding="10dp"
+    android:background="#eee"
+    >
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nav_user_headShot"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/pic_default"
+        android:layout_centerInParent="true"
+        />
+
+    <TextView
+        android:id="@+id/nav_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:text="未登录"
+        />
+
+</RelativeLayout>

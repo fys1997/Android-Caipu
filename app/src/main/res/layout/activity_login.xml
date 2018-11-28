@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_login"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            />
+    </android.support.design.widget.AppBarLayout>
+
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="100dp"
+       android:layout_marginLeft="30dp"
+       android:layout_marginRight="30dp"
+       app:layout_behavior="@string/appbar_scrolling_view_behavior"
+       >
+
+       <android.support.design.widget.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:counterEnabled="true"
+           app:counterMaxLength="6"
+           >
+           <EditText
+               android:id="@+id/edit_user_name"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:singleLine="true"
+               android:maxLength="6"
+               android:hint="请输入用户名"
+               />
+       </android.support.design.widget.TextInputLayout>
+
+       <android.support.design.widget.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="20dp"
+           app:counterEnabled="true"
+           app:counterMaxLength="12"
+           >
+           <EditText
+               android:id="@+id/edit_user_password"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:inputType="textPassword"
+               android:singleLine="true"
+               android:maxLength="12"
+               android:hint="请输入密码"
+               />
+       </android.support.design.widget.TextInputLayout>
+
+       <Button
+           android:id="@+id/btn_login"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="40dp"
+           android:paddingLeft="40dp"
+           android:paddingRight="40dp"
+           android:layout_gravity="center_horizontal"
+           android:text="登录"
+           android:background="#458B74"
+           android:textColor="#fff"
+           />
+   </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/btn_register_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="注册新用户"
+        android:textColor="#458B74"
+        />
+
+</android.support.design.widget.CoordinatorLayout>

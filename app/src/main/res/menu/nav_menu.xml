@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <group>
+        <item
+            android:id="@+id/nav_myFavorite"
+            android:icon="@drawable/favorite"
+            android:title="我的收藏"
+            />
+
+        <item
+            android:id="@+id/nav_myCookbook"
+            android:icon="@drawable/create"
+            android:title="我的食谱"
+            />
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/setting"
+            android:title="系统设置"
+            />
+
+        <item
+            android:id="@+id/nav_switch"
+            android:icon="@drawable/switch_user"
+            android:title="切换用户"
+            />
+
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/exit"
+            android:title="退出应用"
+            />
+
+    </group>
+
+</menu>

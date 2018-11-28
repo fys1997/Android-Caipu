@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 连框颜色值 -->
+    <item>
+        <shape>
+            <solid android:color="#458B74" />
+        </shape>
+    </item>
+    <!-- 主体背景颜色值 -->
+    <item
+        android:bottom="3dp"
+        ><!--设置只有底部和右边有边框-->
+        <shape>
+            <solid android:color="#fff" />
+        </shape>
+    </item>
+</layer-list>
