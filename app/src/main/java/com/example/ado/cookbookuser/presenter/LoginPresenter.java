@@ -15,6 +15,7 @@ public class LoginPresenter {
         this.loginActivity = loginActivity;
     }
 
+
     public void userLogin(String name,String password){
         List<User> users = DataSupport.findAll(User.class);
         for(User user:users){

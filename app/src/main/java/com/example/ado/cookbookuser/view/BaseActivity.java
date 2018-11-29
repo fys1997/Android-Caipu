@@ -88,6 +88,7 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    //bitmap转byte数组
     public byte[] bitmapToByteArray(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);

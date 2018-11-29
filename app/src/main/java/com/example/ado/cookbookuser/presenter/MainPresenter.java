@@ -32,9 +32,6 @@ public class MainPresenter  {
     }
 
 
-
-
-
     public void GetAndSetMovieData(final String count, final int id)
     {
         Observable.create(new ObservableOnSubscribe<MainViewI>() {

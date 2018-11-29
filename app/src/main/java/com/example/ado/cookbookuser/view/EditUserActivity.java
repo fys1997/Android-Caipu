@@ -63,15 +63,14 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
     private Toolbar toolbarEditUser;                    //EditUserActivity的toolbar
     private CircleImageView circleImageView;            //用户头像
     private TextView textView;                          //用户名
-    private DatePicker userDataPicker;
-    private EditText editUserBirthday;
-    private EditText editUserGender;
+    private EditText editUserBirthday;                  //用户生日编辑
+    private EditText editUserGender;                    //用户性别编辑
 
     //用户选择头像图片的方式
     public static final int TAKE_PHOTO = 1;
     public static final int CHOOSE_PHOTO = 2;
 
-    private Uri imageUri;                                //用户头像地址
+    private Uri imageHeadShotUri;                                //用户头像地址
 
     private User userChanged = new User();
     @Override
@@ -83,12 +82,18 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         textView = findViewById(R.id.edit_layout_user_name);
         toolbarEditUser = findViewById(R.id.toolbar_edit_user);
         circleImageView = findViewById(R.id.edit_layout_headShot);
-        //userDataPicker = findViewById(R.id.edit_data_picker);
         editUserBirthday = findViewById(R.id.edit_user_birthday);
         editUserGender = findViewById(R.id.edit_user_gender);
 
-        hideInputManager(EditUserActivity.this,editUserBirthday);
+        initLayout();
 
+        circleImageView.setOnClickListener(this);
+        editUserBirthday.setOnClickListener(this);
+        editUserGender.setOnClickListener(this);
+    }
+
+    //初始化布局
+    private void initLayout(){
         //设置toolbar
         setSupportActionBar(toolbarEditUser);
         ActionBar actionBar = getSupportActionBar();
@@ -96,6 +101,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        //初始化界面
         byte[] userForNowHeadShot = BaseActivity.userForNow.getHeadShot();
         Bitmap bitmap = BitmapFactory.decodeByteArray(userForNowHeadShot,0,userForNowHeadShot.length);
         Glide.with(EditUserActivity.this).load(bitmap).into(circleImageView);
@@ -103,20 +109,16 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         editUserBirthday.setText(BaseActivity.userForNow.getBirthday());
         editUserGender.setText(BaseActivity.userForNow.getGender());
 
-        circleImageView.setOnClickListener(this);
-        editUserBirthday.setOnClickListener(this);
-        editUserGender.setOnClickListener(this);
+        //隐藏软键盘
+        hideInputManager(EditUserActivity.this,editUserBirthday);
     }
 
+    //隐藏软键盘
     public static void hideInputManager(Context context,View view){
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (view !=null && imm != null){
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏
         }
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     @Override
@@ -145,6 +147,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(choicePic[which].equals("拍照")){
+                    //本地cache文件夹
                     File outputImage = new File(getExternalCacheDir(),"cook_book_user_head_shot.jpg");
                     editUserPresenter.getPicByTakePhoto(outputImage);
                 }else if(choicePic[which].equals("从相册中选择")){
@@ -157,6 +160,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
 
     }
 
+    //弹出生日选择
     private void showBirthday(){
         Calendar cal;
         int year,month,day;
@@ -183,6 +187,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         dialog.show();
     }
 
+    //弹出性别选择
     private void showGenderChooseDialog() {
         final String[] genderArray = {"男","女"};
         int checkedItem = 0;
@@ -200,7 +205,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
     }
 
     public void onGetPicByTakePhoto(Uri imageUri){
-        this.imageUri = imageUri;
+        this.imageHeadShotUri = imageUri;
         //打开相机
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
@@ -248,7 +253,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
             case TAKE_PHOTO:{
                 if(resultCode == RESULT_OK){
                     try {
-                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageUri));
+                        Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageHeadShotUri));
                         userChanged.setHeadShot(bitmapToByteArray(bitmap));
 
                         Glide.with(this).load(bitmap).into(circleImageView);
@@ -289,6 +294,8 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
                 userChanged.setBirthday(birthday);
                 userChanged.setGender(gender);
                 userChanged.updateAll("name =?", BaseActivity.userForNow.getName());
+
+                //更新当前用户
                 List<User> users = DataSupport.findAll(User.class);
                 for(User user:users){
                     if (user.getName().equals(BaseActivity.userForNow.getName())) {

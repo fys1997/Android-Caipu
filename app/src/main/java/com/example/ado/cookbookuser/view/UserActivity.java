@@ -25,7 +25,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
     private ImageView userHandShot;                                //用户头像
     private CollapsingToolbarLayout collapsingToolbarLayout;       //折叠栏
     private AppBarLayout appBarLayout;                             //appBar
-    private TextView header;                                       //顶部标题
+    private TextView headerTitle;                                       //顶部标题
     private FloatingActionButton fabEditInformation;               //编辑信息按键
 
     @Override
@@ -37,7 +37,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
         userHandShot = findViewById(R.id.user_headShot);
         collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar_layout);
         appBarLayout = findViewById(R.id.appBar);
-        header = findViewById(R.id.header);
+        headerTitle = findViewById(R.id.header);
         fabEditInformation = findViewById(R.id.fab_edit_information);
 
         //设置toolbar
@@ -54,9 +54,9 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
                 if(Math.abs(i) >= appBarLayout.getTotalScrollRange()){
-                    header.setVisibility(View.VISIBLE);
+                    headerTitle.setVisibility(View.VISIBLE);
                 }else{
-                    header.setVisibility(View.GONE);
+                    headerTitle.setVisibility(View.GONE);
                 }
             }
         });

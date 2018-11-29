@@ -99,19 +99,7 @@ View.OnClickListener,MainViewI
         navMenu = navigationView.getMenu();
         tabLayout=findViewById(R.id.tabLayout);
 
-        //菜谱界面展示逻辑
-        initTabData();
-        initTab(tabdata);
-        initViewPager();
-        initTabListening();
-
-        //设置toolbar
-        setSupportActionBar(toolbarMain);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!= null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.menu);
-        }
+        initLayout();
 
         //设置按键监听
         quitUser.setOnClickListener(this);
@@ -131,6 +119,23 @@ View.OnClickListener,MainViewI
 //                e.printStackTrace();
 //            }
 //        }
+    }
+
+    //初始化界面
+    private void initLayout(){
+        //设置toolbar
+        setSupportActionBar(toolbarMain);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!= null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.menu);
+        }
+
+        //菜谱界面展示逻辑
+        initTabData();
+        initTab(tabdata);
+        initViewPager();
+        initTabListening();
     }
 
     @Override
