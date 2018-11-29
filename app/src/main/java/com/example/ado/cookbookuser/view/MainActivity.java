@@ -273,13 +273,8 @@ View.OnClickListener,MainViewI
     public void setRecyclerItemData(ArrayList<RecyclerItem>data) {
         recyclerView=fragments.get(position).getView().findViewById(R.id.Frecyclerview);
         recyclerAdapter=(MRecyclerAdapter)recyclerView.getAdapter();
-        //ArrayList<RecyclerItem>items=((MainFragment)fragments.get(position)).getItems();
-        //items.addAll(data);
-        //recyclerAdapter=new MRecyclerAdapter(fragments.get(position).getContext(),R.layout.recycleritem,items);
-        //recyclerView.setAdapter(recyclerAdapter);
         recyclerAdapter.addData(data);
         recyclerAdapter.notifyDataSetChanged();
-        //pagerAdapter.notifyDataSetChanged();
     }
 
     public void initTabData() {
@@ -311,6 +306,7 @@ View.OnClickListener,MainViewI
         pagerAdapter=new MFragmentAdapter(fragments,getSupportFragmentManager(),tabdata);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
+        mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
     }
 
     public void initTabListening() {
@@ -324,6 +320,7 @@ View.OnClickListener,MainViewI
             public void onPageSelected(int pos) {
                 position=pos;
                 recyclerView = fragments.get(position).getView().findViewById(R.id.Frecyclerview);
+                if(((MRecyclerAdapter)recyclerView.getAdapter()).getData().size()==0)
                 mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
             }
 

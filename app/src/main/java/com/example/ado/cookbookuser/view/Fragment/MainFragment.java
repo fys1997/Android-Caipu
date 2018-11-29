@@ -21,11 +21,8 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         view=inflater.inflate(R.layout.fragment,null);
-        //items.add(new RecyclerItem("https://p1.ssl.qhmsg.com/t019c3e922caaa6068d.jpg","caipu"));
         recyclerView=view.findViewById(R.id.Frecyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //LinearLayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        //recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(new MRecyclerAdapter(getContext(),R.layout.recycleritem,items));
         return view;
     }
