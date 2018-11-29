@@ -313,6 +313,7 @@ View.OnClickListener,MainViewI
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
+        //initRefrshListening();
     }
 
     public void initTabListening() {

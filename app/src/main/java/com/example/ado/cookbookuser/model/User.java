@@ -8,7 +8,7 @@ public class User extends DataSupport{
 
     private String name;
     private String password;
-    private int gender; //0为未设定，1为男，2为女
+    private String gender; //0为未设定，1为男，2为女
     private byte[] headShot;
     private String birthday;
 
@@ -20,7 +20,7 @@ public class User extends DataSupport{
         return password;
     }
 
-    public int getGender() { return gender; }
+    public String getGender() { return gender; }
 
     public byte[] getHeadShot() {return headShot; }
 
@@ -34,7 +34,7 @@ public class User extends DataSupport{
         this.password = password;
     }
 
-    public void setGender(int gender) { this.gender = gender; }
+    public void setGender(String gender) { this.gender = gender; }
 
     public void setHeadShot(byte[] headShot) {
         this.headShot = headShot;

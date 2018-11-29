@@ -2,7 +2,9 @@ package com.example.ado.cookbookuser.view;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.DatePickerDialog;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,7 +29,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +48,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -53,6 +63,9 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
     private Toolbar toolbarEditUser;                    //EditUserActivity的toolbar
     private CircleImageView circleImageView;            //用户头像
     private TextView textView;                          //用户名
+    private DatePicker userDataPicker;
+    private EditText editUserBirthday;
+    private EditText editUserGender;
 
     //用户选择头像图片的方式
     public static final int TAKE_PHOTO = 1;
@@ -70,6 +83,11 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         textView = findViewById(R.id.edit_layout_user_name);
         toolbarEditUser = findViewById(R.id.toolbar_edit_user);
         circleImageView = findViewById(R.id.edit_layout_headShot);
+        //userDataPicker = findViewById(R.id.edit_data_picker);
+        editUserBirthday = findViewById(R.id.edit_user_birthday);
+        editUserGender = findViewById(R.id.edit_user_gender);
+
+        hideInputManager(EditUserActivity.this,editUserBirthday);
 
         //设置toolbar
         setSupportActionBar(toolbarEditUser);
@@ -82,10 +100,20 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         Bitmap bitmap = BitmapFactory.decodeByteArray(userForNowHeadShot,0,userForNowHeadShot.length);
         Glide.with(EditUserActivity.this).load(bitmap).into(circleImageView);
         textView.setText(BaseActivity.userForNow.getName());
+        editUserBirthday.setText(BaseActivity.userForNow.getBirthday());
+        editUserGender.setText(BaseActivity.userForNow.getGender());
 
         circleImageView.setOnClickListener(this);
+        editUserBirthday.setOnClickListener(this);
+        editUserGender.setOnClickListener(this);
     }
 
+    public static void hideInputManager(Context context,View view){
+        InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (view !=null && imm != null){
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏
+        }
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -96,6 +124,14 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         switch(v.getId()){
             case R.id.edit_layout_headShot:{
                 showChoiceOfPic();
+                break;
+            }
+            case R.id.edit_user_birthday:{
+                showBirthday();
+                break;
+            }
+            case R.id.edit_user_gender:{
+                showGenderChooseDialog();
                 break;
             }
         }
@@ -119,6 +155,48 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         });
         builder.show();
 
+    }
+
+    private void showBirthday(){
+        Calendar cal;
+        int year,month,day;
+        cal=Calendar.getInstance();
+        year=cal.get(Calendar.YEAR);
+        Log.i("wxy","year"+year);
+        month=cal.get(Calendar.MONTH);
+        day=cal.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog.OnDateSetListener listener=new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker arg0, int year, int month, int day) {
+                editUserBirthday.setText(year+"-"+(++month)+"-"+day);
+            }
+        };
+        DatePickerDialog dialog=new DatePickerDialog(EditUserActivity.this, 0,listener,year,month,day);
+        ;
+        DatePicker datePicker = dialog.getDatePicker();
+        Date today = Calendar.getInstance().getTime();//当天
+        try {
+            datePicker.setMaxDate(today.getTime());// 最大日期
+        } catch (Exception e) {
+
+        }
+        dialog.show();
+    }
+
+    private void showGenderChooseDialog() {
+        final String[] genderArray = {"男","女"};
+        int checkedItem = 0;
+        String nowGender = editUserGender.getText().toString();
+        if(nowGender.equals("女")) checkedItem = 1;
+        AlertDialog.Builder builder3 = new AlertDialog.Builder(this);
+        builder3.setSingleChoiceItems(genderArray, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                editUserGender.setText(genderArray[which]);
+                dialog.dismiss();
+            }
+        });
+        builder3.show();
     }
 
     public void onGetPicByTakePhoto(Uri imageUri){
@@ -206,6 +284,10 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
                 return true;
             }
             case R.id.save:{
+                String birthday = editUserBirthday.getText().toString();
+                String gender = editUserGender.getText().toString();
+                userChanged.setBirthday(birthday);
+                userChanged.setGender(gender);
                 userChanged.updateAll("name =?", BaseActivity.userForNow.getName());
                 List<User> users = DataSupport.findAll(User.class);
                 for(User user:users){

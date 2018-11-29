@@ -108,7 +108,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         user.setPassword(password);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.animal);
         user.setHeadShot(bitmapToByteArray(bitmap));
-        user.setGender(0);
+        user.setGender("未设置");
         user.setBirthday("2018-1-1");
         user.save();
         Toast.makeText(RegisterActivity.this,"用户注册成功",Toast.LENGTH_SHORT).show();

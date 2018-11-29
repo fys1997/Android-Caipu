@@ -80,15 +80,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:counterMaxLength="6"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 >
                 <EditText
                     android:id="@+id/edit_user_birthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:maxLength="6"
                     android:hint="生日"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     />
             </android.support.design.widget.TextInputLayout>
 
@@ -114,15 +116,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                app:counterMaxLength="6"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 >
                 <EditText
                     android:id="@+id/edit_user_gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
-                    android:maxLength="6"
                     android:hint="性别"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     />
             </android.support.design.widget.TextInputLayout>
 
