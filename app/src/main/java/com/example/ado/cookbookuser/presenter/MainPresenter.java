@@ -48,6 +48,7 @@ public class MainPresenter  {
                 .subscribe(new Consumer<MainViewI>() {
                     @Override
                     public void accept(MainViewI viewI) throws Exception {
+                        viewI.initRefrshListening();
                         viewI.setRecyclerItemData(data);
                     }
                 });

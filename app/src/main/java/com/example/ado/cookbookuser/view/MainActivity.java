@@ -104,7 +104,6 @@ View.OnClickListener,MainViewI
         initTab(tabdata);
         initViewPager();
         initTabListening();
-        initRefrshListening();
 
         //设置toolbar
         setSupportActionBar(toolbarMain);
@@ -313,7 +312,6 @@ View.OnClickListener,MainViewI
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
-        //initRefrshListening();
     }
 
     public void initTabListening() {
@@ -326,7 +324,6 @@ View.OnClickListener,MainViewI
             @Override
             public void onPageSelected(int pos) {
                 position=pos;
-                initRefrshListening();
                 recyclerView = fragments.get(position).getView().findViewById(R.id.Frecyclerview);
                 if(((MRecyclerAdapter)recyclerView.getAdapter()).getData().size()==0)
                 mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
@@ -338,6 +335,7 @@ View.OnClickListener,MainViewI
             }
         });
     }
+    @Override
     public void initRefrshListening(){
         pullToRefreshLayout=((MainFragment)fragments.get(position)).getPullToRefreshLayout();
         if(pullToRefreshLayout!=null){
