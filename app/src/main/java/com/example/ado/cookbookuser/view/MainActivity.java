@@ -48,6 +48,8 @@ import com.example.ado.cookbookuser.view.Fragment.MainFragment;
 import com.example.ado.cookbookuser.view.Interface.MainViewI;
 import com.example.ado.cookbookuser.view.adapter.MFragmentAdapter;
 import com.example.ado.cookbookuser.view.adapter.MRecyclerAdapter;
+import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
+import com.jwenfeng.library.pulltorefresh.PullToRefreshLayout;
 
 import java.util.ArrayList;
 
@@ -72,6 +74,7 @@ View.OnClickListener,MainViewI
     private MFragmentAdapter pagerAdapter;
     private MRecyclerAdapter recyclerAdapter;
     private RecyclerView recyclerView;
+    private PullToRefreshLayout pullToRefreshLayout;
     private int position=0;
 
     private static final String TAG = "MainActivity";
@@ -101,6 +104,7 @@ View.OnClickListener,MainViewI
         initTab(tabdata);
         initViewPager();
         initTabListening();
+        initRefrshListening();
 
         //设置toolbar
         setSupportActionBar(toolbarMain);
@@ -275,6 +279,8 @@ View.OnClickListener,MainViewI
         recyclerAdapter=(MRecyclerAdapter)recyclerView.getAdapter();
         recyclerAdapter.addData(data);
         recyclerAdapter.notifyDataSetChanged();
+        if (pullToRefreshLayout!=null)
+            pullToRefreshLayout.finishLoadMore();
     }
 
     public void initTabData() {
@@ -319,6 +325,7 @@ View.OnClickListener,MainViewI
             @Override
             public void onPageSelected(int pos) {
                 position=pos;
+                initRefrshListening();
                 recyclerView = fragments.get(position).getView().findViewById(R.id.Frecyclerview);
                 if(((MRecyclerAdapter)recyclerView.getAdapter()).getData().size()==0)
                 mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
@@ -329,5 +336,21 @@ View.OnClickListener,MainViewI
 
             }
         });
+    }
+    public void initRefrshListening(){
+        pullToRefreshLayout=((MainFragment)fragments.get(position)).getPullToRefreshLayout();
+        if(pullToRefreshLayout!=null){
+            pullToRefreshLayout.setRefreshListener(new BaseRefreshListener() {
+                @Override
+                public void refresh() {
+                    pullToRefreshLayout.finishRefresh();
+                }
+
+                @Override
+                public void loadMore() {
+                    mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
+                }
+            });
+        }
     }
 }
