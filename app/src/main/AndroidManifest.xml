@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ado.cookbookuser">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name="org.litepal.LitePalApplication"
@@ -13,26 +13,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <provider
-            android:authorities="com.example.ado.cookbookuser.fileprovider"
             android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.ado.cookbookuser.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".view.StepActivity"
-            android:label="StepActivity"></activity>
+
+        <activity
+            android:name=".view.StepActivity"
+            android:label="StepActivity" />
         <activity
             android:name=".view.MainActivity"
             android:label="食谱"
             android:theme="@style/BaseTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.LoginActivity"
@@ -49,8 +46,25 @@
         <activity
             android:name=".view.EditUserActivity"
             android:label="修改个人信息"
-            android:theme="@style/EditUserTheme"
+            android:theme="@style/EditUserTheme" />
+        <activity
+            android:name=".view.FingerPointActivity"
+            android:label="指纹功能"
+            android:theme="@style/FingerPointTheme" />
+        <activity
+            android:name=".view.FingerPointAuthActivity"
+            android:label="指纹识别"
+            android:theme="@style/FingerPointAuthTheme" />
+        <activity
+            android:name=".view.BootActivity"
+            android:label="引导界面"
+            android:theme="@style/BootTheme"
             >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
     </application>

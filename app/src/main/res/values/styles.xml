@@ -33,5 +33,15 @@
         <item name="android:textSize">17sp</item>
     </style>
 
+    <style name="FingerPointTheme" parent="BaseTheme">
 
+    </style>
+
+    <style name="FingerPointAuthTheme" parent="BaseTheme">
+
+    </style>
+
+    <style name="BootTheme" parent="BaseTheme">
+
+    </style>
 </resources>

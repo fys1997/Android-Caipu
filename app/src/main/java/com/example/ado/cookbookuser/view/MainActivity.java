@@ -222,6 +222,11 @@ View.OnClickListener,MainViewI
 
                 break;
             }
+            case R.id.nav_fingerPoint:{
+                Intent intent = new Intent(MainActivity.this,FingerPointActivity.class);
+                startActivity(intent);
+                break;
+            }
             case R.id.nav_switch:{
                 userOut("切换帐号","您确定要切换帐号吗?");
                 break;
