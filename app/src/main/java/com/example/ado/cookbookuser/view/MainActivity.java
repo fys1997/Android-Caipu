@@ -46,6 +46,7 @@ import com.example.ado.cookbookuser.data.RecyclerItem;
 import com.example.ado.cookbookuser.presenter.MainPresenter;
 import com.example.ado.cookbookuser.view.Fragment.MainFragment;
 import com.example.ado.cookbookuser.view.Interface.MainViewI;
+import com.example.ado.cookbookuser.view.Interface.OnClickListener;
 import com.example.ado.cookbookuser.view.adapter.MFragmentAdapter;
 import com.example.ado.cookbookuser.view.adapter.MRecyclerAdapter;
 import com.jwenfeng.library.pulltorefresh.BaseRefreshListener;
@@ -283,6 +284,7 @@ View.OnClickListener,MainViewI
         recyclerAdapter=(MRecyclerAdapter)recyclerView.getAdapter();
         recyclerAdapter.addData(data);
         recyclerAdapter.notifyDataSetChanged();
+        setRecyclerItemClickListener();
         if (pullToRefreshLayout!=null)
             pullToRefreshLayout.finishLoadMore();
     }
@@ -355,6 +357,27 @@ View.OnClickListener,MainViewI
                     mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
                 }
             });
+        }
+    }
+    @Override
+    public void setRecyclerItemClickListener(){
+        ((MRecyclerAdapter)recyclerView.getAdapter()).setOnItemClickListener(new OnClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent=new Intent(MainActivity.this, StepActivity.class);
+                intent.putExtra("name",recyclerAdapter.getData().get(position).getDescription());
+                intent.putExtra("url",recyclerAdapter.getData().get(position).getImgsrc());
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+    }
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(mainPresenter!=null){
+            mainPresenter.destroy();
+            mainPresenter=null;
         }
     }
 }

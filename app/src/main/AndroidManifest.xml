@@ -22,6 +22,8 @@
                 android:resource="@xml/file_paths">
             </meta-data>
         </provider>
+        <activity android:name=".view.StepActivity"
+            android:label="StepActivity"></activity>
         <activity
             android:name=".view.MainActivity"
             android:label="食谱"
