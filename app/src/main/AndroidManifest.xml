@@ -11,7 +11,9 @@
         android:allowBackup="true"
         android:icon="@drawable/logo3"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+
+        >
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.ado.cookbookuser.fileprovider"
@@ -27,7 +29,7 @@
             android:label="StepActivity" />
         <activity
             android:name=".view.MainActivity"
-            android:label="食谱"
+            android:label="主界面"
             android:theme="@style/BaseTheme">
 
         </activity>
@@ -57,7 +59,7 @@
             android:theme="@style/FingerPointAuthTheme" />
         <activity
             android:name=".view.BootActivity"
-            android:label="引导界面"
+            android:label="食谱"
             android:theme="@style/BootTheme"
             >
             <intent-filter>
