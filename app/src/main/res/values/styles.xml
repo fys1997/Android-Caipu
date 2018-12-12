@@ -44,4 +44,8 @@
     <style name="BootTheme" parent="BaseTheme">
 
     </style>
+
+    <style name="StepTheme" parent="BaseTheme">
+
+    </style>
 </resources>

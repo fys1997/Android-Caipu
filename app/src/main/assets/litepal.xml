@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <litepal>
     <dbname value="CookbookStore"></dbname>
-    <version value="17"></version>
+    <version value="18"></version>
     <list>
         <mapping class = "com.example.ado.cookbookuser.model.User"></mapping>
         <mapping class = "com.example.ado.cookbookuser.model.FavCookBook"></mapping>
+        <mapping class = "com.example.ado.cookbookuser.model.CreateCookBook"></mapping>
     </list>
 </litepal>

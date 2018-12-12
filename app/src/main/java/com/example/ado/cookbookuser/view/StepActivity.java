@@ -3,7 +3,10 @@ package com.example.ado.cookbookuser.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,7 +21,7 @@ import com.example.ado.cookbookuser.view.Interface.StepViewI;
 
 import java.util.ArrayList;
 
-public class StepActivity extends FragmentActivity implements StepViewI {
+public class StepActivity extends BaseActivity implements StepViewI {
     private LinearLayout linearLayout;
     private Intent intent;
     private String menu;//记录保存要查看的菜谱名
@@ -27,10 +30,22 @@ public class StepActivity extends FragmentActivity implements StepViewI {
     private ImageView imageView;
     private RecyclerView recyclerView;
     private StepPresenter stepPresenter;//该activity对应的present接口
+    private Toolbar toolbarStep;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.itemclickview);
+
+        toolbarStep = findViewById(R.id.toolbar_step);
+
+        //设置toolbar
+        setSupportActionBar(toolbarStep);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         intent=getIntent();
         menu=intent.getStringExtra("name");
         imageurl=intent.getStringExtra("url");
@@ -84,5 +99,16 @@ public class StepActivity extends FragmentActivity implements StepViewI {
             stepPresenter.destroy();
             stepPresenter=null;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

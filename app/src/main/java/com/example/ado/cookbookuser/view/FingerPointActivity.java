@@ -8,8 +8,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ado.cookbookuser.R;
@@ -21,13 +23,17 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class FingerPointActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener{
+public class FingerPointActivity extends BaseActivity implements CompoundButton.OnCheckedChangeListener,View.OnClickListener{
 
     private FingerPointPresent fingerPointPresent;
 
     private Toolbar toolbarFinger;
     private SwitchCompat switchCompat;
+    
+    private TextView supportCheck;
+    private TextView fingerPointSetting;
 
+    private String isFingerPointAuthOpen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,8 @@ public class FingerPointActivity extends BaseActivity implements CompoundButton.
 
         toolbarFinger = findViewById(R.id.toolbar_fingerPoint);
         switchCompat = findViewById(R.id.switch_fingerPoint);
+        supportCheck = findViewById(R.id.support_check);
+        fingerPointSetting = findViewById(R.id.fingerPoint_setting);
 
         //设置toolbar
         setSupportActionBar(toolbarFinger);
@@ -47,12 +55,49 @@ public class FingerPointActivity extends BaseActivity implements CompoundButton.
         }
 
         switchCompat.setOnCheckedChangeListener(this);
+        supportCheck.setOnClickListener(this);
+        fingerPointSetting.setOnClickListener(this);
 
         initView();
 
     }
 
     private void initView(){
+        isFingerPointAuthOpen = getCacheDataOfFingerPointAuth();
+        if(isFingerPointAuthOpen.equals("false")){
+            switchCompat.setChecked(false);
+        }else if(isFingerPointAuthOpen.equals("true")){
+            switchCompat.setChecked(true);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.support_check:{
+                if(fingerPointPresent.isSupport()){
+                    Toast.makeText(this, "此设备支持指纹功能", Toast.LENGTH_SHORT).show(); 
+                }else{
+                    Toast.makeText(this, "此设备不支持指纹功能", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+            case R.id.fingerPoint_setting:{
+                fingerPointSetting();
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    private void fingerPointSetting(){
+        Intent intent = new Intent("android.settings.SETTINGS");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+    
+    private String getCacheDataOfFingerPointAuth(){
         String storageState = Environment.getExternalStorageState();
         if (storageState.equals(Environment.MEDIA_MOUNTED)) {
 
@@ -64,7 +109,7 @@ public class FingerPointActivity extends BaseActivity implements CompoundButton.
                     FileOutputStream outputStream = new FileOutputStream(fingerPointFile);
                     outputStream.write("false".getBytes());
                     outputStream.close();
-                    return;
+                    return "false";
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -84,16 +129,37 @@ public class FingerPointActivity extends BaseActivity implements CompoundButton.
                 e.printStackTrace();
             }
 
-            String isFingerPointAuthOpen = stringBuilder.toString();
+            return stringBuilder.toString();
+        }
+        return "false";
+    }
+    
+    private void setCacheDataOfFingerPointAuth(String state){
+        String storageState = Environment.getExternalStorageState();
+        if (storageState.equals(Environment.MEDIA_MOUNTED)) {
 
-            if(isFingerPointAuthOpen.equals("false")){
-                switchCompat.setChecked(false);
-            }else if(isFingerPointAuthOpen.equals("true")){
-                switchCompat.setChecked(true);
+            String fingerPointFile = getExternalCacheDir().getAbsolutePath() + File.separator + "isFingerPointAuthOpen.txt";
+            File file = new File(fingerPointFile);
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            try {
+                FileOutputStream outputStream = new FileOutputStream(fingerPointFile);
+                outputStream.write(state.getBytes());
+                outputStream.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
-
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
@@ -107,44 +173,18 @@ public class FingerPointActivity extends BaseActivity implements CompoundButton.
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if(isChecked){
+        if(isChecked && isFingerPointAuthOpen.equals("false")){
             if(fingerPointPresent.isSupport()){
                 if (!fingerPointPresent.isHasEnrolledFingerprints()) {
                     Toast.makeText(this, "尚未设置指纹，请设置", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent("android.settings.SETTINGS");
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    fingerPointSetting();
                     switchCompat.setChecked(false);
                     return;
                 }
-
-
-                String storageState = Environment.getExternalStorageState();
-                if (storageState.equals(Environment.MEDIA_MOUNTED)) {
-
-                    String fingerPointFile = getExternalCacheDir().getAbsolutePath() + File.separator + "isFingerPointAuthOpen.txt";
-                    File file = new File(fingerPointFile);
-                    if (!file.exists()) {
-                        try {
-                            file.createNewFile();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    try {
-                        FileOutputStream outputStream = new FileOutputStream(fingerPointFile);
-                        outputStream.write("true".getBytes());
-                        outputStream.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-                Toast.makeText(this, "指纹识别", Toast.LENGTH_SHORT).show();
+                
+                setCacheDataOfFingerPointAuth("true");
+                Toast.makeText(this, "指纹识别已开启", Toast.LENGTH_SHORT).show();
+                
             }else{
                 Toast.makeText(this, "此设备不支持指纹功能", Toast.LENGTH_SHORT).show();
                 switchCompat.setChecked(false);
