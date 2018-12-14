@@ -1,6 +1,8 @@
 package com.example.ado.cookbookuser.presenter;
 
+import com.example.ado.cookbookuser.model.DES;
 import com.example.ado.cookbookuser.model.User;
+import com.example.ado.cookbookuser.view.BaseActivity;
 import com.example.ado.cookbookuser.view.LoginActivity;
 
 import org.litepal.crud.DataSupport;
@@ -20,12 +22,16 @@ public class LoginPresenter {
         List<User> users = DataSupport.findAll(User.class);
         for(User user:users){
             if(name.equals(user.getName())){
-                if(password.equals(user.getPassword())){
-                    loginActivity.onLoginSucceed(user);
-                    return;
-                }else{
-                    loginActivity.onWrongPassword();
-                    return;
+                try {
+                    if(password.equals(DES.decryptDES(user.getPassword(), BaseActivity.KEY_PASSWORD))){
+                        loginActivity.onLoginSucceed(user);
+                        return;
+                    }else{
+                        loginActivity.onWrongPassword();
+                        return;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }

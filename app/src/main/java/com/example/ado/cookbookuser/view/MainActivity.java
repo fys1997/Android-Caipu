@@ -108,7 +108,7 @@ View.OnClickListener,MainViewI
         navCircleImageView.setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //初始化程序
+        //初始化用户数据库
 //        DataSupport.deleteAll(User.class);
 //        String userForNowFile = getExternalCacheDir().getAbsolutePath()  + File.separator + "userForNowFile.txt";
 //        File file = new File(userForNowFile);
@@ -161,6 +161,7 @@ View.OnClickListener,MainViewI
             navMenu.findItem(R.id.nav_setting).setVisible(true);
             navMenu.findItem(R.id.nav_switch).setVisible(true);
             navMenu.findItem(R.id.nav_exit).setVisible(true);
+            navMenu.findItem(R.id.nav_changePwd).setVisible(true);
         }
         else{
             quitUser.setVisibility(View.GONE);
@@ -173,6 +174,7 @@ View.OnClickListener,MainViewI
             navMenu.findItem(R.id.nav_myCookbook).setVisible(false);
             //navMenu.findItem(R.id.nav_setting).setVisible(false);
             navMenu.findItem(R.id.nav_switch).setVisible(false);
+            navMenu.findItem(R.id.nav_changePwd).setVisible(false);
             //navMenu.findItem(R.id.nav_exit).setVisible(false);
         }
 
@@ -220,6 +222,11 @@ View.OnClickListener,MainViewI
             }
             case R.id.nav_setting:{
 
+                break;
+            }
+            case R.id.nav_changePwd:{
+                Intent intent = new Intent(this,ChangePwdActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.nav_fingerPoint:{

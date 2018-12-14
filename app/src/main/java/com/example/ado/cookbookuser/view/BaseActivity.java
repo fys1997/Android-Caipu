@@ -27,6 +27,10 @@ public class BaseActivity extends AppCompatActivity {
     //当前登录的用户
     public static User userForNow = null;
 
+    //public final static String KEY_PASSWORD = "9588028820109132570743325311898426347857298773549468758875018579537757772163084478873699447306034466200616411960574122434059469100235892702736860872901247123456";
+    public final static String KEY_PASSWORD = "12345678";
+
+
     //创建数据库
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {

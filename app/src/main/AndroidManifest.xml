@@ -11,9 +11,7 @@
         android:allowBackup="true"
         android:icon="@drawable/logo3"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-
-        >
+        android:supportsRtl="true">
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.ado.cookbookuser.fileprovider"
@@ -27,14 +25,11 @@
         <activity
             android:name=".view.StepActivity"
             android:label="StepActivity"
-            android:theme="@style/StepTheme"
-            />
+            android:theme="@style/StepTheme" />
         <activity
             android:name=".view.MainActivity"
             android:label=""
-            android:theme="@style/BaseTheme">
-
-        </activity>
+            android:theme="@style/BaseTheme"></activity>
         <activity
             android:name=".view.LoginActivity"
             android:label="登录"
@@ -62,13 +57,19 @@
         <activity
             android:name=".view.BootActivity"
             android:label="食谱"
-            android:theme="@style/BootTheme"
-            >
+            android:theme="@style/BootTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.ChangePwdActivity"
+            android:label="修改密码"
+            android:theme="@style/ChangePwdTheme"
+            >
+
 
         </activity>
     </application>

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.ado.cookbookuser.R;
+import com.example.ado.cookbookuser.model.DES;
 import com.example.ado.cookbookuser.model.User;
 import com.example.ado.cookbookuser.presenter.RegisterPresenter;
 
@@ -105,7 +106,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         //用户默认信息
         User user = new User();
         user.setName(name);
-        user.setPassword(password);
+
+        try {
+            user.setPassword(DES.encryptDES(password,KEY_PASSWORD));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.animal);
         user.setHeadShot(bitmapToByteArray(bitmap));
         user.setGender("未设置");
