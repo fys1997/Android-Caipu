@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +67,7 @@ View.OnClickListener,MainViewI
     private Toolbar toolbarMain;                         //MainActivity的toolbar
     private TextView quitUser;                           //退出登录按键
     private FloatingActionButton fabUser;                //右下方用户按键
+    private EditText searchEdit;                         //搜索栏
 
     private TabLayout tabLayout;
     private ArrayList<String>tabdata=new ArrayList<>();
@@ -99,6 +101,7 @@ View.OnClickListener,MainViewI
         navUserName = navLayout.findViewById(R.id.nav_user_name);
         navMenu = navigationView.getMenu();
         tabLayout=findViewById(R.id.tabLayout);
+        searchEdit = findViewById(R.id.search_edit);
 
         initLayout();
 
@@ -144,6 +147,8 @@ View.OnClickListener,MainViewI
         super.onStart();
         //隐藏侧边栏
         drawerLayout.closeDrawers();
+        searchEdit.setFocusableInTouchMode(false);
+        searchEdit.setFocusable(false);
 
         //登录状态
         if(BaseActivity.userForNow != null) {

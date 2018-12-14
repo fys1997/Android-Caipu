@@ -33,17 +33,18 @@
                     >
 
                     <EditText
+                        android:id="@+id/search_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center_vertical"
-                        android:paddingLeft="10dp"
                         android:paddingTop="8dp"
                         android:paddingBottom="8dp"
                         android:layout_marginRight="20dp"
                         android:hint="请输入食谱名称"
                         android:singleLine="true"
                         android:background="#eee"
+                        android:textAlignment="center"
                         />
 
                     <TextView
