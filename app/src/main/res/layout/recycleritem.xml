@@ -24,10 +24,18 @@
         android:textColor="#000000"
         android:textSize="20sp" />
     <TextView
-        android:id="@+id/Ringredients"
+        android:layout_marginBottom="2mm"
+        android:layout_marginTop="2mm"
+        android:id="@+id/Rtags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#3e3d3d"
+        android:textSize="10sp"/>
+    <TextView
+        android:id="@+id/Ringredients"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#757373"
         android:textSize="10sp"/>
 </LinearLayout>
 

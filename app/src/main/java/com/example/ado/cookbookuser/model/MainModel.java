@@ -26,7 +26,10 @@ public class MainModel implements MModel {
         data.clear();
         dto=RxJavaRetrofitUtilsIndex.getIndex().getCallBack(id,query);
         for (int i = 0; i < dto.getResult().getData().size(); i++) {
-            RecyclerItem item=new RecyclerItem(dto.getResult().getData().get(i).getAlbums().get(0),dto.getResult().getData().get(i).getTitle(),dto.getResult().getData().get(i).getIngredients());
+            RecyclerItem item=new RecyclerItem(dto.getResult().getData().get(i).getAlbums().get(0),dto.getResult().getData().get(i).getTitle(),dto.getResult().getData().get(i).getIngredients()+";"+dto.getResult().getData().get(i).getBurden()+";");
+            item.setTags(dto.getResult().getData().get(i).getTags());
+            item.seprateIngredients();
+            item.seprateTags();
             data.add(item);
         }
         return data;

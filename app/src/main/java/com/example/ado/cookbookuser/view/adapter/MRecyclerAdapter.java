@@ -42,6 +42,7 @@ public class MRecyclerAdapter extends RecyclerView.Adapter<MRecyclerAdapter.MHol
         holder.textView1.setText(data.get(position).getDescription());
         Glide.with(mcontext).load(data.get(position).getImgsrc()).apply(options).into(holder.imageView);
         holder.textView2.setText(data.get(position).getIngredients());
+        holder.textView3.setText(data.get(position).getTags());
         View itemview=((LinearLayout)holder.itemView).getChildAt(0);
         if(monItemClickListener!=null){
             itemview.setOnClickListener(new View.OnClickListener(){
@@ -61,12 +62,14 @@ public class MRecyclerAdapter extends RecyclerView.Adapter<MRecyclerAdapter.MHol
         private ImageView imageView;
         private TextView textView1;
         private TextView textView2;
+        private TextView textView3;
         public MHolder(View itemView)
         {
             super(itemView);
             imageView=(ImageView)itemView.findViewById(R.id.RItemImage);
             textView1=(TextView)itemView.findViewById(R.id.RItemText);
             textView2=(TextView)itemView.findViewById(R.id.Ringredients);
+            textView3=(TextView)itemView.findViewById(R.id.Rtags);
         }
 
     }

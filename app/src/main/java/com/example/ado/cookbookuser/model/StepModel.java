@@ -20,7 +20,8 @@ public class StepModel implements SModel {
         data.clear();
         dto= RxJavaRetrofitUtilsMenu.getMenu().getCallBack(query);
         for (int i = 0; i < dto.getResult().getData().get(0).getSteps().size(); i++) {
-            RecyclerItem item=new RecyclerItem(dto.getResult().getData().get(0).getSteps().get(i).getImg(),dto.getResult().getData().get(0).getSteps().get(i).getStep(),dto.getResult().getData().get(0).getIngredients());
+            RecyclerItem item=new RecyclerItem(dto.getResult().getData().get(0).getSteps().get(i).getImg(),dto.getResult().getData().get(0).getSteps().get(i).getStep(),dto.getResult().getData().get(0).getIngredients()+";"+dto.getResult().getData().get(0).getBurden()+";");
+            item.seprateIngredients();
             data.add(item);
         }
         return data;
