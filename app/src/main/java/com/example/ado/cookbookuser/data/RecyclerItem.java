@@ -1,16 +1,16 @@
 package com.example.ado.cookbookuser.data;
 
-import android.net.Uri;
 
-import java.net.URL;
 
 public class RecyclerItem {
     private String imgsrc;
     private String description;
-    public RecyclerItem(String img,String des)
+    private String ingredients;
+    public RecyclerItem(String img,String des,String ingredients)
     {
         this.imgsrc=img;
         this.description=des;
+        this.ingredients=ingredients;
     }
     public void setData(String i,String d)
     {
@@ -24,5 +24,9 @@ public class RecyclerItem {
 
     public String getImgsrc() {
         return imgsrc;
+    }
+
+    public String getIngredients() {
+        return ingredients;
     }
 }

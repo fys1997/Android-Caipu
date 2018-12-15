@@ -39,8 +39,9 @@ public class MRecyclerAdapter extends RecyclerView.Adapter<MRecyclerAdapter.MHol
     @Override
     public void onBindViewHolder(final MHolder holder,int position)
     {
-        holder.textView.setText(data.get(position).getDescription());
+        holder.textView1.setText(data.get(position).getDescription());
         Glide.with(mcontext).load(data.get(position).getImgsrc()).apply(options).into(holder.imageView);
+        holder.textView2.setText(data.get(position).getIngredients());
         View itemview=((LinearLayout)holder.itemView).getChildAt(0);
         if(monItemClickListener!=null){
             itemview.setOnClickListener(new View.OnClickListener(){
@@ -58,12 +59,14 @@ public class MRecyclerAdapter extends RecyclerView.Adapter<MRecyclerAdapter.MHol
     public class MHolder extends RecyclerView.ViewHolder
     {
         private ImageView imageView;
-        private TextView textView;
+        private TextView textView1;
+        private TextView textView2;
         public MHolder(View itemView)
         {
             super(itemView);
             imageView=(ImageView)itemView.findViewById(R.id.RItemImage);
-            textView=(TextView)itemView.findViewById(R.id.RItemText);
+            textView1=(TextView)itemView.findViewById(R.id.RItemText);
+            textView2=(TextView)itemView.findViewById(R.id.Ringredients);
         }
 
     }
