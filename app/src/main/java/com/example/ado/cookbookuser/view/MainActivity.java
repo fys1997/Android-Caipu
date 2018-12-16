@@ -351,6 +351,10 @@ View.OnClickListener,MainViewI
                 recyclerView = fragments.get(position).getView().findViewById(R.id.Frecyclerview);
                 if(((MRecyclerAdapter)recyclerView.getAdapter()).getData().size()==0)
                 mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
+                else {
+                    setRecyclerItemClickListener();
+                    mainPresenter.setRecyclerlistener();
+                }
             }
 
             @Override
@@ -378,6 +382,7 @@ View.OnClickListener,MainViewI
     }
     @Override
     public void setRecyclerItemClickListener(){
+        recyclerAdapter=(MRecyclerAdapter)recyclerView.getAdapter();
         ((MRecyclerAdapter)recyclerView.getAdapter()).setOnItemClickListener(new OnClickListener() {
             @Override
             public void onItemClick(View view, int position) {

@@ -52,6 +52,21 @@ public class MainPresenter  {
         //data=model.getData(count, id);
         //mainViewI.setRecyclerItemData(data);
     }
+    public void setRecyclerlistener(){
+        Observable.create(new ObservableOnSubscribe<MainViewI>() {
+            @Override
+            public void subscribe(ObservableEmitter<MainViewI> e)throws Exception{
+                e.onNext(mainViewI);
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Consumer<MainViewI>() {
+                    @Override
+                    public void accept(MainViewI mainViewI) throws Exception {
+                        mainViewI.initRefrshListening();
+                    }
+                });
+    }
     public void destroy(){
         mainViewI=null;
     }
