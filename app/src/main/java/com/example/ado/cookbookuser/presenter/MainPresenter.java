@@ -8,6 +8,7 @@ import com.example.ado.cookbookuser.network.DTO.IndexDto;
 import com.example.ado.cookbookuser.view.Interface.MainViewI;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -34,7 +35,8 @@ public class MainPresenter  {
 
     public void GetAndSetMovieData(final String count, final int id)
     {
-        Observable.create(new ObservableOnSubscribe<MainViewI>() {
+        Observable.interval(1, TimeUnit.MILLISECONDS)
+                .create(new ObservableOnSubscribe<MainViewI>() {
             @Override
             public void subscribe(ObservableEmitter<MainViewI> e) throws Exception {
                 data=model.getData(count, id);
