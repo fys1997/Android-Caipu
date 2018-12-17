@@ -9,9 +9,10 @@
     </style>
 
     <style name="BaseTheme" parent="AppTheme">
-        <item name="colorPrimary">#ffffff</item>
-        <item name="colorPrimaryDark">#000000</item>
-        <item name="colorAccent">#458B74</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/windowBackground</item>
     </style>
 
     <style name="LoginTheme" parent="BaseTheme">
@@ -55,6 +56,9 @@
 
     </style>
     <style name="FavoriteTheme" parent="BaseTheme">
+
+    </style>
+    <style name="ThemeTheme" parent="BaseTheme">
 
     </style>
 

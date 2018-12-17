@@ -43,7 +43,7 @@
                         android:layout_marginRight="20dp"
                         android:hint="请输入食谱名称"
                         android:singleLine="true"
-                        android:background="#eee"
+                        android:background="@color/searchBar"
                         android:textAlignment="center"
                         />
 
@@ -73,11 +73,11 @@
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFF"
+                android:background="@color/windowBackground"
                 app:tabIndicatorColor="#EF4A11"
                 app:tabSelectedTextColor="#0a0a0a"
                 app:tabTextAppearance="@style/MyTabLayoutTextAppearance"
-                app:tabTextColor="#a7a5a5"
+                app:tabTextColor="#333"
                 app:tabGravity="fill"
                 app:tabMode="scrollable"/>
             <android.support.v4.view.ViewPager

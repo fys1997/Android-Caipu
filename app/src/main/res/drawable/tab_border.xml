@@ -3,7 +3,7 @@
     <!-- 连框颜色值 -->
     <item>
         <shape>
-            <solid android:color="#000" />
+            <solid android:color="#458B74" />
         </shape>
     </item>
 
@@ -11,7 +11,7 @@
         android:bottom="2dp"
         >
         <shape>
-            <solid android:color="#fff" />
+            <solid android:color="@color/windowBackground" />
         </shape>
     </item>
 </layer-list>

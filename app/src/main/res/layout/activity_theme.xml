@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         >
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_fingerPoint"
+            android:id="@+id/toolbar_theme"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             />
@@ -45,59 +45,18 @@
                 android:layout_weight="1"
                 android:textSize="18sp"
                 android:textColor="#000"
-                android:text="开启指纹"
+                android:text="开启夜间模式"
                 />
 
             <android.support.v7.widget.SwitchCompat
-                android:id="@+id/switch_fingerPoint"
+                android:id="@+id/switch_dark_theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 />
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/item_border"
-            android:paddingBottom="12dp"
-            android:paddingTop="12dp"
-            android:paddingLeft="10dp"
-            >
 
-            <TextView
-                android:id="@+id/support_check"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:textColor="#000"
-                android:text="检验指纹支持"
-                />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="12dp"
-            android:paddingTop="12dp"
-            android:paddingLeft="10dp"
-            android:background="@drawable/item_border"
-            >
-
-            <TextView
-                android:id="@+id/fingerPoint_setting"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="18sp"
-                android:textColor="#000"
-                android:text="进入指纹设置"
-                />
-
-        </LinearLayout>
 
 
 

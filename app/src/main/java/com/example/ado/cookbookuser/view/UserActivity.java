@@ -3,40 +3,29 @@ package com.example.ado.cookbookuser.view;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Layout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.Resource;
 import com.example.ado.cookbookuser.R;
-import com.example.ado.cookbookuser.model.User;
 import com.example.ado.cookbookuser.view.Fragment.CreateFragment;
 import com.example.ado.cookbookuser.view.Fragment.FavFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 public class UserActivity extends BaseActivity implements View.OnClickListener{
 
@@ -107,7 +96,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
             Bitmap bitmap = BitmapFactory.decodeByteArray(userForNowHeadShot,0,userForNowHeadShot.length);
             Glide.with(UserActivity.this).load(bitmap).into(userHandShot);
         }else{
-            Glide.with(UserActivity.this).load(R.drawable.pic_default).into(userHandShot);
+            Glide.with(UserActivity.this).load(R.drawable.pic).into(userHandShot);
         }
     }
 

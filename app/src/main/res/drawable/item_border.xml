@@ -11,7 +11,7 @@
         android:bottom="1dp"
         >
         <shape>
-            <solid android:color="#fff" />
+            <solid android:color="@color/windowBackground" />
         </shape>
     </item>
 </layer-list>

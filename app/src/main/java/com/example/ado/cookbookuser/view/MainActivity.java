@@ -172,7 +172,7 @@ View.OnClickListener,MainViewI
             quitUser.setVisibility(View.GONE);
             fabUser.hide();
 
-            Glide.with(MainActivity.this).load(R.drawable.pic_default).into(navCircleImageView);
+            Glide.with(MainActivity.this).load(R.drawable.pic).into(navCircleImageView);
             navUserName.setText("未登录");
 
             navMenu.findItem(R.id.nav_myFavorite).setVisible(false);
@@ -227,6 +227,11 @@ View.OnClickListener,MainViewI
             }
             case R.id.nav_setting:{
 
+                break;
+            }
+            case R.id.nav_dark_theme:{
+                Intent intent = new Intent(this,ThemeActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.nav_changePwd:{
