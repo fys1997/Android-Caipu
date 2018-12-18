@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="20dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/shut"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:hint="请输入食谱名称"
+            android:singleLine="true"
+            android:background="@color/searchBar"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="搜索"
+            android:textSize="18sp"
+            android:textColor="#458B74"
+            />
+    </LinearLayout>
+    <TextView
+
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="流行搜索"
+        android:textColor="#000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.example.ado.cookbookuser.view.OwnView.SearchTextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="#dde1e1"
+            android:text="中国"
+            android:textSize="20sp"
+            android:cornerSize="3"/>
+
+    </LinearLayout>
+
+</LinearLayout>
