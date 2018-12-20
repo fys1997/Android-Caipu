@@ -5,5 +5,5 @@ import com.example.ado.cookbookuser.data.RecyclerItem;
 import java.util.ArrayList;
 
 public interface StepViewI {
-    void initStepUI(ArrayList<RecyclerItem> datas);
+    void initStepUI(ArrayList<RecyclerItem> datas,String imageurl);
 }

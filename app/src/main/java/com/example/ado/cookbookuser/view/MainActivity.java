@@ -149,6 +149,7 @@ View.OnClickListener,MainViewI
         drawerLayout.closeDrawers();
         searchEdit.setFocusableInTouchMode(false);
         searchEdit.setFocusable(false);
+        setOnsearchEditClick();
 
         //登录状态
         if(BaseActivity.userForNow != null) {
@@ -393,7 +394,6 @@ View.OnClickListener,MainViewI
             public void onItemClick(View view, int position) {
                 Intent intent=new Intent(MainActivity.this, StepActivity.class);
                 intent.putExtra("name",recyclerAdapter.getData().get(position).getDescription());
-                intent.putExtra("url",recyclerAdapter.getData().get(position).getImgsrc());
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -406,5 +406,14 @@ View.OnClickListener,MainViewI
             mainPresenter.destroy();
             mainPresenter=null;
         }
+    }
+    public void setOnsearchEditClick(){
+        searchEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,SearchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

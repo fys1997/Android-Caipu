@@ -25,7 +25,6 @@ public class StepActivity extends BaseActivity implements StepViewI {
     private LinearLayout linearLayout;
     private Intent intent;
     private String menu;//记录保存要查看的菜谱名
-    private String imageurl;//图片地址
     private TextView textView;
     private ImageView imageView;
     private RecyclerView recyclerView;
@@ -48,7 +47,6 @@ public class StepActivity extends BaseActivity implements StepViewI {
 
         intent=getIntent();
         menu=intent.getStringExtra("name");
-        imageurl=intent.getStringExtra("url");
         stepPresenter=new StepPresenter(this);
         imageView=(ImageView)findViewById(R.id.itemClickImageView);
         textView=(TextView)findViewById(R.id.RItemText);
@@ -58,7 +56,7 @@ public class StepActivity extends BaseActivity implements StepViewI {
 
     //初始化这个新界面
     @Override
-    public void initStepUI(ArrayList<RecyclerItem> datas){
+    public void initStepUI(ArrayList<RecyclerItem> datas,String imageurl){
         Glide.with(this.getBaseContext()).load(imageurl).into(imageView);
         textView.setText(menu);
         linearLayout=findViewById(R.id.linerlayout);

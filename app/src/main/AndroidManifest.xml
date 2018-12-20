@@ -27,6 +27,10 @@
             android:label=""
             android:theme="@style/StepTheme" />
         <activity
+            android:name=".view.SearchActivity"
+            android:label="搜索"
+            android:theme="@style/SearchTheme"/>
+        <activity
             android:name=".view.MainActivity"
             android:label=""
             android:theme="@style/BaseTheme"

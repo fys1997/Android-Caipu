@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface SModel {
     ArrayList<RecyclerItem> getData(String menu);
+    String getImageUrl();
 }

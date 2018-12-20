@@ -12,6 +12,7 @@ import java.util.Map;
 public class StepModel implements SModel {
     private Map<String,String> query=new HashMap<>();
     private MenuDto dto=new MenuDto();
+    private String imageUrl;
     private ArrayList<RecyclerItem> data=new ArrayList<>();
     @Override
     public ArrayList<RecyclerItem> getData(String menu){
@@ -19,11 +20,16 @@ public class StepModel implements SModel {
         query.put("menu",menu);
         data.clear();
         dto= RxJavaRetrofitUtilsMenu.getMenu().getCallBack(query);
+        imageUrl=dto.getResult().getData().get(0).getAlbums().get(0);
         for (int i = 0; i < dto.getResult().getData().get(0).getSteps().size(); i++) {
             RecyclerItem item=new RecyclerItem(dto.getResult().getData().get(0).getSteps().get(i).getImg(),dto.getResult().getData().get(0).getSteps().get(i).getStep(),dto.getResult().getData().get(0).getIngredients()+";"+dto.getResult().getData().get(0).getBurden()+";");
             item.seprateIngredients();
             data.add(item);
         }
         return data;
+    }
+    @Override
+    public String getImageUrl() {
+        return imageUrl;
     }
 }

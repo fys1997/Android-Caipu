@@ -49,6 +49,11 @@
     <style name="StepTheme" parent="BaseTheme">
 
     </style>
+
+    <style name="SearchTheme" parent="BaseTheme">
+
+    </style>
+
     <style name="ChangePwdTheme" parent="BaseTheme">
 
     </style>

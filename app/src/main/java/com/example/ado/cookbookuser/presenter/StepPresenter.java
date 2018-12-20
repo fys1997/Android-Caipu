@@ -18,6 +18,7 @@ import io.reactivex.schedulers.Schedulers;
 public class StepPresenter {
     private SModel model=new StepModel();
     private StepViewI stepViewI;
+    private String imageUrl;
     private ArrayList<RecyclerItem> datas=new ArrayList<>();
     public StepPresenter(StepViewI viewI){stepViewI=viewI;}
     public void operation(final String menu){
@@ -25,6 +26,7 @@ public class StepPresenter {
             @Override
             public void subscribe(ObservableEmitter<StepViewI> e) throws Exception {
                 datas=model.getData(menu);
+                imageUrl=model.getImageUrl();
                 e.onNext(stepViewI);
             }
         }).observeOn(AndroidSchedulers.mainThread())
@@ -32,7 +34,7 @@ public class StepPresenter {
                 .subscribe(new Consumer<StepViewI>() {
                     @Override
                     public void accept(StepViewI viewI) throws Exception {
-                        viewI.initStepUI(datas);
+                        viewI.initStepUI(datas,imageUrl);
                     }
                 });
     }
