@@ -5,10 +5,11 @@ import com.example.ado.cookbookuser.network.DTO.MenuDto;
 import com.example.ado.cookbookuser.network.RxJavaRetrofitUtilsMenu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
-public class SearchMode implements com.example.ado.cookbookuser.model.Interface.SearchModel {
-    private Map<String,String>query;
+public class SearchModel implements com.example.ado.cookbookuser.model.Interface.SearchModel {
+    private Map<String,String>query=new HashMap<>();
     private MenuDto dto=new MenuDto();
     private ArrayList<SearchRecyclerItem>data=new ArrayList<>();
     @Override
@@ -19,7 +20,7 @@ public class SearchMode implements com.example.ado.cookbookuser.model.Interface.
         query.put("rn","8");
         data.clear();
         dto=RxJavaRetrofitUtilsMenu.getMenu().getCallBack(query);
-        for (int i = 0; i < dto.getResult().getData().get(0).getSteps().size(); i++){
+        for (int i = 0; i < dto.getResult().getData().size(); i++){
             SearchRecyclerItem item=new SearchRecyclerItem(dto.getResult().getData().get(i).getAlbums().get(0),dto.getResult().getData().get(i).getTitle(),dto.getResult().getData().get(i).getIngredients()+";"+dto.getResult().getData().get(i).getBurden()+";");
             item.setTags(dto.getResult().getData().get(i).getTags());
             item.seprateIngredients();

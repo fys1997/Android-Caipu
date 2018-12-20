@@ -30,6 +30,7 @@ public class StepActivity extends BaseActivity implements StepViewI {
     private RecyclerView recyclerView;
     private StepPresenter stepPresenter;//该activity对应的present接口
     private Toolbar toolbarStep;
+    private int type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,12 +47,17 @@ public class StepActivity extends BaseActivity implements StepViewI {
         }
 
         intent=getIntent();
-        menu=intent.getStringExtra("name");
+        Bundle bundle=intent.getBundleExtra("name");
+        menu=bundle.getString("name");//此处可能为menu与id
+        type=bundle.getInt("type");
         stepPresenter=new StepPresenter(this);
         imageView=(ImageView)findViewById(R.id.itemClickImageView);
         textView=(TextView)findViewById(R.id.RItemText);
         //recyclerView=(RecyclerView)findViewById(R.id.menuRecyclerView);
+        if(type==0)
         stepPresenter.operation(menu);
+        //else
+
     }
 
     //初始化这个新界面

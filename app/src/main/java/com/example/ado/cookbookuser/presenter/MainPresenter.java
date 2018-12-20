@@ -35,7 +35,7 @@ public class MainPresenter  {
 
     public void GetAndSetMovieData(final String count, final int id)
     {
-        Observable.interval(1, TimeUnit.MILLISECONDS)
+        Observable.interval(2, TimeUnit.MILLISECONDS)
                 .create(new ObservableOnSubscribe<MainViewI>() {
             @Override
             public void subscribe(ObservableEmitter<MainViewI> e) throws Exception {

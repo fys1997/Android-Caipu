@@ -38,5 +38,8 @@ public class StepPresenter {
                     }
                 });
     }
+    public void anotherOperation(final String id){
+
+    }
     public void destroy(){stepViewI=null;}
 }

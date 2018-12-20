@@ -11,11 +11,26 @@ import com.example.ado.cookbookuser.R;
 public class SearchActivity extends BaseActivity  {
     private TextView textView;
     private EditText editText;
+    private TextView search;
+    private String menu=new String();
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_ui);
         editText=findViewById(R.id.search_edit);
+        search=findViewById(R.id.search);
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menu=editText.getText().toString();
+                if(!menu.isEmpty()){
+                    Intent intent=new Intent(SearchActivity.this,SearchResultActivity.class);
+                    intent.putExtra("name",menu);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                }
+            }
+        });
         initTextView();
     }
 
@@ -37,7 +52,7 @@ public class SearchActivity extends BaseActivity  {
          @Override
          public void onClick(View v) {
              TextView view=(TextView)v;
-             Intent intent=new Intent(SearchActivity.this, SearchActivity.class);
+             Intent intent=new Intent(SearchActivity.this, SearchResultActivity.class);
              intent.putExtra("name",view.getText());
              intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
              startActivity(intent);

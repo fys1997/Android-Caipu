@@ -30,6 +30,10 @@
             android:name=".view.SearchActivity"
             android:label="搜索"
             android:theme="@style/SearchTheme"/>
+        <activity android:name=".view.SearchResultActivity"
+            android:label="搜索结果"
+            android:theme="@style/SearchResultTheme"/>
+
         <activity
             android:name=".view.MainActivity"
             android:label=""

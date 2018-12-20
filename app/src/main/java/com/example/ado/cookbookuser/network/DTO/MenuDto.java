@@ -105,7 +105,7 @@ public class MenuDto {
              * steps : [{"img":"http://img.juhe.cn/cookbook/s/1/45_0824e37faf00b71e.jpg","step":"1.将五花肉煮至断生状态"},{"img":"http://img.juhe.cn/cookbook/s/1/45_b6d7329b703f6e85.jpg","step":"2.切成大小一致的块"},{"img":"http://img.juhe.cn/cookbook/s/1/45_6ee9e8dab0516333.jpg","step":"3.放在锅内煎"},{"img":"http://img.juhe.cn/cookbook/s/1/45_b9afd6d4dd81f55c.jpg","step":"4.入生姜"},{"img":"http://img.juhe.cn/cookbook/s/1/45_d0170fbe236421f9.jpg","step":"5.放八角草果各一个，香叶一片"},{"img":"http://img.juhe.cn/cookbook/s/1/45_639b12210745fa41.jpg","step":"6.放冰糖"},{"img":"http://img.juhe.cn/cookbook/s/1/45_c25e0cedd2012f45.jpg","step":"7.加料酒"},{"img":"http://img.juhe.cn/cookbook/s/1/45_eb68327980f022dd.jpg","step":"8.加玫瑰腐乳和腐乳汁及适量盐"},{"img":"http://img.juhe.cn/cookbook/s/1/45_ac17263a11507a41.jpg","step":"9.加米醋"},{"img":"http://img.juhe.cn/cookbook/s/1/45_f5489af5d12b4930.jpg","step":"10.加水继续炖"},{"img":"http://img.juhe.cn/cookbook/s/1/45_8e0cf83cb7306281.jpg","step":"11.直至肉变软糯汤汁收干即可"}]
              */
 
-            private String id;
+            private int id;
             private String title;
             private String tags;
             private String imtro;
@@ -114,11 +114,11 @@ public class MenuDto {
             private List<String> albums;
             private List<StepsBean> steps;
 
-            public String getId() {
+            public int getId() {
                 return id;
             }
 
-            public void setId(String id) {
+            public void setId(int id) {
                 this.id = id;
             }
 

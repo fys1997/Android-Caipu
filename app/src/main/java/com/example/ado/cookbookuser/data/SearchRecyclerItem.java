@@ -3,7 +3,7 @@ package com.example.ado.cookbookuser.data;
 import java.util.ArrayList;
 
 public class SearchRecyclerItem {
-    private String id;
+    private int id;
     private String imgsrc;
     private String description;
     private String ingredients;
@@ -80,11 +80,11 @@ public class SearchRecyclerItem {
     }
     public String getTags(){return tags;}
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }

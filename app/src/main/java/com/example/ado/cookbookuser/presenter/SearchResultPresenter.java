@@ -1,8 +1,7 @@
 package com.example.ado.cookbookuser.presenter;
 
 import com.example.ado.cookbookuser.data.SearchRecyclerItem;
-import com.example.ado.cookbookuser.model.Interface.SearchModel;
-import com.example.ado.cookbookuser.model.SearchMode;
+import com.example.ado.cookbookuser.model.SearchModel;
 import com.example.ado.cookbookuser.view.Interface.SearchResultViewI;
 
 import java.util.ArrayList;
@@ -14,9 +13,10 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class SearchResultPresenter {
-   private SearchModel model=new SearchMode();
+   private com.example.ado.cookbookuser.model.Interface.SearchModel model=new SearchModel();
    private SearchResultViewI viewI;
    private ArrayList<SearchRecyclerItem>data=new ArrayList<>();
+   public SearchResultPresenter(SearchResultViewI searchResultViewI){viewI=searchResultViewI;}
    public void operations(final String count,final String menu){
        Observable.create(new ObservableOnSubscribe<SearchResultViewI>() {
            @Override

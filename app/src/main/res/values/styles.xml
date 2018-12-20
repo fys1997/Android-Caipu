@@ -54,6 +54,10 @@
 
     </style>
 
+    <style name="SearchResultTheme" parent="BaseTheme">
+
+    </style>
+
     <style name="ChangePwdTheme" parent="BaseTheme">
 
     </style>

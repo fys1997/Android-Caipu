@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import java.util.ArrayList;
 
-public class FFragmentAdapter entends FragmentPaperAdapter{
+/*public class FFragmentAdapter extends  FragmentPaperAdapter{
     private ArrayList<Fragment>fragments;
     private ArrayList<String>titles;
     public FFragmentAdapter(ArrayList<Fragment>fragments, FragmentManager fm,ArrayList<String>titles)
@@ -24,4 +24,4 @@ public class FFragmentAdapter entends FragmentPaperAdapter{
     public CharSequence getPageTitle(int position){
         return titles.get(position);
     }
-}
+}*/

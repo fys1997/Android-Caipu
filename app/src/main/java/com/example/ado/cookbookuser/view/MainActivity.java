@@ -393,7 +393,12 @@ View.OnClickListener,MainViewI
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent=new Intent(MainActivity.this, StepActivity.class);
-                intent.putExtra("name",recyclerAdapter.getData().get(position).getDescription());
+                //intent.putExtra("name",recyclerAdapter.getData().get(position).getDescription());
+                //intent.putExtra("type","0");//代表使用请求menu的网络调用接口
+                Bundle bundle=new Bundle();
+                bundle.putInt("type",0);
+                bundle.putString("name",recyclerAdapter.getData().get(position).getDescription());
+                intent.putExtra("content",bundle);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
