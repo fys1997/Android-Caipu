@@ -61,14 +61,24 @@
     <style name="ChangePwdTheme" parent="BaseTheme">
 
     </style>
+
     <style name="MyRecipeTheme" parent="BaseTheme">
 
     </style>
+
     <style name="FavoriteTheme" parent="BaseTheme">
 
     </style>
+
     <style name="ThemeTheme" parent="BaseTheme">
 
     </style>
 
+    <style name="SettingTheme" parent="BaseTheme">
+
+    </style>
+
+    <style name="CreateRecipeTheme" parent="BaseTheme">
+
+    </style>
 </resources>

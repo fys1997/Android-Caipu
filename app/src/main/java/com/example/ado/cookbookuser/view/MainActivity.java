@@ -219,15 +219,18 @@ View.OnClickListener,MainViewI
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
             case R.id.nav_myFavorite:{
-
+                Intent intent = new Intent(this, FavoriteActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.nav_myCookbook:{
-
+                Intent intent = new Intent(this,MyRecipeActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.nav_setting:{
-
+                Intent intent = new Intent(this,SettingActivity.class);
+                startActivity(intent);
                 break;
             }
             case R.id.nav_dark_theme:{
