@@ -38,8 +38,22 @@ public class StepPresenter {
                     }
                 });
     }
-    public void anotherOperation(final String id){
-
+    public void anotherOperation(final int id){
+        Observable.create(new ObservableOnSubscribe<StepViewI>() {
+            @Override
+            public void subscribe(ObservableEmitter<StepViewI> e)throws Exception{
+                datas=model.getData(id);
+                imageUrl=model.getImageUrl();
+                e.onNext(stepViewI);
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Consumer<StepViewI>() {
+                    @Override
+                    public void accept(StepViewI viewI) throws Exception {
+                        viewI.initStepUI(datas,imageUrl);
+                    }
+                });
     }
     public void destroy(){stepViewI=null;}
 }

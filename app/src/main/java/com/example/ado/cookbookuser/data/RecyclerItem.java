@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerItem {
+    private String titlle;
     private String imgsrc;
     private String description;
     private String ingredients;
@@ -80,4 +81,12 @@ public class RecyclerItem {
         tags=newTags;
     }
     public String getTags(){return tags;}
+
+    public String getTitlle() {
+        return titlle;
+    }
+
+    public void setTitlle(String titlle) {
+        this.titlle = titlle;
+    }
 }

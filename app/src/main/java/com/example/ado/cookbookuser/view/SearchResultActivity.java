@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.ado.cookbookuser.R;
 import com.example.ado.cookbookuser.data.SearchRecyclerItem;
@@ -23,6 +25,8 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
     private SearchResultPresenter presenter;
     private String menu;
     private Intent intent;
+    private TextView textView;
+    private EditText editText;
     private SearchResultAdapter recycleradapter;
     @Override
     protected void onCreate(Bundle savedInstaceState){
@@ -33,6 +37,7 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
         menu=intent.getStringExtra("name");
         presenter=new SearchResultPresenter(this);
         initRecyclerView();
+        initTextViewListener();
     }
     @Override
     public void setRecyclerItemData(ArrayList<SearchRecyclerItem>data){
@@ -73,12 +78,13 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent=new Intent(SearchResultActivity.this, StepActivity.class);//此处要改
-                //intent.putExtra("name",recycleradapter.getData().get(position).getId());
-                Bundle bundle=new Bundle();
-                bundle.putInt("type",1);
-                bundle.putString("name",Integer.toString(recycleradapter.getData().get(position).getId()));
-                intent.putExtra("content",bundle);
-                //intent.putExtra("type","1");//1代表网络请求调用使用id查值
+                int id=recycleradapter.getData().get(position).getId();
+                intent.putExtra("name",Integer.toString(id));
+                //Bundle bundle=new Bundle();
+                //bundle.putInt("type",1);
+                //bundle.putString("name",Integer.toString(recycleradapter.getData().get(position).getId()));
+                //intent.putExtra("content",bundle);
+                intent.putExtra("type","1");//1代表网络请求调用使用id查值
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -94,5 +100,17 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
     }
     public void initRecyclerView(){
         presenter.operations("0",menu);
+    }
+    public void initTextViewListener(){
+        textView=findViewById(R.id.search_result);
+        editText=findViewById(R.id.search_result_edit);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!editText.getText().toString().isEmpty()){
+                    presenter.operations("0",editText.getText().toString());
+                }
+            }
+        });
     }
 }

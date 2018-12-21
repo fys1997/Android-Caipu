@@ -29,6 +29,7 @@ public class SearchResultPresenter {
                .subscribe(new Consumer<SearchResultViewI>() {
                    @Override
                    public void accept(SearchResultViewI searchResultViewI) throws Exception {
+                       if (!data.isEmpty())
                        viewI.initRefreshListening();
                        viewI.setRecyclerItemData(data);
                    }

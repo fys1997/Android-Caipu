@@ -47,24 +47,27 @@ public class StepActivity extends BaseActivity implements StepViewI {
         }
 
         intent=getIntent();
-        Bundle bundle=intent.getBundleExtra("name");
-        menu=bundle.getString("name");//此处可能为menu与id
-        type=bundle.getInt("type");
+        menu=intent.getStringExtra("name");//此处可能为menu与id
+        type=Integer.parseInt(intent.getStringExtra("type"));
         stepPresenter=new StepPresenter(this);
         imageView=(ImageView)findViewById(R.id.itemClickImageView);
         textView=(TextView)findViewById(R.id.RItemText);
         //recyclerView=(RecyclerView)findViewById(R.id.menuRecyclerView);
         if(type==0)
         stepPresenter.operation(menu);
-        //else
+        else
+        stepPresenter.anotherOperation(Integer.parseInt(menu));
 
     }
 
-    //初始化这个新界面
+    //初始化这个新界面，当可以找到相关数据的时候
     @Override
     public void initStepUI(ArrayList<RecyclerItem> datas,String imageurl){
         Glide.with(this.getBaseContext()).load(imageurl).into(imageView);
+        if(type==0)
         textView.setText(menu);
+        else
+            textView.setText(datas.get(0).getTitlle());
         linearLayout=findViewById(R.id.linerlayout);
         for(int i=0;i<datas.size();i++){
             View Sview= getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.line);

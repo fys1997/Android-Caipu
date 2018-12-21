@@ -20,13 +20,15 @@ public class SearchModel implements com.example.ado.cookbookuser.model.Interface
         query.put("rn","8");
         data.clear();
         dto=RxJavaRetrofitUtilsMenu.getMenu().getCallBack(query);
-        for (int i = 0; i < dto.getResult().getData().size(); i++){
-            SearchRecyclerItem item=new SearchRecyclerItem(dto.getResult().getData().get(i).getAlbums().get(0),dto.getResult().getData().get(i).getTitle(),dto.getResult().getData().get(i).getIngredients()+";"+dto.getResult().getData().get(i).getBurden()+";");
-            item.setTags(dto.getResult().getData().get(i).getTags());
-            item.seprateIngredients();
-            item.seprateTags();
-            item.setId(dto.getResult().getData().get(i).getId());
-            data.add(item);
+        if(Integer.parseInt(dto.getResultcode())==200) {
+            for (int i = 0; i < dto.getResult().getData().size(); i++) {
+                SearchRecyclerItem item = new SearchRecyclerItem(dto.getResult().getData().get(i).getAlbums().get(0), dto.getResult().getData().get(i).getTitle(), dto.getResult().getData().get(i).getIngredients() + ";" + dto.getResult().getData().get(i).getBurden() + ";");
+                item.setTags(dto.getResult().getData().get(i).getTags());
+                item.seprateIngredients();
+                item.seprateTags();
+                item.setId(dto.getResult().getData().get(i).getId());
+                data.add(item);
+            }
         }
         return data;
     }
