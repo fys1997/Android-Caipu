@@ -40,16 +40,19 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
         initTextViewListener();
     }
     @Override
-    public void setRecyclerItemData(ArrayList<SearchRecyclerItem>data){
-        recyclerView=findViewById(R.id.search_result_recyclerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this.getBaseContext()));
+    public void setRecyclerItemData(ArrayList<SearchRecyclerItem>data,boolean setadapter){
+
         if(recycleradapter==null){
             recycleradapter=new SearchResultAdapter(this.getBaseContext(),R.layout.recycleritem,data);
             recyclerView.setAdapter(recycleradapter);
         }
         else {
             recycleradapter = (SearchResultAdapter) recyclerView.getAdapter();
-            recycleradapter.addData(data);
+            if(setadapter)
+                recycleradapter.changeData(data);
+            else {
+                recycleradapter.addData(data);
+            }
             recycleradapter.notifyDataSetChanged();
         }
         setRecyclerItemClickListener();
@@ -67,7 +70,7 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
 
                 @Override
                 public void loadMore() {
-                    presenter.operations(Integer.toString(recycleradapter.getItemCount()),menu);
+                    presenter.operations(recycleradapter.getDatasCount(),menu,false);
                 }
             });
         }
@@ -99,7 +102,9 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
         }
     }
     public void initRecyclerView(){
-        presenter.operations("0",menu);
+        recyclerView=findViewById(R.id.search_result_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getBaseContext()));
+        presenter.operations("0",menu,true);
     }
     public void initTextViewListener(){
         textView=findViewById(R.id.search_result);
@@ -108,7 +113,8 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
             @Override
             public void onClick(View view) {
                 if(!editText.getText().toString().isEmpty()){
-                    presenter.operations("0",editText.getText().toString());
+                    menu=editText.getText().toString();
+                    presenter.operations("0",menu,true);
                 }
             }
         });

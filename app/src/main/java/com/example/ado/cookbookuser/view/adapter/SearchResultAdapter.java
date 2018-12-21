@@ -73,8 +73,10 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         monItemClickListener=onItemClickListener;
     }
     public void addData(ArrayList<SearchRecyclerItem>newData){data.addAll(newData);}
+    public void changeData(ArrayList<SearchRecyclerItem>newData){data=newData;}
 
     public ArrayList<SearchRecyclerItem> getData() {
         return data;
     }
+    public String getDatasCount(){return Integer.toString(data.size());}
 }

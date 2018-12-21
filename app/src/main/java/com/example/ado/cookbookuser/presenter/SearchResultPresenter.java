@@ -17,7 +17,7 @@ public class SearchResultPresenter {
    private SearchResultViewI viewI;
    private ArrayList<SearchRecyclerItem>data=new ArrayList<>();
    public SearchResultPresenter(SearchResultViewI searchResultViewI){viewI=searchResultViewI;}
-   public void operations(final String count,final String menu){
+   public void operations(final String count,final String menu,final boolean setadapter){
        Observable.create(new ObservableOnSubscribe<SearchResultViewI>() {
            @Override
            public void subscribe(ObservableEmitter<SearchResultViewI>e)throws Exception{
@@ -31,7 +31,7 @@ public class SearchResultPresenter {
                    public void accept(SearchResultViewI searchResultViewI) throws Exception {
                        if (!data.isEmpty())
                        viewI.initRefreshListening();
-                       viewI.setRecyclerItemData(data);
+                       viewI.setRecyclerItemData(data,setadapter);
                    }
                });
    }
