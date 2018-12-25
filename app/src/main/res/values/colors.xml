@@ -5,4 +5,5 @@
     <color name="colorAccent">#458B74</color>
     <color name="windowBackground">#fff</color>
     <color name="searchBar">#eee</color>
+    <color name="snackBar">#ccc</color>
 </resources>

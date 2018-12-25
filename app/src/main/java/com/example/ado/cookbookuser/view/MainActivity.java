@@ -2,6 +2,7 @@ package com.example.ado.cookbookuser.view;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -233,9 +235,36 @@ View.OnClickListener,MainViewI
                 startActivity(intent);
                 break;
             }
+            case R.id.nav_light_sensor:{
+                isLightSensorOpen = !isLightSensorOpen;
+                if(isLightSensorOpen){
+                    Toast.makeText(this, "光照感应已开启", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "光照感应已关闭", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
             case R.id.nav_dark_theme:{
-                Intent intent = new Intent(this,ThemeActivity.class);
-                startActivity(intent);
+                int currentNightMode = getResources().getConfiguration().uiMode
+                        & Configuration.UI_MODE_NIGHT_MASK;
+                switch (currentNightMode) {
+                    case Configuration.UI_MODE_NIGHT_NO: {
+                        getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        // Night mode is not active, we're in day time
+                        break;
+                    }
+                    case Configuration.UI_MODE_NIGHT_YES:{
+                        getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        // Night mode is active, we're at night!
+                        break;
+                    }
+                    case Configuration.UI_MODE_NIGHT_UNDEFINED: {
+                        // We don't know what mode we're in, assume notnight
+                    }
+                }
+                startActivity(new Intent(this,MainActivity.class));
+                overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
+                finish();
                 break;
             }
             case R.id.nav_changePwd:{

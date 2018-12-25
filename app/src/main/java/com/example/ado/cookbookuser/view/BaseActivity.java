@@ -1,13 +1,20 @@
 package com.example.ado.cookbookuser.view;
 
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
+import android.view.View;
 import android.widget.Toast;
 
+import com.example.ado.cookbookuser.R;
+import com.example.ado.cookbookuser.model.LightSensorUtil;
 import com.example.ado.cookbookuser.model.User;
 
 import org.litepal.LitePal;
@@ -30,6 +37,10 @@ public class BaseActivity extends AppCompatActivity {
     //public final static String KEY_PASSWORD = "9588028820109132570743325311898426347857298773549468758875018579537757772163084478873699447306034466200616411960574122434059469100235892702736860872901247123456";
     public final static String KEY_PASSWORD = "12345678";
 
+    private LightSensorUtil lightSensorUtil;
+
+    public static Boolean isLightSensorOpen = false;
+
 
     //创建数据库
     @Override
@@ -41,6 +52,11 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        int currentNightMode = getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK;
+        if(isLightSensorOpen && currentNightMode == Configuration.UI_MODE_NIGHT_NO){
+            onLightSensorBegin();
+        }
 
         String storageState = Environment.getExternalStorageState();
 
@@ -81,7 +97,7 @@ public class BaseActivity extends AppCompatActivity {
                 for(User user:users){
                     if (user.getName().equals(userForNowName)) {
                         userForNow = user;
-                        Toast.makeText(this,userForNow.getName(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(this,userForNow.getName(),Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
@@ -97,6 +113,18 @@ public class BaseActivity extends AppCompatActivity {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
+    }
+
+    public void onLightSensorChanged(){
+        View view = getWindow().findViewById(R.id.snack_bar);
+        if (view == null) return;
+        Snackbar snackbar = Snackbar.make(view,"检测到您的环境光线较弱,建议设置为夜间模式",Snackbar.LENGTH_LONG);
+        snackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        snackbar.show();
+    }
+
+    public void onLightSensorBegin(){
+        lightSensorUtil = new LightSensorUtil(getApplicationContext(),this);
     }
 
 

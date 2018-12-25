@@ -5,4 +5,10 @@
     android:background="#00ff00"
     >
 
+    <LinearLayout
+        android:id="@+id/snack_bar"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"></LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
