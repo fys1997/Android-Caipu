@@ -94,12 +94,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
 
     //初始化布局
     private void initLayout(){
-        //设置toolbar
-        setSupportActionBar(toolbarEditUser);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!= null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setToolbar(toolbarEditUser);
 
         //初始化界面
         byte[] userForNowHeadShot = BaseActivity.userForNow.getHeadShot();

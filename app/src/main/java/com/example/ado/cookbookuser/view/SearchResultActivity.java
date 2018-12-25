@@ -38,11 +38,9 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
         setContentView(R.layout.search_result);
         pullToRefreshLayout=findViewById(R.id.SearchRefreshLayout);
         toolbarSearchResult = findViewById(R.id.toolbar_search_result);
-        setSupportActionBar(toolbarSearchResult);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!= null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
+        setToolbar(toolbarSearchResult);
+
         intent=getIntent();
         menu=intent.getStringExtra("name");
         presenter=new SearchResultPresenter(this);

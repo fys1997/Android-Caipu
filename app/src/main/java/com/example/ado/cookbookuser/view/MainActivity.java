@@ -127,13 +127,29 @@ View.OnClickListener,MainViewI
 //        }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initWidget();
+
+    }
+
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(mainPresenter!=null){
+            mainPresenter.destroy();
+            mainPresenter=null;
+        }
+    }
+
     //初始化界面
     private void initLayout(){
         //设置toolbar
-        setSupportActionBar(toolbarMain);
+        setToolbar(toolbarMain);
         ActionBar actionBar = getSupportActionBar();
-        if(actionBar!= null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
+        if(actionBar!=null){
             actionBar.setHomeAsUpIndicator(R.drawable.menu);
         }
 
@@ -144,9 +160,8 @@ View.OnClickListener,MainViewI
         initTabListening();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
+    //初始化控件
+    private void initWidget(){
         //隐藏侧边栏
         drawerLayout.closeDrawers();
         searchEdit.setFocusableInTouchMode(false);
@@ -185,163 +200,6 @@ View.OnClickListener,MainViewI
             navMenu.findItem(R.id.nav_changePwd).setVisible(false);
             //navMenu.findItem(R.id.nav_exit).setVisible(false);
         }
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.fab_user:{
-                Intent intent = new Intent(MainActivity.this,UserActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.quit_user:{
-                userOut("退出登录","您确定要退出登录吗?");
-                break;
-            }
-            case R.id.nav_user_headShot:{
-                if(BaseActivity.userForNow == null){
-                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                    startActivity(intent);
-                }else{
-                    Intent intent = new Intent(MainActivity.this,UserActivity.class);
-                    startActivity(intent);
-                }
-                break;
-            }
-            default:
-                break;
-        }
-    }
-
-    //menu onclick
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        switch(menuItem.getItemId()){
-            case R.id.nav_myFavorite:{
-                Intent intent = new Intent(this, FavoriteActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.nav_myCookbook:{
-                Intent intent = new Intent(this,MyRecipeActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.nav_setting:{
-                Intent intent = new Intent(this,SettingActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.nav_light_sensor:{
-                isLightSensorOpen = !isLightSensorOpen;
-                if(isLightSensorOpen){
-                    Toast.makeText(this, "光照感应已开启", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this, "光照感应已关闭", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            }
-            case R.id.nav_dark_theme:{
-                int currentNightMode = getResources().getConfiguration().uiMode
-                        & Configuration.UI_MODE_NIGHT_MASK;
-                switch (currentNightMode) {
-                    case Configuration.UI_MODE_NIGHT_NO: {
-                        getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        // Night mode is not active, we're in day time
-                        break;
-                    }
-                    case Configuration.UI_MODE_NIGHT_YES:{
-                        getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        // Night mode is active, we're at night!
-                        break;
-                    }
-                    case Configuration.UI_MODE_NIGHT_UNDEFINED: {
-                        // We don't know what mode we're in, assume notnight
-                    }
-                }
-                startActivity(new Intent(this,MainActivity.class));
-                overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
-                finish();
-                break;
-            }
-            case R.id.nav_changePwd:{
-                Intent intent = new Intent(this,ChangePwdActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.nav_fingerPoint:{
-                Intent intent = new Intent(MainActivity.this,FingerPointActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.nav_switch:{
-                userOut("切换帐号","您确定要切换帐号吗?");
-                break;
-            }
-            case R.id.nav_exit:{
-                finish();
-                break;
-            }
-
-        }
-
-        return true;
-    }
-
-    private void userOut(String title,String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String userForNowFile = getExternalCacheDir().getAbsolutePath()  + File.separator + "userForNowFile.txt";
-                File file = new File(userForNowFile);
-                if (file.exists()){
-                    file.delete();
-                }
-                try {
-                    file.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                BaseActivity.userForNow = null;
-                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-        builder.show();
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{
-                drawerLayout.openDrawer(GravityCompat.START);
-                break;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public void setRecyclerItemData(ArrayList<RecyclerItem>data) {
-        recyclerView=fragments.get(position).getView().findViewById(R.id.Frecyclerview);
-        recyclerAdapter=(MRecyclerAdapter)recyclerView.getAdapter();
-        recyclerAdapter.addData(data);
-        recyclerAdapter.notifyDataSetChanged();
-        setRecyclerItemClickListener();
-        if (pullToRefreshLayout!=null)
-            pullToRefreshLayout.finishLoadMore();
     }
 
     public void initTabData() {
@@ -388,7 +246,7 @@ View.OnClickListener,MainViewI
                 position=pos;
                 recyclerView = fragments.get(position).getView().findViewById(R.id.Frecyclerview);
                 if(((MRecyclerAdapter)recyclerView.getAdapter()).getData().size()==0)
-                mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
+                    mainPresenter.GetAndSetMovieData(Integer.toString(((MainFragment)fragments.get(position)).getItems().size()), position+1);
                 else {
                     setRecyclerItemClickListener();
                     mainPresenter.setRecyclerlistener();
@@ -401,6 +259,177 @@ View.OnClickListener,MainViewI
             }
         });
     }
+
+    //切换主题模式
+    private void switchTheme(){
+        int currentNightMode = getResources().getConfiguration().uiMode
+                & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO: {
+                getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                // Night mode is not active, we're in day time
+                break;
+            }
+            case Configuration.UI_MODE_NIGHT_YES:{
+                getDelegate().setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                // Night mode is active, we're at night!
+                break;
+            }
+            case Configuration.UI_MODE_NIGHT_UNDEFINED: {
+                // We don't know what mode we're in, assume notnight
+            }
+        }
+        startActivity(new Intent(this,MainActivity.class));
+        overridePendingTransition(R.anim.fade_out,R.anim.fade_in);
+        finish();
+    }
+
+    private void userOut(String title,String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String userForNowFile = getExternalCacheDir().getAbsolutePath()  + File.separator + "userForNowFile.txt";
+                File file = new File(userForNowFile);
+                if (file.exists()){
+                    file.delete();
+                }
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                BaseActivity.userForNow = null;
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+
+    public void setOnsearchEditClick(){
+        searchEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,SearchActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.fab_user:{
+                Intent intent = new Intent(MainActivity.this,UserActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.quit_user:{
+                userOut("退出登录","您确定要退出登录吗?");
+                break;
+            }
+            case R.id.nav_user_headShot:{
+                if(BaseActivity.userForNow == null){
+                    Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(MainActivity.this,UserActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            }
+            default:
+                break;
+        }
+    }
+
+    //nav_menu的点击事件
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        switch(menuItem.getItemId()){
+            case R.id.nav_myFavorite:{
+                Intent intent = new Intent(this, FavoriteActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.nav_myCookbook:{
+                Intent intent = new Intent(this,MyRecipeActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.nav_setting:{
+                Intent intent = new Intent(this,SettingActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.nav_light_sensor:{
+                isLightSensorOpen = !isLightSensorOpen;
+                if(isLightSensorOpen){
+                    Toast.makeText(this, "光照感应已开启", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "光照感应已关闭", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+            case R.id.nav_dark_theme:{
+                switchTheme();
+                break;
+            }
+            case R.id.nav_changePwd:{
+                Intent intent = new Intent(this,ChangePwdActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.nav_fingerPoint:{
+                Intent intent = new Intent(MainActivity.this,FingerPointActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.nav_switch:{
+                userOut("切换帐号","您确定要切换帐号吗?");
+                break;
+            }
+            case R.id.nav_exit:{
+                finish();
+                break;
+            }
+
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                drawerLayout.openDrawer(GravityCompat.START);
+                break;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void setRecyclerItemData(ArrayList<RecyclerItem>data) {
+        recyclerView=fragments.get(position).getView().findViewById(R.id.Frecyclerview);
+        recyclerAdapter=(MRecyclerAdapter)recyclerView.getAdapter();
+        recyclerAdapter.addData(data);
+        recyclerAdapter.notifyDataSetChanged();
+        setRecyclerItemClickListener();
+        if (pullToRefreshLayout!=null)
+            pullToRefreshLayout.finishLoadMore();
+    }
+
     @Override
     public void initRefrshListening(){
         pullToRefreshLayout=((MainFragment)fragments.get(position)).getPullToRefreshLayout();
@@ -418,6 +447,7 @@ View.OnClickListener,MainViewI
             });
         }
     }
+
     @Override
     public void setRecyclerItemClickListener(){
         recyclerAdapter=(MRecyclerAdapter)recyclerView.getAdapter();
@@ -436,21 +466,6 @@ View.OnClickListener,MainViewI
             }
         });
     }
-    @Override
-    public void onDestroy(){
-        super.onDestroy();
-        if(mainPresenter!=null){
-            mainPresenter.destroy();
-            mainPresenter=null;
-        }
-    }
-    public void setOnsearchEditClick(){
-        searchEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,SearchActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+
+
 }

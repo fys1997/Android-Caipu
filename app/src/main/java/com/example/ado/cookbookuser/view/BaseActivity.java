@@ -8,8 +8,10 @@ import android.os.Environment;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
@@ -58,7 +60,7 @@ public class BaseActivity extends AppCompatActivity {
             onLightSensorBegin();
         }
 
-        String storageState = Environment.getExternalStorageState();
+        String storageState = getExternalStorageState();
 
         //判断是否存在可用的的SDCard，若userForNow为null，为其赋值
         if (userForNow == null && storageState.equals(Environment.MEDIA_MOUNTED)) {
@@ -128,5 +130,12 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
+    public void setToolbar(Toolbar toolbar){
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!= null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
+    }
 }

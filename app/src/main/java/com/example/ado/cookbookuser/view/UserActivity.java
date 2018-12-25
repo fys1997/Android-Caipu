@@ -45,8 +45,6 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
-
-
         toolbarUser = findViewById(R.id.toolbar_user);
         userHandShot = findViewById(R.id.user_headShot);
         collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar_layout);
@@ -57,14 +55,12 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
         tabFavorite = findViewById(R.id.tab_favorite);
         tabCreate = findViewById(R.id.tab_create);
 
-        //设置toolbar
-        setSupportActionBar(toolbarUser);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setToolbar(toolbarUser);
 
-        //collapsingToolbarLayout.setTitle(myself.getName());
+        //设置监听事件
+        fabEditInformation.setOnClickListener(this);
+        tabFavorite.setOnClickListener(this);
+        tabCreate.setOnClickListener(this);
 
         //设置折叠事件
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
@@ -78,11 +74,6 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
             }
         });
 
-        //设置监听事件
-        fabEditInformation.setOnClickListener(this);
-        tabFavorite.setOnClickListener(this);
-        tabCreate.setOnClickListener(this);
-
         initPager();
     }
 
@@ -90,14 +81,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
     protected void onStart() {
         super.onStart();
 
-        //登录状态
-        if(BaseActivity.userForNow != null){
-            byte[] userForNowHeadShot = BaseActivity.userForNow.getHeadShot();
-            Bitmap bitmap = BitmapFactory.decodeByteArray(userForNowHeadShot,0,userForNowHeadShot.length);
-            Glide.with(UserActivity.this).load(bitmap).into(userHandShot);
-        }else{
-            Glide.with(UserActivity.this).load(R.drawable.pic).into(userHandShot);
-        }
+        initWidget();
     }
 
     @Override
@@ -118,6 +102,17 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
             }
             default:
                 break;
+        }
+    }
+
+    private void initWidget(){
+        //登录状态
+        if(BaseActivity.userForNow != null){
+            byte[] userForNowHeadShot = BaseActivity.userForNow.getHeadShot();
+            Bitmap bitmap = BitmapFactory.decodeByteArray(userForNowHeadShot,0,userForNowHeadShot.length);
+            Glide.with(UserActivity.this).load(bitmap).into(userHandShot);
+        }else{
+            Glide.with(UserActivity.this).load(R.drawable.pic).into(userHandShot);
         }
     }
 

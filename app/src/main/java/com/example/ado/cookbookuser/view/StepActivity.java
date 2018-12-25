@@ -50,14 +50,9 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
 
         toolbarStep = findViewById(R.id.toolbar_step);
 
-        //设置toolbar
-        setSupportActionBar(toolbarStep);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setToolbar(toolbarStep);
 
-        intent=getIntent();
+        intent = getIntent();
         menu=intent.getStringExtra("name");//此处可能为menu与id
         type=Integer.parseInt(intent.getStringExtra("type"));
         stepPresenter=new StepPresenter(this);
@@ -69,6 +64,10 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
         else
         stepPresenter.anotherOperation(Integer.parseInt(menu));
 
+        initSensor();
+    }
+
+    private void initSensor(){
         sensorManager =(SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 

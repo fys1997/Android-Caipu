@@ -35,11 +35,7 @@ public class ChangePwdActivity extends BaseActivity implements View.OnClickListe
         newPasswordEdit = findViewById(R.id.new_password);
         submitChange = findViewById(R.id.submit_button);
 
-        setSupportActionBar(toolbarChangePwd);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!= null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setToolbar(toolbarChangePwd);
 
         submitChange.setOnClickListener(this);
     }

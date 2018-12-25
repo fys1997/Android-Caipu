@@ -40,12 +40,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         toolbarRegister = findViewById(R.id.toolbar_register);
         register = findViewById(R.id.btn_register);
 
-        //设置toolbar
-        setSupportActionBar(toolbarRegister);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setToolbar(toolbarRegister);
 
         //设置监听事件
         register.setOnClickListener(this);

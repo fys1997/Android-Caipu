@@ -47,12 +47,7 @@ public class FingerPointActivity extends BaseActivity implements CompoundButton.
         supportCheck = findViewById(R.id.support_check);
         fingerPointSetting = findViewById(R.id.fingerPoint_setting);
 
-        //设置toolbar
-        setSupportActionBar(toolbarFinger);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setToolbar(toolbarFinger);
 
         switchCompat.setOnCheckedChangeListener(this);
         supportCheck.setOnClickListener(this);

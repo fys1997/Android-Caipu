@@ -47,12 +47,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         btnLogin.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
 
-        //设置toolbar
-        setSupportActionBar(toolbarLogin);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar != null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setToolbar(toolbarLogin);
     }
 
     @Override

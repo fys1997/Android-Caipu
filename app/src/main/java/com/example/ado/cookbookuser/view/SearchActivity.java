@@ -26,11 +26,7 @@ public class SearchActivity extends BaseActivity  {
         search=findViewById(R.id.search);
         toolbarSearch = findViewById(R.id.toolbar_search);
 
-        setSupportActionBar(toolbarSearch);
-        ActionBar actionBar = getSupportActionBar();
-        if(actionBar!= null){
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setToolbar(toolbarSearch);
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
