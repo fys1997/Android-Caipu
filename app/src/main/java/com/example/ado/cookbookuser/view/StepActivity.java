@@ -1,6 +1,11 @@
 package com.example.ado.cookbookuser.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
@@ -21,7 +26,7 @@ import com.example.ado.cookbookuser.view.Interface.StepViewI;
 
 import java.util.ArrayList;
 
-public class StepActivity extends BaseActivity implements StepViewI {
+public class StepActivity extends BaseActivity implements StepViewI,SensorEventListener {
     private LinearLayout linearLayout;
     private Intent intent;
     private String menu;//记录保存要查看的菜谱名
@@ -31,6 +36,12 @@ public class StepActivity extends BaseActivity implements StepViewI {
     private StepPresenter stepPresenter;//该activity对应的present接口
     private Toolbar toolbarStep;
     private int type;
+    private SensorManager sensorManager;
+    //private TextView textView;
+    private Sensor sensor;
+
+    private static final int INTERVAL_TIME = 70;
+    private long lastTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -58,6 +69,10 @@ public class StepActivity extends BaseActivity implements StepViewI {
         else
         stepPresenter.anotherOperation(Integer.parseInt(menu));
 
+        sensorManager =(SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        lastTime = System.currentTimeMillis();
     }
 
     //初始化这个新界面，当可以找到相关数据的时候
@@ -99,6 +114,21 @@ public class StepActivity extends BaseActivity implements StepViewI {
             linearLayout.addView(Mtextview);
         }
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sensorManager.registerListener( this,sensor, SensorManager.SENSOR_DELAY_FASTEST);
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        sensorManager.unregisterListener(this);
+    }
+
     @Override
     public void onDestroy(){
         super.onDestroy();
@@ -117,5 +147,27 @@ public class StepActivity extends BaseActivity implements StepViewI {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        long currentTime = System.currentTimeMillis();
+        long timeInterval = currentTime - lastTime;
+
+        if (timeInterval < INTERVAL_TIME) return;
+
+        float[] values = event.values;
+
+        if (values[0] > 15){
+            //想左摇晃
+        }
+        else if(values[0] < -15){
+            //向右摇晃
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }

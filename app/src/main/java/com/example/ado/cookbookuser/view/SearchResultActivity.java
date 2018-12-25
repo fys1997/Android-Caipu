@@ -2,8 +2,11 @@ package com.example.ado.cookbookuser.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,11 +31,18 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
     private TextView textView;
     private EditText editText;
     private SearchResultAdapter recycleradapter;
+    private Toolbar toolbarSearchResult;
     @Override
     protected void onCreate(Bundle savedInstaceState){
         super.onCreate(savedInstaceState);
         setContentView(R.layout.search_result);
         pullToRefreshLayout=findViewById(R.id.SearchRefreshLayout);
+        toolbarSearchResult = findViewById(R.id.toolbar_search_result);
+        setSupportActionBar(toolbarSearchResult);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!= null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
         intent=getIntent();
         menu=intent.getStringExtra("name");
         presenter=new SearchResultPresenter(this);
@@ -118,5 +128,16 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                break;
+            }
+        }
+        return true;
     }
 }

@@ -2,6 +2,10 @@ package com.example.ado.cookbookuser.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,6 +16,7 @@ public class SearchActivity extends BaseActivity  {
     private TextView textView;
     private EditText editText;
     private TextView search;
+    private Toolbar toolbarSearch;
     private String menu=new String();
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -19,6 +24,14 @@ public class SearchActivity extends BaseActivity  {
         setContentView(R.layout.search_ui);
         editText=findViewById(R.id.search_edit);
         search=findViewById(R.id.search);
+        toolbarSearch = findViewById(R.id.toolbar_search);
+
+        setSupportActionBar(toolbarSearch);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar!= null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,4 +71,15 @@ public class SearchActivity extends BaseActivity  {
              startActivity(intent);
          }
      };
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                break;
+            }
+        }
+        return true;
+    }
 }
