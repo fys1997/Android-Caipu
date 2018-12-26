@@ -117,7 +117,9 @@ public class BaseActivity extends AppCompatActivity {
         return baos.toByteArray();
     }
 
-    public void onLightSensorChanged(){
+    public void onLightSensorChanged(float lightWeight){
+        //Toast.makeText(this, "" + lightWeight, Toast.LENGTH_SHORT).show();
+
         View view = getWindow().findViewById(R.id.snack_bar);
         if (view == null) return;
         Snackbar snackbar = Snackbar.make(view,"检测到您的环境光线较弱,建议设置为夜间模式",Snackbar.LENGTH_LONG);

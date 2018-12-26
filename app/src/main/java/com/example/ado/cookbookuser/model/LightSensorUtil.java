@@ -30,8 +30,8 @@ public class LightSensorUtil implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
 
-            if(event.values[0] < 400.0f) {
-                baseActivity.onLightSensorChanged();
+            if(event.values[0] < 20.0f) {
+                baseActivity.onLightSensorChanged(event.values[0]);
                 manager.unregisterListener(this);
             }
         }
