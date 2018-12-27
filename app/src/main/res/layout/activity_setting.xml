@@ -16,9 +16,94 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_border"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:paddingLeft="10dp"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="需求功能1"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_border"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:paddingLeft="10dp"
+            >
+
+            <TextView
+                android:id="@+id/support_check"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="需求功能2"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/item_border"
+            >
+
+            <TextView
+                android:id="@+id/fingerPoint_setting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="需求功能3"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/snack_bar"
         android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_height="0dp"></LinearLayout>
+        android:layout_height="0dp">
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -14,6 +14,64 @@
             android:layout_height="?attr/actionBarSize"
             />
     </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/MF_Image"
+                    android:layout_width="60pt"
+                    android:layout_height="60pt"
+                    android:maxHeight="60dp"
+                    android:maxWidth="60sp"
+                    android:layout_margin="2mm"/>
+                <LinearLayout
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/MF_Text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="20sp" />
+                    <TextView
+                        android:layout_marginBottom="2mm"
+                        android:layout_marginTop="2mm"
+                        android:id="@+id/MFtags"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#3e3d3d"
+                        android:textSize="10sp"/>
+                    <TextView
+                        android:id="@+id/MFingredients"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#757373"
+                        android:textSize="10sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.RecyclerView>
+
+
+
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/snack_bar"
         android:orientation="vertical"

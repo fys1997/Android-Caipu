@@ -16,9 +16,127 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <!--选取图片-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/take_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Take photo"
+                android:textAllCaps="false"
+                />
+
+            <Button
+                android:id="@+id/choose_from_album"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose From Album"
+                android:textAllCaps="false"
+                app:layout_constraintTop_toBottomOf="@id/take_photo"/>
+
+            <ImageView
+                android:id="@+id/picture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/choose_from_album"/>
+
+        </RelativeLayout>
+
+        <!--填写食材-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                >
+                <EditText
+                    android:id="@+id/edit_material"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="请输入所需食材"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+
+        <!--填写步骤-->
+        <RelativeLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/step_pic"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/step_text"
+                    android:text="//"/>
+                <Button
+                    android:id="@+id/step_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="创建新步骤"
+                    android:textColor="#000000"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="left" />
+                <Button
+                    android:id="@+id/step_new"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="删除"
+                    android:textColor="#000000"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="right" />
+
+            </android.support.v7.widget.RecyclerView>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="确定食谱"
+            android:background="@color/colorFinish"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="bottom"
+            />
+    </RelativeLayout>
+
+
+    <LinearLayout
         android:id="@+id/snack_bar"
         android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_height="0dp"></LinearLayout>
+        android:layout_height="0dp">
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

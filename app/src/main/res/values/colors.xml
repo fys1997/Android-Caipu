@@ -6,4 +6,5 @@
     <color name="windowBackground">#fff</color>
     <color name="searchBar">#eee</color>
     <color name="snackBar">#ccc</color>
+    <color name="colorFinish">#DC143C</color>
 </resources>

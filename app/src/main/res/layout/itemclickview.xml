@@ -49,6 +49,7 @@
                 android:textColor="#1b1a1a"/>
 
         </LinearLayout>
+
     </ScrollView>
 
     <LinearLayout

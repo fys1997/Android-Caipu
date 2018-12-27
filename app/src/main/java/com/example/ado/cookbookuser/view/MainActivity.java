@@ -362,7 +362,7 @@ View.OnClickListener,MainViewI
                 break;
             }
             case R.id.nav_myCookbook:{
-                Intent intent = new Intent(this,MyRecipeActivity.class);
+                Intent intent = new Intent(this,CreateRecipeActivity.class);
                 startActivity(intent);
                 break;
             }
