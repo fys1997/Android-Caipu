@@ -1,6 +1,8 @@
 package com.example.ado.cookbookuser.model;
 
-public class CreateCookBook {
+import org.litepal.crud.DataSupport;
+
+public class CreateCookBook extends DataSupport{
 
     private String name;
     private User user;

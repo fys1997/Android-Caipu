@@ -2,7 +2,9 @@ package com.example.ado.cookbookuser.model;
 
 import com.example.ado.cookbookuser.model.User;
 
-public class FavCookBook {
+import org.litepal.crud.DataSupport;
+
+public class FavCookBook extends DataSupport {
     private String cookBook_name;
     private User user;
 

@@ -11,7 +11,7 @@
         android:layout_width="60pt"
         android:layout_height="60pt"
         android:maxHeight="60dp"
-        android:maxWidth="60sp" />
+        android:maxWidth="60dp" />
     <LinearLayout
         android:layout_gravity="center_vertical"
         android:orientation="vertical"
