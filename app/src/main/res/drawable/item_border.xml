@@ -8,7 +8,7 @@
     </item>
 
     <item
-        android:bottom="1dp"
+        android:bottom="0.5dp"
         >
         <shape>
             <solid android:color="@color/windowBackground" />

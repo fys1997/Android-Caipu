@@ -181,9 +181,9 @@ View.OnClickListener,MainViewI
 
             navMenu.findItem(R.id.nav_myFavorite).setVisible(true);
             navMenu.findItem(R.id.nav_myCookbook).setVisible(true);
-            navMenu.findItem(R.id.nav_setting).setVisible(true);
+            //navMenu.findItem(R.id.nav_setting).setVisible(true);
             navMenu.findItem(R.id.nav_switch).setVisible(true);
-            navMenu.findItem(R.id.nav_exit).setVisible(true);
+            ///navMenu.findItem(R.id.nav_exit).setVisible(true);
             navMenu.findItem(R.id.nav_changePwd).setVisible(true);
         }
         else{
@@ -371,26 +371,12 @@ View.OnClickListener,MainViewI
                 startActivity(intent);
                 break;
             }
-            case R.id.nav_light_sensor:{
-                isLightSensorOpen = !isLightSensorOpen;
-                if(isLightSensorOpen){
-                    Toast.makeText(this, "光照感应已开启", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(this, "光照感应已关闭", Toast.LENGTH_SHORT).show();
-                }
-                break;
-            }
             case R.id.nav_dark_theme:{
                 switchTheme();
                 break;
             }
             case R.id.nav_changePwd:{
                 Intent intent = new Intent(this,ChangePwdActivity.class);
-                startActivity(intent);
-                break;
-            }
-            case R.id.nav_fingerPoint:{
-                Intent intent = new Intent(MainActivity.this,FingerPointActivity.class);
                 startActivity(intent);
                 break;
             }

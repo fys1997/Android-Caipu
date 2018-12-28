@@ -84,34 +84,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/step_pic"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/step_text"
-                    android:text="//"/>
-                <Button
-                    android:id="@+id/step_new"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="创建新步骤"
-                    android:textColor="#000000"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="left" />
-                <Button
-                    android:id="@+id/step_new"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="删除"
-                    android:textColor="#000000"
-                    android:layout_marginTop="20dp"
-                    android:layout_gravity="right" />
+
 
             </android.support.v7.widget.RecyclerView>
 
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/step_pic"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/step_text"
+                android:text="//"/>
+            <Button
+                android:id="@+id/step_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="创建新步骤"
+                android:textColor="#000000"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="left" />
+            <Button
+                android:id="@+id/step_new2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="删除"
+                android:textColor="#000000"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="right" />
 
         </RelativeLayout>
 

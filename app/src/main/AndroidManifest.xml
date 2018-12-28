@@ -21,6 +21,16 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <activity
+            android:name=".view.BootActivity"
+            android:label="食谱"
+            android:theme="@style/BootTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".view.StepActivity"
@@ -62,16 +72,7 @@
             android:name=".view.FingerPointAuthActivity"
             android:label="指纹识别"
             android:theme="@style/FingerPointAuthTheme" />
-        <activity
-            android:name=".view.BootActivity"
-            android:label="食谱"
-            android:theme="@style/BootTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity
             android:name=".view.ChangePwdActivity"
             android:label="修改密码"
