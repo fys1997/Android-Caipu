@@ -20,8 +20,7 @@ public class CreateStoreUtil {
     public List<CreateCookBook> getCookbookFromCreate(){
         List<CreateCookBook> createCookBookList;
         int user_id = BaseActivity.userForNow.getId();
-        String user_id_string = user_id + "";
-        createCookBookList = DataSupport.where("user_id = ?",user_id_string).find(CreateCookBook.class);
+        createCookBookList = DataSupport.where("user_id = ?",String.valueOf(user_id)).find(CreateCookBook.class);
         return createCookBookList;
 
     }

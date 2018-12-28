@@ -23,8 +23,7 @@ public class FavStoreUtil {
     public List<FavCookBook> getAllCookbookFromFav(){
         List<FavCookBook> favCookBookList;
         int user_id = BaseActivity.userForNow.getId();
-        String user_id_string = user_id + "";
-        favCookBookList = DataSupport.where("user_id = ?",user_id_string).find(FavCookBook.class);
+        favCookBookList = DataSupport.where("user_id = ?",String.valueOf(user_id)).find(FavCookBook.class);
         return favCookBookList;
     }
 
