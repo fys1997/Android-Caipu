@@ -4,6 +4,7 @@ import org.litepal.crud.DataSupport;
 
 public class CreateCookBook extends DataSupport{
 
+    private int id;
     private String name;
     private byte[] cover;
     private String material;
@@ -26,6 +27,14 @@ public class CreateCookBook extends DataSupport{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

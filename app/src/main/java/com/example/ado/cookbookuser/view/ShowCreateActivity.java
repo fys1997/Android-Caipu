@@ -17,6 +17,7 @@ import com.example.ado.cookbookuser.view.adapter.CookStepShowAdapter;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowCreateActivity extends BaseActivity {
@@ -38,7 +39,8 @@ public class ShowCreateActivity extends BaseActivity {
         setContentView(R.layout.activity_show_create);
 
         Intent intent = getIntent();
-        //cookbookId = intent.getIntExtra("cookbookId");
+        steps = new ArrayList<>();
+        cookbookId = intent.getIntExtra("id",0);
         createCookBook = DataSupport.find(CreateCookBook.class,cookbookId);
         toolbarShowCreate = findViewById(R.id.toolbar_show_create);
         cookbookCover = findViewById(R.id.cookbook_cover);
@@ -59,15 +61,15 @@ public class ShowCreateActivity extends BaseActivity {
         Glide.with(this).load(bitmap).into(cookbookCover);
         cookbookName.setText(createCookBook.getName());
         cookbookMaterial.setText(createCookBook.getMaterial());
-        if(!createCookBook.getStep1().equals("")) steps.add(createCookBook.getStep1());
-        if(!createCookBook.getStep2().equals("")) steps.add(createCookBook.getStep2());
-        if(!createCookBook.getStep3().equals("")) steps.add(createCookBook.getStep3());
-        if(!createCookBook.getStep4().equals("")) steps.add(createCookBook.getStep4());
-        if(!createCookBook.getStep5().equals("")) steps.add(createCookBook.getStep5());
-        if(!createCookBook.getStep6().equals("")) steps.add(createCookBook.getStep6());
-        if(!createCookBook.getStep7().equals("")) steps.add(createCookBook.getStep7());
-        if(!createCookBook.getStep8().equals("")) steps.add(createCookBook.getStep8());
-        if(!createCookBook.getStep9().equals("")) steps.add(createCookBook.getStep9());
-        if(!createCookBook.getStep10().equals("")) steps.add(createCookBook.getStep10());
+        if(createCookBook.getStep1()!=null) steps.add(createCookBook.getStep1());
+        if(createCookBook.getStep2()!=null) steps.add(createCookBook.getStep2());
+        if(createCookBook.getStep3()!=null) steps.add(createCookBook.getStep3());
+        if(createCookBook.getStep4()!=null) steps.add(createCookBook.getStep4());
+        if(createCookBook.getStep5()!=null) steps.add(createCookBook.getStep5());
+        if(createCookBook.getStep6()!=null) steps.add(createCookBook.getStep6());
+        if(createCookBook.getStep7()!=null) steps.add(createCookBook.getStep7());
+        if(createCookBook.getStep8()!=null) steps.add(createCookBook.getStep8());
+        if(createCookBook.getStep9()!=null) steps.add(createCookBook.getStep9());
+        if(createCookBook.getStep10()!=null) steps.add(createCookBook.getStep10());
     }
 }

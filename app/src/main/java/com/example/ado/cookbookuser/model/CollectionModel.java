@@ -36,6 +36,7 @@ public class CollectionModel implements CreateModelI {
     public ArrayList<RecyclerItem>getDatas(List<CreateCookBook>createCookBookList){
         for (int i=0;i<createCookBookList.size();i++){
             RecyclerItem item=new RecyclerItem(createCookBookList.get(i).getCover(),createCookBookList.get(i).getName(),createCookBookList.get(i).getMaterial());
+            item.setId(createCookBookList.get(i).getId());
             data.add(item);
         }
         return data;

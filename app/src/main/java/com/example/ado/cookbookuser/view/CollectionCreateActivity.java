@@ -83,21 +83,33 @@ public class CollectionCreateActivity extends BaseActivity implements CreateColl
     @Override
     public void setRecyclerItemClickListener(){
         recyclerViewadapter=(CreateCollectionAdapter)recyclerView.getAdapter();
-        recyclerViewadapter.setOnItemClickListener(new OnClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent=new Intent(CollectionCreateActivity.this,StepActivity.class);
-                ArrayList<Integer>list=new ArrayList<>();
-                for (int i=0;i<recyclerViewadapter.getData().size();i++){
-                    list.add(recyclerViewadapter.getData().get(i).getId());
+        if(which.equals("like")) {
+            recyclerViewadapter.setOnItemClickListener(new OnClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(CollectionCreateActivity.this, StepActivity.class);
+                    ArrayList<Integer> list = new ArrayList<>();
+                    for (int i = 0; i < recyclerViewadapter.getData().size(); i++) {
+                        list.add(recyclerViewadapter.getData().get(i).getId());
+                    }
+                    intent.putExtra("name", Integer.toString(recyclerViewadapter.getData().get(position).getId()));
+                    intent.putExtra("type", "1");//1代表网络请求调用使用id查值
+                    intent.putExtra("position", Integer.toString(position));
+                    intent.putIntegerArrayListExtra("list", list);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 }
-                intent.putExtra("name",Integer.toString(recyclerViewadapter.getData().get(position).getId()));
-                intent.putExtra("type","1");//1代表网络请求调用使用id查值
-                intent.putExtra("position",Integer.toString(position));
-                intent.putIntegerArrayListExtra("list",list);
-                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+            });
+        }
+        else if(which.equals("create")){
+            recyclerViewadapter.setOnItemClickListener(new OnClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent=new Intent(CollectionCreateActivity.this,ShowCreateActivity.class);
+                    intent.putExtra("id",recyclerViewadapter.getData().get(position).getId());
+                    startActivity(intent);
+                }
+            });
+        }
     }
 }
