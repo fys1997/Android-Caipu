@@ -28,6 +28,8 @@ import com.example.ado.cookbookuser.view.Interface.StepViewI;
 import java.util.ArrayList;
 
 public class StepActivity extends BaseActivity implements StepViewI,SensorEventListener {
+    private int linearlayoutViewSize=0;
+    private boolean isSensor=true;
     private LinearLayout linearLayout;
     private Intent intent;
     private String menu;//记录保存要查看的菜谱名
@@ -92,6 +94,8 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
         else
             textView.setText(datas.get(0).getTitlle());
         linearLayout=findViewById(R.id.linerlayout);
+        if(linearlayoutViewSize!=0)
+        linearLayout.removeViews(2,3*linearlayoutViewSize);
         for(int i=0;i<datas.size();i++){
             View Sview= getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.line);
             TextView StextView=getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.menuItemTextView);
@@ -120,7 +124,9 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
             linearLayout.addView(Mview);
             linearLayout.addView(Mimageview);
             linearLayout.addView(Mtextview);
+            isSensor=true;
         }
+        linearlayoutViewSize=datas.size();
     }
 
 
@@ -165,37 +171,43 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
         if (timeInterval < INTERVAL_TIME) return;
 
         float[] values = event.values;
+        if(isSensor) {
 
-        if (values[0] > 15){
-            if(type==0){
-                position--;
-                if(position<0)
-                    position=menuNames.size()-1;
-                stepPresenter.operation(menuNames.get(position));
+            if (values[0] < -15) {
+                if (type == 0) {
+                    position--;
+                    if (position < 0)
+                        position = menuNames.size() - 1;
+                    menu=menuNames.get(position);
+                    stepPresenter.operation(menuNames.get(position));
+                    isSensor=false;
+                } else {
+                    position--;
+                    if (position < 0)
+                        position = menuIDs.size();
+                    stepPresenter.anotherOperation(menuIDs.get(position));
+                    isSensor=false;
+                }
+                event.values[0] = 0;
+                //Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+                //想左摇晃
+            } else if (values[0] > 15) {
+                if (type == 0) {
+                    position++;
+                    position = position % menuNames.size();
+                    menu=menuNames.get(position);
+                    stepPresenter.operation(menuNames.get(position));
+                    isSensor=false;
+                } else {
+                    position--;
+                    position = position % menuIDs.size();
+                    stepPresenter.anotherOperation(menuIDs.get(position));
+                    isSensor=false;
+                }
+                event.values[0] = 0;
+                //向右摇晃
             }
-            else{
-                position--;
-                if(position<0)
-                    position=menuIDs.size();
-                stepPresenter.anotherOperation(menuIDs.get(position));
-            }
-            event.values[0] = 0;
-            //Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-            //想左摇晃
-        }
-        else if(values[0] < -15){
-            if(type==0){
-                position++;
-               position=position%menuNames.size();
-                stepPresenter.operation(menuNames.get(position));
-            }
-            else{
-                position--;
-                position=position%menuIDs.size();
-                stepPresenter.anotherOperation(menuIDs.get(position));
-            }
-            event.values[0] = 0;
-            //向右摇晃
+
         }
     }
 
