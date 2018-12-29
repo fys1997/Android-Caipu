@@ -34,13 +34,6 @@
             android:textColor="#757373"
             android:textSize="10sp" />
     </LinearLayout>
-    <ImageView
-        android:id="@+id/deleteCollection"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="2mm"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/cancel_collection"
-        />
+
 
 </LinearLayout>

@@ -38,4 +38,9 @@ public class FavStoreUtil {
 
     }
 
+    public static void deleteByCookId(int cookbook_name_id){
+        int user_id = BaseActivity.userForNow.getId();
+        DataSupport.deleteAll(FavCookBook.class,"user_id = ? and cookBook_name_id = ?",String.valueOf(user_id),String.valueOf(cookbook_name_id));
+    }
+
 }

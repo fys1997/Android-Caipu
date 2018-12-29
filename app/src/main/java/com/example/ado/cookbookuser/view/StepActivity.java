@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.example.ado.cookbookuser.R;
 import com.example.ado.cookbookuser.data.RecyclerItem;
 import com.example.ado.cookbookuser.model.CreateStoreUtil;
+import com.example.ado.cookbookuser.model.FavCookBook;
 import com.example.ado.cookbookuser.model.FavStoreUtil;
 import com.example.ado.cookbookuser.presenter.StepPresenter;
 import com.example.ado.cookbookuser.view.Interface.StepViewI;
@@ -104,6 +105,10 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
             textView.setText(datas.get(0).getTitlle());
         menu=datas.get(0).getTitlle();
         menuId=datas.get(0).getId();
+        if(FavStoreUtil.isCookbookInFav(menuId)){
+            islike = true;
+            Glide.with(getBaseContext()).load(R.drawable.like_red).into(likeButton);
+        }
         linearLayout=findViewById(R.id.linerlayout);
         if(linearlayoutViewSize!=0)
         linearLayout.removeViews(4,linearlayoutViewSize);
@@ -124,9 +129,7 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
             inTextView.setTextColor(lineTextView.getTextColors());
             //此处加入内容
             String content=datas.get(0).getIngredientsName().get(i);
-            for(int j=content.length();j<60;j++){
-                content=content+" ";
-            }
+            content += ":  ";
             content=content+datas.get(0).getIngredientsNumber().get(i);
             inTextView.setText(content);
             inTextView.setTextSize(lineTextView.getTextSize());
@@ -185,8 +188,11 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
 
     @Override
     public void onDestroy(){
-        if(islike)
+        if(islike && !FavStoreUtil.isCookbookInFav(menuId))
             FavStoreUtil.saveCookbookToFav(menuId);
+        else if(!islike&&FavStoreUtil.isCookbookInFav(menuId)){
+            FavStoreUtil.deleteByCookId(menuId);
+        }
         super.onDestroy();
         if(stepPresenter!=null){
             stepPresenter.destroy();

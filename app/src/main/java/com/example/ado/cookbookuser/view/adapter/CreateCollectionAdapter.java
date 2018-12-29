@@ -64,13 +64,13 @@ public class CreateCollectionAdapter extends RecyclerView.Adapter<CreateCollecti
         private ImageView CollectionImageView;
         private TextView COllectionText;
         private TextView CollectionIngredients;
-        private ImageView DeleteImageView;
+
         public CreateCollectionHolder(View itemView){
             super(itemView);
             CollectionImageView=(ImageView)itemView.findViewById(R.id.RCollectionItemImage);
             COllectionText=(TextView)itemView.findViewById(R.id.RCollectionItemText);
             CollectionIngredients=(TextView)itemView.findViewById(R.id.RCollectioningredients);
-            DeleteImageView=(ImageView)itemView.findViewById(R.id.deleteCollection);
+
         }
     }
     public void setOnItemClickListener(OnClickListener onItemClickListener)

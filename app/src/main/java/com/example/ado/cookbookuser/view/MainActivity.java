@@ -140,8 +140,8 @@ View.OnClickListener,MainViewI
 
        // 初始化用户数据库
 //        DataSupport.deleteAll(User.class);
-//        DataSupport.deleteAll(CreateCookBook.class);
-//        DataSupport.deleteAll(FavCookBook.class);
+        DataSupport.deleteAll(CreateCookBook.class);
+        DataSupport.deleteAll(FavCookBook.class);
 //        String userForNowFile = getExternalCacheDir().getAbsolutePath()  + File.separator + "userForNowFile.txt";
 //        File file = new File(userForNowFile);
 //        if (file.exists()){
