@@ -162,6 +162,8 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
                     if(stepDetails.size()>=10)cookBook.setStep10(stepDetails.get(9));
                     cookBook.save();
                 }
+                Toast.makeText(this, "保存食谱成功", Toast.LENGTH_SHORT).show();
+                finish();
                 break;
             }
         }
@@ -177,8 +179,9 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
         }else if(inputCookbookMaterial.getText().toString().equals("")){
             Toast.makeText(this, "请输入食谱用料", Toast.LENGTH_SHORT).show();
             return true;
-        }else if(!hasEmptyStep()){
+        }else if(hasEmptyStep()){
             Toast.makeText(this, "存在空步骤，请输入完整", Toast.LENGTH_SHORT).show();
+            return true;
         }
         return false;
     }

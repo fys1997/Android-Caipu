@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ado.cookbookuser.R;
+import com.example.ado.cookbookuser.model.CreateCookBook;
+import com.example.ado.cookbookuser.model.FavCookBook;
 import com.example.ado.cookbookuser.model.User;
 
 import org.litepal.LitePal;
@@ -113,18 +115,7 @@ View.OnClickListener,MainViewI
         navCircleImageView.setOnClickListener(this);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //初始化用户数据库
-//        DataSupport.deleteAll(User.class);
-//        String userForNowFile = getExternalCacheDir().getAbsolutePath()  + File.separator + "userForNowFile.txt";
-//        File file = new File(userForNowFile);
-//        if (file.exists()){
-//            file.delete();
-//            try{
-//                file.createNewFile();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
+
     }
 
     @Override
@@ -146,6 +137,22 @@ View.OnClickListener,MainViewI
 
     //初始化界面
     private void initLayout(){
+
+        //初始化用户数据库
+        DataSupport.deleteAll(User.class);
+        DataSupport.deleteAll(CreateCookBook.class);
+        DataSupport.deleteAll(FavCookBook.class);
+        String userForNowFile = getExternalCacheDir().getAbsolutePath()  + File.separator + "userForNowFile.txt";
+        File file = new File(userForNowFile);
+        if (file.exists()){
+            file.delete();
+            try{
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
         //设置toolbar
         setToolbar(toolbarMain);
         ActionBar actionBar = getSupportActionBar();
