@@ -9,9 +9,9 @@ import java.util.List;
 
 public class FavStoreUtil {
 
-    public static void saveCookbookToFav(String cookbookName){
+    public static void saveCookbookToFav(int cookbookName){
         FavCookBook newCookbook = new FavCookBook();
-        newCookbook.setCookBook_name(cookbookName);
+        newCookbook.setCookBook_name_id(cookbookName);
         newCookbook.setUser(BaseActivity.userForNow);
         newCookbook.save();
     }

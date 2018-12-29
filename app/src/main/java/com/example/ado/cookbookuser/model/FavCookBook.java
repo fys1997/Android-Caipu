@@ -5,15 +5,15 @@ import com.example.ado.cookbookuser.model.User;
 import org.litepal.crud.DataSupport;
 
 public class FavCookBook extends DataSupport {
-    private String cookBook_name;
+    private int cookBook_name_id;
     private User user;
 
-    public String getCookBook_name() {
-        return cookBook_name;
+    public int getCookBook_name_id() {
+        return cookBook_name_id;
     }
 
-    public void setCookBook_name(String cookBook_name) {
-        this.cookBook_name = cookBook_name;
+    public void setCookBook_name_id(int cookBook_name_id) {
+        this.cookBook_name_id = cookBook_name_id;
     }
 
     public User getUser() {
