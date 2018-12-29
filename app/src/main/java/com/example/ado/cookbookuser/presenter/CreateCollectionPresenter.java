@@ -2,6 +2,7 @@ package com.example.ado.cookbookuser.presenter;
 
 import com.example.ado.cookbookuser.data.RecyclerItem;
 import com.example.ado.cookbookuser.model.CollectionModel;
+import com.example.ado.cookbookuser.model.CreateCookBook;
 import com.example.ado.cookbookuser.model.FavCookBook;
 import com.example.ado.cookbookuser.model.Interface.CreateModelI;
 import com.example.ado.cookbookuser.model.Interface.MModel;
@@ -39,6 +40,23 @@ public class CreateCollectionPresenter {
                     public void accept(CreateCollectionInterface createCollectionInterface) throws Exception {
                         createCollectionInterface.initRecyclerView(datas);
                         createCollectionInterface.setRecyclerItemClickListener();
+                    }
+                });
+    }
+    public void getDatas(final List<CreateCookBook>createCookBookList){
+        Observable.create(new ObservableOnSubscribe<CreateCollectionInterface>() {
+            @Override
+            public void subscribe(ObservableEmitter<CreateCollectionInterface>e)throws Exception{
+                datas=model.getDatas(createCookBookList);
+                e.onNext(anInterface);
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Consumer<CreateCollectionInterface>() {
+                    @Override
+                    public void accept(CreateCollectionInterface createCollectionInterface) throws Exception {
+                        createCollectionInterface.initRecyclerView(datas);
+
                     }
                 });
     }

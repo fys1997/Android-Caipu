@@ -11,8 +11,15 @@ public class RecyclerItem {
     private String description;
     private String ingredients;
     private String tags;
+    private byte[] cover;
     private ArrayList<String> IngredientsName=new ArrayList<>();
     private ArrayList<String>IngredientsNumber=new ArrayList<>();
+
+    public RecyclerItem(byte[]cover,String title,String ingredients){
+        this.imgsrc= new String(cover);
+        this.titlle=title;
+        this.ingredients=ingredients;
+    }
 
     public RecyclerItem(List<String> img,String title,String ingredients)
     {

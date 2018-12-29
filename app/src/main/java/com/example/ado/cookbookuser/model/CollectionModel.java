@@ -32,4 +32,12 @@ public class CollectionModel implements CreateModelI {
         }
         return data;
     }
+    @Override
+    public ArrayList<RecyclerItem>getDatas(List<CreateCookBook>createCookBookList){
+        for (int i=0;i<createCookBookList.size();i++){
+            RecyclerItem item=new RecyclerItem(createCookBookList.get(i).getCover(),createCookBookList.get(i).getName(),createCookBookList.get(i).getMaterial());
+            data.add(item);
+        }
+        return data;
+    }
 }

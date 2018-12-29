@@ -12,6 +12,8 @@ import android.view.View;
 
 import com.example.ado.cookbookuser.R;
 import com.example.ado.cookbookuser.data.RecyclerItem;
+import com.example.ado.cookbookuser.model.CreateCookBook;
+import com.example.ado.cookbookuser.model.CreateStoreUtil;
 import com.example.ado.cookbookuser.model.FavCookBook;
 import com.example.ado.cookbookuser.model.FavStoreUtil;
 import com.example.ado.cookbookuser.presenter.CreateCollectionPresenter;
@@ -25,19 +27,31 @@ import java.util.List;
 public class CollectionCreateActivity extends BaseActivity implements CreateCollectionInterface {
     private RecyclerView recyclerView;
     private List<FavCookBook> favCookBookList;
+    private List<CreateCookBook> createCookBookList;
     private CreateCollectionPresenter presenter;
     private Toolbar toolbarCollection;
     private CreateCollectionAdapter recyclerViewadapter;
+    private String which;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_collection_page);
+        Intent intent=getIntent();
+        which=intent.getStringExtra("which");
         toolbarCollection = findViewById(R.id.toolbar_collection);
         setToolbar(toolbarCollection);
-        favCookBookList = FavStoreUtil.getAllCookbookFromFav();
+
+
         presenter=new CreateCollectionPresenter(this);
-        presenter.getData(favCookBookList);
+        if(which.equals("like")) {
+            favCookBookList = FavStoreUtil.getAllCookbookFromFav();
+            presenter.getData(favCookBookList);
+        } else{
+            createCookBookList = CreateStoreUtil.getCookbookFromCreate();
+            presenter.getDatas(createCookBookList);
+        }
+
     }
 
     @Override

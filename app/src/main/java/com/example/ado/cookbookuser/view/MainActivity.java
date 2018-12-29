@@ -140,8 +140,8 @@ View.OnClickListener,MainViewI
 
        // 初始化用户数据库
 //        DataSupport.deleteAll(User.class);
-        DataSupport.deleteAll(CreateCookBook.class);
-        DataSupport.deleteAll(FavCookBook.class);
+       // DataSupport.deleteAll(CreateCookBook.class);
+        //DataSupport.deleteAll(FavCookBook.class);
 //        String userForNowFile = getExternalCacheDir().getAbsolutePath()  + File.separator + "userForNowFile.txt";
 //        File file = new File(userForNowFile);
 //        if (file.exists()){
@@ -365,11 +365,14 @@ View.OnClickListener,MainViewI
         switch(menuItem.getItemId()){
             case R.id.nav_myFavorite:{
                 Intent intent = new Intent(this, CollectionCreateActivity.class);
+                intent.putExtra("which","like");
                 startActivity(intent);
                 break;
             }
             case R.id.nav_myCookbook:{
-
+                Intent intent = new Intent(this, CollectionCreateActivity.class);
+                intent.putExtra("which","create");
+                startActivity(intent);
                 break;
             }
             case R.id.nav_setting:{
