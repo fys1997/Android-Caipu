@@ -49,7 +49,7 @@ public class StepModel implements SModel {
             RecyclerItem item=new RecyclerItem(idDto.getResult().getData().get(0).getSteps().get(i).getImg(),idDto.getResult().getData().get(0).getSteps().get(i).getStep(),idDto.getResult().getData().get(0).getIngredients()+";"+idDto.getResult().getData().get(0).getBurden()+";");
             item.setTitlle(idDto.getResult().getData().get(0).getTitle());
             item.seprateIngredients();
-            item.setId(dto.getResult().getData().get(0).getId());
+            item.setId(id);
             data.add(item);
         }
         return data;

@@ -38,6 +38,7 @@ public class CreateCollectionPresenter {
                     @Override
                     public void accept(CreateCollectionInterface createCollectionInterface) throws Exception {
                         createCollectionInterface.initRecyclerView(datas);
+                        createCollectionInterface.setRecyclerItemClickListener();
                     }
                 });
     }

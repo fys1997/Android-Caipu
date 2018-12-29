@@ -6,4 +6,5 @@ import java.util.ArrayList;
 
 public interface CreateCollectionInterface {
     void initRecyclerView(ArrayList<RecyclerItem>datas);
+    void setRecyclerItemClickListener();
 }

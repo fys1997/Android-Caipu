@@ -241,7 +241,7 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
                     stepPresenter.operation(menuNames.get(position));
                     isSensor=false;
                 } else {
-                    position--;
+                    position++;
                     position = position % menuIDs.size();
                     stepPresenter.anotherOperation(menuIDs.get(position));
                     isSensor=false;

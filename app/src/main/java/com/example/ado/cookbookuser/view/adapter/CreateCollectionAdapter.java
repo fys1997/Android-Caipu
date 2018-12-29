@@ -73,4 +73,12 @@ public class CreateCollectionAdapter extends RecyclerView.Adapter<CreateCollecti
             DeleteImageView=(ImageView)itemView.findViewById(R.id.deleteCollection);
         }
     }
+    public void setOnItemClickListener(OnClickListener onItemClickListener)
+    {
+        monItemClickListener=onItemClickListener;
+    }
+
+    public ArrayList<RecyclerItem> getData() {
+        return data;
+    }
 }
