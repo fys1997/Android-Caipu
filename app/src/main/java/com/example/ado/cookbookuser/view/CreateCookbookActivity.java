@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ado.cookbookuser.R;
+import com.example.ado.cookbookuser.model.CreateCookBook;
 import com.example.ado.cookbookuser.model.GetPicUtil;
 import com.example.ado.cookbookuser.view.adapter.CookStepAdapter;
 
@@ -45,7 +46,9 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
     private TextView inputCookbookName;
     private ImageView cookbookCover;
     private TextView placeHolder;
+    private CreateCookBook cookBook = new CreateCookBook();
 
+    private Bitmap coverBitmap;
     private int stepSize = 0;
     private GetPicUtil getPicUtil;
     private Uri imageCoverUri;
@@ -144,7 +147,20 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
             }
             case R.id.submit_cookbook:{
                 if(!hasInputError()){
-
+                    cookBook.setCover(bitmapToByteArray(coverBitmap));
+                    cookBook.setName(inputCookbookName.getText().toString());
+                    cookBook.setMaterial(inputCookbookMaterial.getText().toString());
+                    if(stepDetails.size()>=1)cookBook.setStep1(stepDetails.get(0));
+                    if(stepDetails.size()>=2)cookBook.setStep2(stepDetails.get(1));
+                    if(stepDetails.size()>=3)cookBook.setStep3(stepDetails.get(2));
+                    if(stepDetails.size()>=4)cookBook.setStep4(stepDetails.get(3));
+                    if(stepDetails.size()>=5)cookBook.setStep5(stepDetails.get(4));
+                    if(stepDetails.size()>=6)cookBook.setStep6(stepDetails.get(5));
+                    if(stepDetails.size()>=7)cookBook.setStep7(stepDetails.get(6));
+                    if(stepDetails.size()>=8)cookBook.setStep8(stepDetails.get(7));
+                    if(stepDetails.size()>=9)cookBook.setStep9(stepDetails.get(8));
+                    if(stepDetails.size()>=10)cookBook.setStep10(stepDetails.get(9));
+                    cookBook.save();
                 }
                 break;
             }
@@ -168,11 +184,14 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
     }
 
     private boolean hasEmptyStep(){
+        stepDetails = new ArrayList<>();
         for(int i = 0;i<recyclerView.getChildCount();i++){
             LinearLayout linearLayout = (LinearLayout) recyclerView.getChildAt(i);
             EditText editText = linearLayout.findViewById(R.id.step_detail);
             if(editText.getText().toString().equals("")){
                 return true;
+            }else{
+                stepDetails.add(editText.getText().toString());
             }
         }
         return false;
@@ -191,8 +210,9 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
                 if(resultCode == RESULT_OK){
                     try {
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageCoverUri));
-
                         Glide.with(this).load(bitmap).into(cookbookCover);
+
+                        coverBitmap = bitmap;
                         cookbookCover.setVisibility(View.VISIBLE);
                         placeHolder.setVisibility(View.GONE);
 //                        circleImageView.setImageBitmap(bitmap);
@@ -223,6 +243,7 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
     public void onDisplayImage(String imagePath){
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
         Glide.with(this).load(imagePath).into(cookbookCover);
+        coverBitmap = bitmap;
         cookbookCover.setVisibility(View.VISIBLE);
         placeHolder.setVisibility(View.GONE);
     }
