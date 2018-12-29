@@ -258,16 +258,21 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
+                if(BaseActivity.userForNow == null){
+                    Toast.makeText(StepActivity.this, "请先登录", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(StepActivity.this,LoginActivity.class));
+                    return;
+                }
                 if(islike) {
                     Glide.with(getBaseContext()).load(R.drawable.like).into(likeButton);
                     Toast.makeText(StepActivity.this, "取消收藏", Toast.LENGTH_SHORT).show();
-                    FavStoreUtil.deleteCookbookFromFav();
+                    //FavStoreUtil.deleteCookbookFromFav();
                     islike=false;
                 }
                 else {
                     Glide.with(getBaseContext()).load(R.drawable.like_red).into(likeButton);
                     Toast.makeText(StepActivity.this,"收藏成功",Toast.LENGTH_SHORT).show();
-                    FavStoreUtil.saveCookbookToFav(menu);
+                    //FavStoreUtil.saveCookbookToFav(menu);
                     islike=true;
                 }
             }
