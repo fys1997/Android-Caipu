@@ -38,6 +38,7 @@
                     android:maxHeight="60dp"
                     android:maxWidth="60sp"
                     android:layout_margin="2mm"/>
+
                 <LinearLayout
                     android:layout_gravity="center_vertical"
                     android:orientation="vertical"
@@ -63,6 +64,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="#757373"
                         android:textSize="10sp"/>
+
                 </LinearLayout>
             </LinearLayout>
 

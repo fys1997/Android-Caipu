@@ -87,15 +87,12 @@ public class CreateRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_recipe);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        CRRecyclerAdapter adapter = new CRRecyclerAdapter(steplist);
-        recyclerView.setAdapter(adapter);
+//        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//        CRRecyclerAdapter adapter = new CRRecyclerAdapter(steplist);
+//        recyclerView.setAdapter(adapter);
     }
-
-
-
 
 
 //===============================
@@ -232,5 +229,6 @@ public class CreateRecipeActivity extends AppCompatActivity {
 //            Toast.makeText(this,"failed to get image",Toast.LENGTH_SHORT).show();
 //        }
 //    }
+
 
 }
