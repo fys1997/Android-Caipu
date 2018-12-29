@@ -45,12 +45,12 @@ public class MRecyclerAdapter extends RecyclerView.Adapter<MRecyclerAdapter.MHol
         holder.textView3.setText(data.get(position).getTags());
         final View itemview=((LinearLayout)holder.itemView).getChildAt(0);
         if(monItemClickListener!=null){
-            itemview.setOnClickListener(new View.OnClickListener(){
+            holder.itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v)
                 {
                     int position=holder.getLayoutPosition();
-                    monItemClickListener.onItemClick(itemview,position);
+                    monItemClickListener.onItemClick(v,position);
                 }
             });
         }

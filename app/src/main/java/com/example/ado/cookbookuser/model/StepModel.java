@@ -20,7 +20,7 @@ public class StepModel implements SModel {
     @Override
     public ArrayList<RecyclerItem> getData(String menu){
         query.clear();
-        query.put("key", "721ffff371fef1638076d2e53e4a09f2");
+        query.put("key", "0513f3cf3e6df9e3a40268ba6a43e3d0");
         query.put("menu",menu);
         data.clear();
         dto= RxJavaRetrofitUtilsMenu.getMenu().getCallBack(query);
@@ -28,6 +28,7 @@ public class StepModel implements SModel {
         for (int i = 0; i < dto.getResult().getData().get(0).getSteps().size(); i++) {
             RecyclerItem item=new RecyclerItem(dto.getResult().getData().get(0).getSteps().get(i).getImg(),dto.getResult().getData().get(0).getSteps().get(i).getStep(),dto.getResult().getData().get(0).getIngredients()+";"+dto.getResult().getData().get(0).getBurden()+";");
             item.seprateIngredients();
+            item.setTitlle(dto.getResult().getData().get(0).getTitle());
             data.add(item);
         }
         return data;
@@ -39,7 +40,7 @@ public class StepModel implements SModel {
     @Override
     public ArrayList<RecyclerItem>getData(int id){
         query.clear();
-        query.put("key", "721ffff371fef1638076d2e53e4a09f2");
+        query.put("key", "0513f3cf3e6df9e3a40268ba6a43e3d0");
         data.clear();
         idDto=RxJavaRetrofitUtilsID.getId().getCallBack(id,query);
         imageUrl=idDto.getResult().getData().get(0).getAlbums().get(0);

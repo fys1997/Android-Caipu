@@ -89,4 +89,12 @@ public class RecyclerItem {
     public void setTitlle(String titlle) {
         this.titlle = titlle;
     }
+
+    public ArrayList<String> getIngredientsName() {
+        return IngredientsName;
+    }
+
+    public ArrayList<String> getIngredientsNumber() {
+        return IngredientsNumber;
+    }
 }

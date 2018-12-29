@@ -34,4 +34,33 @@
         android:textColor="#181818"
         android:textSize="10sp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3mm"
+        android:layout_marginLeft="2mm"
+        android:layout_marginTop="3mm"
+        android:layout_marginRight="2mm"
+        android:text="用料"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <View
+        android:id="@+id/lineIngredients"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="2mm"
+        android:layout_marginRight="2mm"
+        android:layout_height="1dip"
+        android:background="#d8d3d3" />
+    <TextView
+        android:id="@+id/ingredients"
+        android:textSize="8sp"
+        android:layout_marginLeft="2mm"
+        android:layout_marginTop="1mm"
+        android:layout_margin="2mm"
+        android:text="可乐易拉罐一听"
+        android:textColor="#2a2929"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

@@ -47,6 +47,23 @@
                 android:textStyle="bold"
                 android:typeface="serif"
                 android:textColor="#1b1a1a"/>
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="#d8d3d3" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3mm"
+                android:layout_marginLeft="2mm"
+                android:layout_marginTop="3mm"
+                android:layout_marginRight="2mm"
+                android:text="用料"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

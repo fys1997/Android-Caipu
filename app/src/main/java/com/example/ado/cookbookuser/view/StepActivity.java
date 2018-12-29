@@ -7,7 +7,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -90,12 +89,41 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
     public void initStepUI(ArrayList<RecyclerItem> datas,String imageurl){
         Glide.with(this.getBaseContext()).load(imageurl).into(imageView);
         if(type==0)
-        textView.setText(menu);
+        textView.setText(datas.get(0).getTitlle());
         else
             textView.setText(datas.get(0).getTitlle());
         linearLayout=findViewById(R.id.linerlayout);
         if(linearlayoutViewSize!=0)
-        linearLayout.removeViews(2,3*linearlayoutViewSize);
+        linearLayout.removeViews(4,linearlayoutViewSize);
+        linearlayoutViewSize=0;
+        for (int i=0;i<datas.get(0).getIngredientsName().size();i++){
+            View lineview=getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.lineIngredients);
+            TextView lineTextView=getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.ingredients);
+            ViewGroup.LayoutParams layoutParams;
+            //灰线
+            layoutParams=lineview.getLayoutParams();
+            View Mview=new View(this);
+            Mview.setLayoutParams(layoutParams);
+            Mview.setBackground(lineview.getBackground());
+            //加textView
+            TextView inTextView=new TextView(this);
+            layoutParams=lineTextView.getLayoutParams();
+            inTextView.setLayoutParams(layoutParams);
+            inTextView.setTextColor(lineTextView.getTextColors());
+            //此处加入内容
+            String content=datas.get(0).getIngredientsName().get(i);
+            for(int j=content.length();j<60;j++){
+                content=content+" ";
+            }
+            content=content+datas.get(0).getIngredientsNumber().get(i);
+            inTextView.setText(content);
+            inTextView.setTextSize(lineTextView.getTextSize());
+            //加入view
+            linearLayout.addView(Mview);
+            linearLayout.addView(inTextView);
+            linearlayoutViewSize=linearlayoutViewSize+2;
+
+        }
         for(int i=0;i<datas.size();i++){
             View Sview= getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.line);
             TextView StextView=getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.menuItemTextView);
@@ -124,9 +152,9 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
             linearLayout.addView(Mview);
             linearLayout.addView(Mimageview);
             linearLayout.addView(Mtextview);
+            linearlayoutViewSize=linearlayoutViewSize+3;
             isSensor=true;
         }
-        linearlayoutViewSize=datas.size();
     }
 
 
@@ -184,7 +212,7 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
                 } else {
                     position--;
                     if (position < 0)
-                        position = menuIDs.size();
+                        position = menuIDs.size()-1;
                     stepPresenter.anotherOperation(menuIDs.get(position));
                     isSensor=false;
                 }

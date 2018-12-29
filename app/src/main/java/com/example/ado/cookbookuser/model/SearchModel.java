@@ -14,7 +14,7 @@ public class SearchModel implements com.example.ado.cookbookuser.model.Interface
     private ArrayList<SearchRecyclerItem>data=new ArrayList<>();
     @Override
     public ArrayList<SearchRecyclerItem>getData(String count,String menu){
-        query.put("key", "721ffff371fef1638076d2e53e4a09f2");
+        query.put("key", "0513f3cf3e6df9e3a40268ba6a43e3d0");
         query.put("menu",menu);
         query.put("pn",count);
         query.put("rn","8");
