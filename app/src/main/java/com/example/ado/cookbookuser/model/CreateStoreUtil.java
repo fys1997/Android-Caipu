@@ -8,16 +8,16 @@ import java.util.List;
 
 public class CreateStoreUtil {
 
-    public void deleteCookbookFromCreate(int cookbookId){
+    public static void deleteCookbookFromCreate(int cookbookId){
         DataSupport.delete(CreateCookBook.class,cookbookId);
     }
 
-    public void saveCookbookToCreate(CreateCookBook createCookBook){
+    public static void saveCookbookToCreate(CreateCookBook createCookBook){
         createCookBook.setUser(BaseActivity.userForNow);
         createCookBook.save();
     }
 
-    public List<CreateCookBook> getCookbookFromCreate(){
+    public static List<CreateCookBook> getCookbookFromCreate(){
         List<CreateCookBook> createCookBookList;
         int user_id = BaseActivity.userForNow.getId();
         createCookBookList = DataSupport.where("user_id = ?",String.valueOf(user_id)).find(CreateCookBook.class);

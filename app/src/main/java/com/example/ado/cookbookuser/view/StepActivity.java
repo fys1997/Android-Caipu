@@ -2,11 +2,15 @@ package com.example.ado.cookbookuser.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -21,12 +25,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.ado.cookbookuser.R;
 import com.example.ado.cookbookuser.data.RecyclerItem;
+import com.example.ado.cookbookuser.model.CreateStoreUtil;
+import com.example.ado.cookbookuser.model.FavStoreUtil;
 import com.example.ado.cookbookuser.presenter.StepPresenter;
 import com.example.ado.cookbookuser.view.Interface.StepViewI;
-
 import java.util.ArrayList;
 
 public class StepActivity extends BaseActivity implements StepViewI,SensorEventListener {
+    private boolean islike=false;
     private int linearlayoutViewSize=0;
     private boolean isSensor=true;
     private LinearLayout linearLayout;
@@ -42,6 +48,7 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
     private ArrayList<Integer>menuIDs;//记录了列表菜谱ID
     private int type;
     private SensorManager sensorManager;
+    private FloatingActionButton likeButton;
     //private TextView textView;
     private Sensor sensor;
 
@@ -64,6 +71,7 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
         stepPresenter=new StepPresenter(this);
         imageView=(ImageView)findViewById(R.id.itemClickImageView);
         textView=(TextView)findViewById(R.id.RItemText);
+        likeButton=(FloatingActionButton)findViewById(R.id.like);
         //recyclerView=(RecyclerView)findViewById(R.id.menuRecyclerView);
         if(type==0) {
             stepPresenter.operation(menu);
@@ -75,6 +83,7 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
         }
 
         initSensor();
+        setLikeButtonClickListener();
     }
 
     private void initSensor(){
@@ -243,4 +252,27 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
+    public void setLikeButtonClickListener(){
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+                if(islike) {
+                    Glide.with(getBaseContext()).load(R.drawable.like).into(likeButton);
+                    Toast.makeText(StepActivity.this, "取消收藏", Toast.LENGTH_SHORT).show();
+                    FavStoreUtil.deleteCookbookFromFav();
+                    islike=false;
+                }
+                else {
+                    Glide.with(getBaseContext()).load(R.drawable.like_red).into(likeButton);
+                    Toast.makeText(StepActivity.this,"收藏成功",Toast.LENGTH_SHORT).show();
+                    FavStoreUtil.saveCookbookToFav(menu);
+                    islike=true;
+                }
+            }
+        });
+    }
+
+
 }
