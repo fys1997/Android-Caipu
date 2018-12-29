@@ -9,7 +9,7 @@
         android:layout_margin="2mm"
         android:id="@+id/RCollectionItemImage"
         android:layout_width="60pt"
-        android:layout_height="60pt"
+        android:layout_height="45pt"
         android:maxHeight="60dp"
         android:maxWidth="60dp" />
 
