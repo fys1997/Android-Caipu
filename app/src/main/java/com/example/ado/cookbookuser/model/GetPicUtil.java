@@ -1,4 +1,4 @@
-package com.example.ado.cookbookuser.presenter;
+package com.example.ado.cookbookuser.model;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -18,6 +18,7 @@ import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.ado.cookbookuser.view.BaseActivity;
 import com.example.ado.cookbookuser.view.EditUserActivity;
 import com.example.ado.cookbookuser.view.MainActivity;
 
@@ -25,22 +26,20 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 
-public class EditUserPresenter {
-
-    private EditUserActivity editUserActivity;
+public class GetPicUtil {
 
     private Uri imageUri;
+    private BaseActivity activity;
 
-    private static final String TAG = "EditUserPresenter";
-    public EditUserPresenter(EditUserActivity editUserActivity){
-        this.editUserActivity = editUserActivity;
+    public GetPicUtil(BaseActivity activity){
+        this.activity = activity;
     }
+
 
     //通过拍照获取头像
     public void getPicByTakePhoto(File outputImage){
         try{
             if(outputImage.exists()){
-                Log.d(TAG, "getPicByTakePhoto: delete");
                 outputImage.delete();
             }
             outputImage.createNewFile();
@@ -48,20 +47,20 @@ public class EditUserPresenter {
             e.printStackTrace();
         }
         if(Build.VERSION.SDK_INT >= 24){
-            imageUri = FileProvider.getUriForFile(editUserActivity,"com.example.ado.cookbookuser.fileprovider",outputImage);
+            imageUri =  FileProvider.getUriForFile(activity,"com.example.ado.cookbookuser.fileprovider",outputImage);
         }else{
             imageUri = Uri.fromFile(outputImage);
         }
-        editUserActivity.onGetPicByTakePhoto(imageUri);
+        activity.onGetPicByTakePhoto(imageUri);
     }
 
     //从相册中获取头像
     public void getPicFromAlbum(){
-        if(ContextCompat.checkSelfPermission(editUserActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+        if(ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
                 PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(editUserActivity,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+            ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
         }else{
-            editUserActivity.onGetPicFromAlbum();
+            activity.onGetPicFromAlbum();
         }
     }
 
@@ -70,7 +69,7 @@ public class EditUserPresenter {
     public void handleImageOnKitKat(Intent data){
         String imagePath = null;
         Uri uri = data.getData();
-        if(DocumentsContract.isDocumentUri(editUserActivity,uri)){
+        if(DocumentsContract.isDocumentUri(activity,uri)){
             String docId = DocumentsContract.getDocumentId(uri);
             if("com.android.providers.media.documents".equals(uri.getAuthority())){
                 String id = docId.split(":")[1];
@@ -98,7 +97,7 @@ public class EditUserPresenter {
     //获取图片地址
     public String getImagePath(Uri uri,String selection){
         String path = null;
-        Cursor cursor = editUserActivity.getContentResolver().query(uri,null,selection,null,null);
+        Cursor cursor = activity.getContentResolver().query(uri,null,selection,null,null);
         if(cursor!=null){
             if(cursor.moveToNext()){
                 path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
@@ -111,10 +110,9 @@ public class EditUserPresenter {
     //展示图片
     public void displayImage(String imagePath){
         if(imagePath != null){
-            editUserActivity.onDisplayImage(imagePath);
+            activity.onDisplayImage(imagePath);
         }else{
-            editUserActivity.onImageNotFind();
+            activity.onImageNotFind();
         }
     }
-
 }

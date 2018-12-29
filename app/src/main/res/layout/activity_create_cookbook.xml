@@ -16,13 +16,16 @@
             />
     </android.support.design.widget.AppBarLayout>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
         <LinearLayout
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -30,17 +33,27 @@
             android:focusableInTouchMode="true"
             >
 
-
-            <TextView
-                android:id="@+id/select_cookbook_cover"
+            <ImageView
+                android:id="@+id/cookbook_cover"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:textAlignment="center"
-                android:paddingTop="40dp"
-                android:text="请上传菜谱封面 +"
+                android:layout_height="200dp"
+                android:visibility="gone"
                 />
 
+            <TextView
+                android:id="@+id/place_holder"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:paddingTop="80dp"
+                android:text="请上传菜谱封面 +"
+                android:background="#999"
+                android:textAlignment="center"
+                />
+
+
             <EditText
+                android:id="@+id/select_cookbook_name"
+                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -48,11 +61,87 @@
                 android:hint="请输入食谱名称"
                 />
 
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="用料"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000"
+                />
+
+            <EditText
+                android:id="@+id/input_cookbook_material"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:hint="请输入食材"
+                android:layout_marginTop="10dp"
+                />
+
+            <TextView
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="做法"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="#000"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cookbook_steps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+            </android.support.v7.widget.RecyclerView>
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/step_less"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="减少一步"
+                    android:textColor="#f00"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginRight="30dp"
+                    android:visibility="gone"
+                    />
+
+                <TextView
+                    android:id="@+id/step_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="再添加一步"
+                    android:textColor="#f00"
+                    android:textSize="15sp"
+                    android:layout_marginBottom="30dp"
+                     />
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/submit_cookbook"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#f00"
+                android:textColor="#fff"
+                android:text="保存食谱"
+                android:layout_marginBottom="10dp"
+                />
 
         </LinearLayout>
 
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/snack_bar"

@@ -1,14 +1,18 @@
 package com.example.ado.cookbookuser.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PersistableBundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +20,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.ado.cookbookuser.R;
+import com.example.ado.cookbookuser.model.GetPicUtil;
 import com.example.ado.cookbookuser.model.LightSensorUtil;
 import com.example.ado.cookbookuser.model.User;
 
@@ -42,6 +47,9 @@ public class BaseActivity extends AppCompatActivity {
     private LightSensorUtil lightSensorUtil;
 
     public static Boolean isLightSensorOpen = false;
+
+    public static final int TAKE_PHOTO = 1;
+    public static final int CHOOSE_PHOTO = 2;
 
 
     //创建数据库
@@ -139,5 +147,52 @@ public class BaseActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+    }
+
+    //弹出用户选择头像图片的方式
+    public void showChoiceOfPic(final String filename,final GetPicUtil getPicUtil){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final String[] choicePic = {"拍照","从相册中选择"};
+        builder.setItems(choicePic, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(choicePic[which].equals("拍照")){
+                    //本地cache文件夹
+                    //File outputImage = new File(getExternalCacheDir(),"cook_book_user_head_shot.jpg");
+                    File outputImage = new File(getExternalCacheDir(),filename);
+                    getPicUtil.getPicByTakePhoto(outputImage);
+                }else if(choicePic[which].equals("从相册中选择")){
+                    getPicUtil.getPicFromAlbum();
+
+                }
+            }
+        });
+        builder.show();
+
+    }
+
+    public void onGetPicByTakePhoto(Uri imageUri){
+        //打开相机
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+        startActivityForResult(intent,TAKE_PHOTO);
+    }
+
+
+
+    public void onGetPicFromAlbum(){
+        //打开相册
+        Intent intent = new Intent("android.intent.action.GET_CONTENT");
+        intent.setType("image/*");
+        startActivityForResult(intent,CHOOSE_PHOTO);
+    }
+
+    public void  onDisplayImage(String imagePath){
+
+    }
+
+    //图片获取失败
+    public void onImageNotFind(){
+        Toast.makeText(this,"获取图片失败",Toast.LENGTH_SHORT).show();
     }
 }
