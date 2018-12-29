@@ -9,7 +9,7 @@
         android:layout_margin="2mm"
         android:id="@+id/RCollectionItemImage"
         android:layout_width="60pt"
-        android:layout_height="45pt"
+        android:layout_height="60pt"
         android:maxHeight="60dp"
         android:maxWidth="60dp" />
 
@@ -26,14 +26,6 @@
             android:textColor="#000000"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/RCollectiontags"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2mm"
-            android:layout_marginTop="2mm"
-            android:textColor="#3e3d3d"
-            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/RCollectioningredients"
@@ -44,12 +36,9 @@
     </LinearLayout>
     <ImageView
         android:id="@+id/deleteCollection"
-        android:src="@drawable/cancel_collection"
         android:layout_gravity="center"
         android:layout_marginLeft="2mm"
-        android:layout_width="20pt"
-        android:layout_height="20pt"
-        android:maxHeight="60dp"
-        android:maxWidth="60dp" />
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
 
 </LinearLayout>

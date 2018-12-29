@@ -86,4 +86,7 @@
     <style name="ShowCreateTheme" parent="BaseTheme">
 
     </style>
+    <style name="CollectionCreateTheme" parent="BaseTheme">
+
+    </style>
 </resources>

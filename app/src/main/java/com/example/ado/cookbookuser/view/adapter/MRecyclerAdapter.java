@@ -43,7 +43,6 @@ public class MRecyclerAdapter extends RecyclerView.Adapter<MRecyclerAdapter.MHol
         Glide.with(mcontext).load(data.get(position).getImgsrc()).apply(options).into(holder.imageView);
         holder.textView2.setText(data.get(position).getIngredients());
         holder.textView3.setText(data.get(position).getTags());
-        final View itemview=((LinearLayout)holder.itemView).getChildAt(0);
         if(monItemClickListener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener(){
                 @Override

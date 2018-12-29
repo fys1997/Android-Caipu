@@ -364,7 +364,7 @@ View.OnClickListener,MainViewI
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch(menuItem.getItemId()){
             case R.id.nav_myFavorite:{
-                Intent intent = new Intent(this, CreateRecipeActivity.class);
+                Intent intent = new Intent(this, CollectionCreateActivity.class);
                 startActivity(intent);
                 break;
             }

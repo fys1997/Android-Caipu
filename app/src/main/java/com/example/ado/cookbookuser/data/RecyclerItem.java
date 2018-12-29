@@ -13,6 +13,14 @@ public class RecyclerItem {
     private String tags;
     private ArrayList<String> IngredientsName=new ArrayList<>();
     private ArrayList<String>IngredientsNumber=new ArrayList<>();
+
+    public RecyclerItem(List<String> img,String title,String ingredients)
+    {
+        this.imgsrc=img.get(0);
+        this.titlle=title;
+        this.ingredients=ingredients;
+    }
+
     public RecyclerItem(String img,String des,String ingredients)
     {
         this.imgsrc=img;

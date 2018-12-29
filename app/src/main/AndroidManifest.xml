@@ -103,6 +103,10 @@
 
 
         </activity>
+        <activity android:name=".view.CollectionCreateActivity"
+            android:label="收藏展示"
+            android:theme="@style/CollectionCreateTheme">
+        </activity>
     </application>
 
 </manifest>
