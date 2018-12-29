@@ -83,4 +83,7 @@
     <style name="CreateRecipeTheme" parent="BaseTheme">
 
     </style>
+    <style name="ShowCreateTheme" parent="BaseTheme">
+
+    </style>
 </resources>

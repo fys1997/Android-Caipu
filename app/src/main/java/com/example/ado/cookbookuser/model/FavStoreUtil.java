@@ -27,4 +27,15 @@ public class FavStoreUtil {
         return favCookBookList;
     }
 
+    public static boolean isCookbookInFav(int cookbookId){
+        List<FavCookBook> favCookBookList = getAllCookbookFromFav();
+        for(int i = 0;i<favCookBookList.size();i++){
+            if(favCookBookList.get(i).getCookBook_name_id() == cookbookId){
+                return true;
+            }
+        }
+        return false;
+
+    }
+
 }

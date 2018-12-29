@@ -138,7 +138,7 @@ View.OnClickListener,MainViewI
     //初始化界面
     private void initLayout(){
 
-        //初始化用户数据库
+       // 初始化用户数据库
         DataSupport.deleteAll(User.class);
         DataSupport.deleteAll(CreateCookBook.class);
         DataSupport.deleteAll(FavCookBook.class);
@@ -369,8 +369,7 @@ View.OnClickListener,MainViewI
                 break;
             }
             case R.id.nav_myCookbook:{
-                Intent intent = new Intent(this,CreateCookbookActivity.class);
-                startActivity(intent);
+
                 break;
             }
             case R.id.nav_setting:{

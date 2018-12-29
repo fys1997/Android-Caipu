@@ -16,9 +16,6 @@ import java.util.List;
 public class CookStepAdapter extends RecyclerView.Adapter<CookStepAdapter.ViewHolder>{
 
     private List<String> stepData;
-    private ViewHolder viewHolder;
-
-
 
     public CookStepAdapter(List<String> data){
         this.stepData = data;

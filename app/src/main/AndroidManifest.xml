@@ -91,10 +91,14 @@
         <activity
             android:name=".view.CreateRecipeActivity"
             android:label="创建食谱 "
-            android:theme="@style/CreateRecipeTheme"></activity>
-        <activity android:name=".view.CreateCookbookActivity"
+            android:theme="@style/CreateRecipeTheme" />
+        <activity
+            android:name=".view.CreateCookbookActivity"
             android:label="创建食谱"
-            android:theme="@style/CreateRecipeTheme"
+            android:theme="@style/CreateRecipeTheme"></activity>
+        <activity android:name=".view.ShowCreateActivity"
+            android:label=""
+            android:theme="@style/ShowCreateTheme"
             >
 
 

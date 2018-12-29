@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.ado.cookbookuser.R;
 import com.example.ado.cookbookuser.model.CreateCookBook;
+import com.example.ado.cookbookuser.model.CreateStoreUtil;
 import com.example.ado.cookbookuser.model.GetPicUtil;
 import com.example.ado.cookbookuser.view.adapter.CookStepAdapter;
 
@@ -54,7 +55,6 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
     private Uri imageCoverUri;
 
     private List<String> stepIds;
-    private int stepNum;
     private List<String> stepDetails;
 
     @Override
@@ -160,7 +160,7 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
                     if(stepDetails.size()>=8)cookBook.setStep8(stepDetails.get(7));
                     if(stepDetails.size()>=9)cookBook.setStep9(stepDetails.get(8));
                     if(stepDetails.size()>=10)cookBook.setStep10(stepDetails.get(9));
-                    cookBook.save();
+                    CreateStoreUtil.saveCookbookToCreate(cookBook);
                 }
                 Toast.makeText(this, "保存食谱成功", Toast.LENGTH_SHORT).show();
                 finish();
