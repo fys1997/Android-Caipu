@@ -32,6 +32,7 @@ import com.example.ado.cookbookuser.view.Interface.StepViewI;
 import java.util.ArrayList;
 
 public class StepActivity extends BaseActivity implements StepViewI,SensorEventListener {
+    private  int menuId;
     private boolean islike=false;
     private int linearlayoutViewSize=0;
     private boolean isSensor=true;
@@ -101,6 +102,8 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
         textView.setText(datas.get(0).getTitlle());
         else
             textView.setText(datas.get(0).getTitlle());
+        menu=datas.get(0).getTitlle();
+        menuId=datas.get(0).getId();
         linearLayout=findViewById(R.id.linerlayout);
         if(linearlayoutViewSize!=0)
         linearLayout.removeViews(4,linearlayoutViewSize);
@@ -182,6 +185,8 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
 
     @Override
     public void onDestroy(){
+        if(islike)
+            FavStoreUtil.saveCookbookToFav(menuId);
         super.onDestroy();
         if(stepPresenter!=null){
             stepPresenter.destroy();

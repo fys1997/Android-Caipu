@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerItem {
+    private int id;
     private String titlle;
     private String imgsrc;
     private String description;
@@ -96,5 +97,13 @@ public class RecyclerItem {
 
     public ArrayList<String> getIngredientsNumber() {
         return IngredientsNumber;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

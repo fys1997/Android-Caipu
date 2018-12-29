@@ -29,6 +29,7 @@ public class StepModel implements SModel {
             RecyclerItem item=new RecyclerItem(dto.getResult().getData().get(0).getSteps().get(i).getImg(),dto.getResult().getData().get(0).getSteps().get(i).getStep(),dto.getResult().getData().get(0).getIngredients()+";"+dto.getResult().getData().get(0).getBurden()+";");
             item.seprateIngredients();
             item.setTitlle(dto.getResult().getData().get(0).getTitle());
+            item.setId(dto.getResult().getData().get(0).getId());
             data.add(item);
         }
         return data;
@@ -48,6 +49,7 @@ public class StepModel implements SModel {
             RecyclerItem item=new RecyclerItem(idDto.getResult().getData().get(0).getSteps().get(i).getImg(),idDto.getResult().getData().get(0).getSteps().get(i).getStep(),idDto.getResult().getData().get(0).getIngredients()+";"+idDto.getResult().getData().get(0).getBurden()+";");
             item.setTitlle(idDto.getResult().getData().get(0).getTitle());
             item.seprateIngredients();
+            item.setId(dto.getResult().getData().get(0).getId());
             data.add(item);
         }
         return data;
