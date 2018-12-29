@@ -42,7 +42,11 @@ public class CreateCollectionAdapter extends RecyclerView.Adapter<CreateCollecti
     @Override
     public void onBindViewHolder(final CreateCollectionHolder holder,int position){
         holder.COllectionText.setText(data.get(position).getTitlle());
-        Glide.with(mcontext).load(data.get(position).getImgsrc()).apply(options).into(holder.CollectionImageView);
+        if(data.get(position).getImgsrc()!= null) {
+            Glide.with(mcontext).load(data.get(position).getImgsrc()).apply(options).into(holder.CollectionImageView);
+        }else{
+            Glide.with(mcontext).load(data.get(position).getCover()).apply(options).into(holder.CollectionImageView);
+        }
         holder.CollectionIngredients.setText(data.get(position).getIngredients());
         //Glide.with(mcontext).load(R.drawable.cancel_collection).into(holder.DeleteImageView);
         if(monItemClickListener!=null){

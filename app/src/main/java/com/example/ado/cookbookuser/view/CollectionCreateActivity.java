@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.ado.cookbookuser.R;
 import com.example.ado.cookbookuser.data.RecyclerItem;
@@ -32,6 +33,7 @@ public class CollectionCreateActivity extends BaseActivity implements CreateColl
     private Toolbar toolbarCollection;
     private CreateCollectionAdapter recyclerViewadapter;
     private String which;
+    private TextView displayTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +44,15 @@ public class CollectionCreateActivity extends BaseActivity implements CreateColl
         toolbarCollection = findViewById(R.id.toolbar_collection);
         setToolbar(toolbarCollection);
 
+        displayTitle = findViewById(R.id.display_title);
 
         presenter=new CreateCollectionPresenter(this);
         if(which.equals("like")) {
+            displayTitle.setText("我的收藏");
             favCookBookList = FavStoreUtil.getAllCookbookFromFav();
             presenter.getData(favCookBookList);
         } else{
+            displayTitle.setText("我的创建");
             createCookBookList = CreateStoreUtil.getCookbookFromCreate();
             presenter.getDatas(createCookBookList);
         }

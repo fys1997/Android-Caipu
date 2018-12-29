@@ -16,7 +16,7 @@ public class RecyclerItem {
     private ArrayList<String>IngredientsNumber=new ArrayList<>();
 
     public RecyclerItem(byte[]cover,String title,String ingredients){
-        this.imgsrc= new String(cover);
+        this.cover = cover;
         this.titlle=title;
         this.ingredients=ingredients;
     }
@@ -38,6 +38,10 @@ public class RecyclerItem {
     {
         this.imgsrc=i;
         this.description=d;
+    }
+
+    public byte[] getCover() {
+        return cover;
     }
 
     public String getDescription() {

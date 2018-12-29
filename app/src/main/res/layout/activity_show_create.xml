@@ -37,7 +37,6 @@
                 android:id="@+id/cookbook_cover"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:visibility="gone"
                 />
 
 
@@ -63,7 +62,6 @@
                 android:id="@+id/cookbook_material"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
                 android:layout_marginTop="10dp"
                 />
 

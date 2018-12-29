@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,6 +49,7 @@ public class ShowCreateActivity extends BaseActivity {
         cookbookName = findViewById(R.id.cookbook_name);
         cookbookMaterial = findViewById(R.id.cookbook_material);
         recyclerView = findViewById(R.id.cookbook_steps);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getBaseContext()));
 
         initData();
         cookStepShowAdapter = new CookStepShowAdapter(steps);
@@ -57,8 +60,8 @@ public class ShowCreateActivity extends BaseActivity {
 
     private void initData(){
         byte[] coverBytes = createCookBook.getCover();
-        Bitmap bitmap = BitmapFactory.decodeByteArray(coverBytes,0,coverBytes.length);
-        Glide.with(this).load(bitmap).into(cookbookCover);
+        //Bitmap bitmap = BitmapFactory.decodeByteArray(coverBytes,0,coverBytes.length);
+        Glide.with(this).load(coverBytes).into(cookbookCover);
         cookbookName.setText(createCookBook.getName());
         cookbookMaterial.setText(createCookBook.getMaterial());
         if(createCookBook.getStep1()!=null) steps.add(createCookBook.getStep1());
@@ -71,5 +74,16 @@ public class ShowCreateActivity extends BaseActivity {
         if(createCookBook.getStep8()!=null) steps.add(createCookBook.getStep8());
         if(createCookBook.getStep9()!=null) steps.add(createCookBook.getStep9());
         if(createCookBook.getStep10()!=null) steps.add(createCookBook.getStep10());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
