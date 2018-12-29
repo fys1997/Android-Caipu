@@ -24,6 +24,8 @@ import com.example.ado.cookbookuser.R;
 import com.example.ado.cookbookuser.view.Fragment.CreateFragment;
 import com.example.ado.cookbookuser.view.Fragment.FavFragment;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +37,10 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
     private AppBarLayout appBarLayout;                             //appBar
     private TextView headerTitle;                                       //顶部标题
     private FloatingActionButton fabEditInformation;               //编辑信息按键
-    private ViewPager viewPager;                                   //收藏和创建的食谱pager
-    private List<Fragment> pagers;                                     //viewPager的页面
-    private Button tabFavorite;                                    //收藏tab
-    private Button tabCreate;                                      //创建的食谱tab
+    private TextView tabCreate;                                      //创建的食谱tab
+    private TextView myUserName;
+    private TextView myBirthday;
+    private TextView myGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +53,15 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
         appBarLayout = findViewById(R.id.appBar);
         headerTitle = findViewById(R.id.header);
         fabEditInformation = findViewById(R.id.fab_edit_information);
-        viewPager = findViewById(R.id.fav_create_view_pager);
-        tabFavorite = findViewById(R.id.tab_favorite);
         tabCreate = findViewById(R.id.tab_create);
+        myUserName = findViewById(R.id.my_user_name);
+        myBirthday = findViewById(R.id.my_birthday);
+        myGender = findViewById(R.id.my_gender);
 
         setToolbar(toolbarUser);
 
         //设置监听事件
         fabEditInformation.setOnClickListener(this);
-        tabFavorite.setOnClickListener(this);
         tabCreate.setOnClickListener(this);
 
         //设置折叠事件
@@ -74,13 +76,20 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
             }
         });
 
-        initPager();
+
+
+    }
+
+    private void initMyInformation(){
+        myUserName.setText(BaseActivity.userForNow.getName().toString());
+        myBirthday.setText(BaseActivity.userForNow.getBirthday().toString());
+        myGender.setText(BaseActivity.userForNow.getGender().toString());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
+        initMyInformation();
         initWidget();
     }
 
@@ -90,14 +99,6 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
             case R.id.fab_edit_information:{
                 Intent intent = new Intent(UserActivity.this,EditUserActivity.class);
                 startActivity(intent);
-                break;
-            }
-            case R.id.tab_create:{
-                viewPager.setCurrentItem(1);
-                break;
-            }
-            case R.id.tab_favorite:{
-                viewPager.setCurrentItem(0);
                 break;
             }
             default:
@@ -116,48 +117,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
-    private void initPager(){
-        pagers = new ArrayList<>();
-        pagers.add(new FavFragment());
-        pagers.add(new CreateFragment());
 
-        FragmentPagerAdapter pagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int i) {
-                return pagers.get(i);
-            }
-
-            @Override
-            public int getCount() {
-                return pagers.size();
-            }
-        };
-
-        viewPager.setAdapter(pagerAdapter);
-
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-                if(i == 0){
-                    tabFavorite.setBackgroundResource(R.drawable.tab_border);
-                    tabCreate.setBackgroundResource(R.drawable.tab_default);
-                }else if(i == 1){
-                    tabCreate.setBackgroundResource(R.drawable.tab_border);
-                    tabFavorite.setBackgroundResource(R.drawable.tab_default);
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-
-            }
-        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

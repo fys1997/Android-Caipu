@@ -44,7 +44,7 @@ public class CreateCollectionAdapter extends RecyclerView.Adapter<CreateCollecti
         holder.COllectionText.setText(data.get(position).getTitlle());
         Glide.with(mcontext).load(data.get(position).getImgsrc()).apply(options).into(holder.CollectionImageView);
         holder.CollectionIngredients.setText(data.get(position).getIngredients());
-        Glide.with(mcontext).load(R.drawable.cancel_collection).into(holder.DeleteImageView);
+        //Glide.with(mcontext).load(R.drawable.cancel_collection).into(holder.DeleteImageView);
         if(monItemClickListener!=null){
             holder.itemView.setOnClickListener(new View.OnClickListener(){
                 @Override

@@ -28,7 +28,7 @@ public class CreateFragment extends Fragment {
         myBirthday = view.findViewById(R.id.my_birthday);
         myGender = view.findViewById(R.id.my_gender);
 
-        //initMyInformation();
+        initMyInformation();
 
         return view;
     }

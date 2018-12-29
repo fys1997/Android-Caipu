@@ -1,9 +1,12 @@
 package com.example.ado.cookbookuser.view;
 
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.example.ado.cookbookuser.R;
 import com.example.ado.cookbookuser.data.RecyclerItem;
@@ -20,11 +23,14 @@ public class CollectionCreateActivity extends BaseActivity implements CreateColl
     private RecyclerView recyclerView;
     private List<FavCookBook> favCookBookList;
     private CreateCollectionPresenter presenter;
+    private Toolbar toolbarCollection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_collection_page);
+        toolbarCollection = findViewById(R.id.toolbar_collection);
+        setToolbar(toolbarCollection);
         favCookBookList = FavStoreUtil.getAllCookbookFromFav();
         presenter=new CreateCollectionPresenter(this);
         presenter.getData(favCookBookList);
@@ -44,5 +50,16 @@ public class CollectionCreateActivity extends BaseActivity implements CreateColl
             presenter.destroy();
             presenter=null;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                break;
+            }
+        }
+        return true;
     }
 }
