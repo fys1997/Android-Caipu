@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.ado.cookbookuser.R;
@@ -35,12 +36,15 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
     private RecyclerView recyclerView;
     private StepPresenter stepPresenter;//该activity对应的present接口
     private Toolbar toolbarStep;
+    private ArrayList<String>menuNames;//记录了列表菜谱名
+    private int position;//此菜谱在之前界面list中的位置
+    private ArrayList<Integer>menuIDs;//记录了列表菜谱ID
     private int type;
     private SensorManager sensorManager;
     //private TextView textView;
     private Sensor sensor;
 
-    private static final int INTERVAL_TIME = 70;
+    private static final int INTERVAL_TIME = 700;
     private long lastTime;
 
     @Override
@@ -54,15 +58,20 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
 
         intent = getIntent();
         menu=intent.getStringExtra("name");//此处可能为menu与id
+        position=Integer.parseInt(intent.getStringExtra("position"));
         type=Integer.parseInt(intent.getStringExtra("type"));
         stepPresenter=new StepPresenter(this);
         imageView=(ImageView)findViewById(R.id.itemClickImageView);
         textView=(TextView)findViewById(R.id.RItemText);
         //recyclerView=(RecyclerView)findViewById(R.id.menuRecyclerView);
-        if(type==0)
-        stepPresenter.operation(menu);
-        else
-        stepPresenter.anotherOperation(Integer.parseInt(menu));
+        if(type==0) {
+            stepPresenter.operation(menu);
+            menuNames=intent.getStringArrayListExtra("list");
+        }
+        else {
+            stepPresenter.anotherOperation(Integer.parseInt(menu));
+            menuIDs=intent.getIntegerArrayListExtra("list");
+        }
 
         initSensor();
     }
@@ -158,9 +167,34 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
         float[] values = event.values;
 
         if (values[0] > 15){
+            if(type==0){
+                position--;
+                if(position<0)
+                    position=menuNames.size()-1;
+                stepPresenter.operation(menuNames.get(position));
+            }
+            else{
+                position--;
+                if(position<0)
+                    position=menuIDs.size();
+                stepPresenter.anotherOperation(menuIDs.get(position));
+            }
+            event.values[0] = 0;
+            //Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
             //想左摇晃
         }
         else if(values[0] < -15){
+            if(type==0){
+                position++;
+               position=position%menuNames.size();
+                stepPresenter.operation(menuNames.get(position));
+            }
+            else{
+                position--;
+                position=position%menuIDs.size();
+                stepPresenter.anotherOperation(menuIDs.get(position));
+            }
+            event.values[0] = 0;
             //向右摇晃
         }
     }

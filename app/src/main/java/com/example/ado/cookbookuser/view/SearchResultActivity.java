@@ -89,6 +89,10 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent=new Intent(SearchResultActivity.this, StepActivity.class);//此处要改
+                ArrayList<Integer>list=new ArrayList<>();
+                for (int i=0;i<recycleradapter.getData().size();i++){
+                    list.add(recycleradapter.getData().get(i).getId());
+                }
                 int id=recycleradapter.getData().get(position).getId();
                 intent.putExtra("name",Integer.toString(id));
                 //Bundle bundle=new Bundle();
@@ -96,6 +100,8 @@ public class SearchResultActivity extends BaseActivity implements SearchResultVi
                 //bundle.putString("name",Integer.toString(recycleradapter.getData().get(position).getId()));
                 //intent.putExtra("content",bundle);
                 intent.putExtra("type","1");//1代表网络请求调用使用id查值
+                intent.putExtra("position",Integer.toString(position));
+                intent.putIntegerArrayListExtra("list",list);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

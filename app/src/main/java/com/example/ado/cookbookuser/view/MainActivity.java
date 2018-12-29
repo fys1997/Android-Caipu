@@ -440,9 +440,16 @@ View.OnClickListener,MainViewI
         ((MRecyclerAdapter)recyclerView.getAdapter()).setOnItemClickListener(new OnClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                ArrayList<RecyclerItem>list=recyclerAdapter.getData();
+                ArrayList<String>listname=new ArrayList<>();
+                for(int i=0;i<list.size();i++){
+                    listname.add(list.get(i).getDescription());
+                }
                 Intent intent=new Intent(MainActivity.this, StepActivity.class);
                 intent.putExtra("name",recyclerAdapter.getData().get(position).getDescription());
                 intent.putExtra("type","0");//代表使用请求menu的网络调用接口
+                intent.putStringArrayListExtra("list",listname);
+                intent.putExtra("position",Integer.toString(position));
                 //Bundle bundle=new Bundle();
                 //bundle.putInt("type",0);
                 //bundle.putString("name",recyclerAdapter.getData().get(position).getDescription());

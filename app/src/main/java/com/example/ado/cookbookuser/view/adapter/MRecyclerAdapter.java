@@ -43,14 +43,14 @@ public class MRecyclerAdapter extends RecyclerView.Adapter<MRecyclerAdapter.MHol
         Glide.with(mcontext).load(data.get(position).getImgsrc()).apply(options).into(holder.imageView);
         holder.textView2.setText(data.get(position).getIngredients());
         holder.textView3.setText(data.get(position).getTags());
-        View itemview=((LinearLayout)holder.itemView).getChildAt(0);
+        final View itemview=((LinearLayout)holder.itemView).getChildAt(0);
         if(monItemClickListener!=null){
             itemview.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v)
                 {
                     int position=holder.getLayoutPosition();
-                    monItemClickListener.onItemClick(holder.imageView,position);
+                    monItemClickListener.onItemClick(itemview,position);
                 }
             });
         }

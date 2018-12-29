@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:layout_margin="2mm"
+        android:id="@+id/RCollectionItemImage"
+        android:layout_width="60pt"
+        android:layout_height="60pt"
+        android:maxHeight="60dp"
+        android:maxWidth="60dp" />
+
+    <LinearLayout
+        android:layout_width="159dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/RCollectionItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/RCollectiontags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2mm"
+            android:layout_marginTop="2mm"
+            android:textColor="#3e3d3d"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/RCollectioningredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#757373"
+            android:textSize="10sp" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/deleteCollection"
+        android:src="@drawable/cancel_collection"
+        android:layout_gravity="center"
+        android:layout_marginLeft="2mm"
+        android:layout_width="20pt"
+        android:layout_height="20pt"
+        android:maxHeight="60dp"
+        android:maxWidth="60dp" />
+
+</LinearLayout>
