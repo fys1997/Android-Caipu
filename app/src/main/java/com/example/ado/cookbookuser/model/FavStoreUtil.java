@@ -28,6 +28,7 @@ public class FavStoreUtil {
     }
 
     public static boolean isCookbookInFav(int cookbookId){
+        if(BaseActivity.userForNow == null) return false;
         List<FavCookBook> favCookBookList = getAllCookbookFromFav();
         for(int i = 0;i<favCookBookList.size();i++){
             if(favCookBookList.get(i).getCookBook_name_id() == cookbookId){
