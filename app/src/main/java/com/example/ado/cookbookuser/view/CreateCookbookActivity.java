@@ -162,9 +162,10 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
                     if(stepDetails.size()>=9)cookBook.setStep9(stepDetails.get(8));
                     if(stepDetails.size()>=10)cookBook.setStep10(stepDetails.get(9));
                     CreateStoreUtil.saveCookbookToCreate(cookBook);
+                    Toast.makeText(this, "保存食谱成功", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
-                Toast.makeText(this, "保存食谱成功", Toast.LENGTH_SHORT).show();
-                finish();
+
                 break;
             }
         }

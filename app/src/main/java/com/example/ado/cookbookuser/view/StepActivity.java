@@ -127,12 +127,14 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
             layoutParams=lineTextView.getLayoutParams();
             inTextView.setLayoutParams(layoutParams);
             inTextView.setTextColor(lineTextView.getTextColors());
+
             //此处加入内容
             String content=datas.get(0).getIngredientsName().get(i);
             content += ":  ";
             content=content+datas.get(0).getIngredientsNumber().get(i);
             inTextView.setText(content);
             inTextView.setTextSize(lineTextView.getTextSize());
+
             //加入view
             linearLayout.addView(Mview);
             linearLayout.addView(inTextView);
@@ -143,6 +145,7 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
             View Sview= getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.line);
             TextView StextView=getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.menuItemTextView);
             ImageView SimageView=getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.menuItemImageview);
+            TextView sTextViewStep = getLayoutInflater().inflate(R.layout.menu_item,null).findViewById(R.id.menuItemStepText);
 
             ViewGroup.LayoutParams layoutParams;
             layoutParams=Sview.getLayoutParams();
@@ -150,6 +153,14 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
             View Mview=new View(this);
             Mview.setLayoutParams(layoutParams);
            Mview.setBackground(Sview.getBackground());
+           //步骤
+            TextView stepView = new TextView(this);
+            stepView.setLayoutParams(sTextViewStep.getLayoutParams());
+            stepView.setTextSize(24);
+            stepView.setTextColor(sTextViewStep.getTextColors());
+            stepView.getPaint().setFakeBoldText(true);
+            stepView.setText("步骤"+ (i+1));
+
            //imageview
             ImageView Mimageview=new ImageView(this);
             layoutParams=SimageView.getLayoutParams();
@@ -162,9 +173,10 @@ public class StepActivity extends BaseActivity implements StepViewI,SensorEventL
             layoutParams=StextView.getLayoutParams();
             Mtextview.setLayoutParams(layoutParams);
             Mtextview.setTextColor(StextView.getTextColors());
-            Mtextview.setTextSize(StextView.getTextSize());
+            Mtextview.setTextSize(18);
             Mtextview.setText(datas.get(i).getDescription());
             linearLayout.addView(Mview);
+            linearLayout.addView(stepView);
             linearLayout.addView(Mimageview);
             linearLayout.addView(Mtextview);
             linearlayoutViewSize=linearlayoutViewSize+3;

@@ -15,21 +15,20 @@
 
     <ImageView
         android:id="@+id/menuItemImageview"
-        android:layout_width="180pt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2mm"
+        android:layout_margin="15dp"
         android:gravity="center_horizontal"
         android:maxHeight="60dp"
         android:maxWidth="60sp" />
 
     <TextView
         android:id="@+id/menuItemTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="2mm"
-        android:layout_marginRight="2mm"
-        android:layout_marginTop="2mm"
-        android:layout_marginBottom="7mm"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:textColor="#181818"
         android:textSize="10sp" />
@@ -54,13 +53,22 @@
         android:background="#d8d3d3" />
     <TextView
         android:id="@+id/ingredients"
-        android:textSize="8sp"
-        android:layout_marginLeft="2mm"
-        android:layout_marginTop="1mm"
-        android:layout_margin="2mm"
+        android:textSize="7sp"
+        android:layout_margin="10dp"
         android:text="可乐易拉罐一听"
         android:textColor="#2a2929"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/menuItemStepText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:textColor="#000"
+        android:textStyle="bold"
+        />
 
 </LinearLayout>
