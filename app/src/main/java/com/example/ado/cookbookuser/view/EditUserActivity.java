@@ -47,10 +47,8 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
     private EditText editUserBirthday;                  //用户生日编辑
     private EditText editUserGender;                    //用户性别编辑
     private GetPicUtil getPicUtil;
-    //用户选择头像图片的方式
 
-
-    private Uri imageHeadShotUri;                                //用户头像地址
+    private Uri imageHeadShotUri;                       //用户头像地址
 
     private User userChanged = new User();
     @Override
@@ -60,14 +58,17 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         getPicUtil = new GetPicUtil(this);
         //editUserPresenter = new EditUserPresenter(this);
 
+        //获取控件
         textView = findViewById(R.id.edit_layout_user_name);
         toolbarEditUser = findViewById(R.id.toolbar_edit_user);
         circleImageView = findViewById(R.id.edit_layout_headShot);
         editUserBirthday = findViewById(R.id.edit_user_birthday);
         editUserGender = findViewById(R.id.edit_user_gender);
 
+        //初始化布局
         initLayout();
 
+        //设置点击事件
         circleImageView.setOnClickListener(this);
         editUserBirthday.setOnClickListener(this);
         editUserGender.setOnClickListener(this);
@@ -75,6 +76,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
 
     //初始化布局
     private void initLayout(){
+        //设置toolbar
         setToolbar(toolbarEditUser);
 
         //初始化界面
@@ -123,7 +125,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         int year,month,day;
         cal=Calendar.getInstance();
         year=cal.get(Calendar.YEAR);
-        Log.i("wxy","year"+year);
+        //Log.i("wxy","year"+year);
         month=cal.get(Calendar.MONTH);
         day=cal.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog.OnDateSetListener listener=new DatePickerDialog.OnDateSetListener() {
@@ -133,7 +135,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
             }
         };
         DatePickerDialog dialog=new DatePickerDialog(EditUserActivity.this, 0,listener,year,month,day);
-        ;
+
         DatePicker datePicker = dialog.getDatePicker();
         Date today = Calendar.getInstance().getTime();//当天
         try {
@@ -161,6 +163,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         builder3.show();
     }
 
+    //通过拍照获取用户头像
     public void onGetPicByTakePhoto(Uri imageUri){
         super.onGetPicByTakePhoto(imageUri);
         this.imageHeadShotUri = imageUri;
@@ -172,9 +175,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
     //展示图片并保存
     public void onDisplayImage(String imagePath){
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-
         userChanged.setHeadShot(bitmapToByteArray(bitmap));
-
         Glide.with(this).load(imagePath).into(circleImageView);
     }
 
@@ -194,6 +195,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    //通过不同方式获取图片
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch(requestCode){
@@ -204,7 +206,6 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
                         userChanged.setHeadShot(bitmapToByteArray(bitmap));
 
                         Glide.with(this).load(bitmap).into(circleImageView);
-//                        circleImageView.setImageBitmap(bitmap);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
@@ -213,14 +214,13 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
             }
             case CHOOSE_PHOTO:{
                 if(resultCode == RESULT_OK){
-                    if(resultCode == RESULT_OK){
-                        if(Build.VERSION.SDK_INT >= 19){
-                            getPicUtil.handleImageOnKitKat(data);
-                        }else{
-                            getPicUtil.handleImageBeforeKitKat(data);
-                        }
+                    if(Build.VERSION.SDK_INT >= 19){
+                        getPicUtil.handleImageOnKitKat(data);
+                    }else{
+                        getPicUtil.handleImageBeforeKitKat(data);
                     }
                 }
+
                 break;
             }
             default:
@@ -228,13 +228,16 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         }
     }
 
+    //设置toolbar点击事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
+            //返回事件
             case android.R.id.home:{
                 finish();
                 return true;
             }
+            //保存用户信息
             case R.id.save:{
                 String birthday = editUserBirthday.getText().toString();
                 String gender = editUserGender.getText().toString();
@@ -257,6 +260,7 @@ public class EditUserActivity extends BaseActivity implements View.OnClickListen
         return super.onOptionsItemSelected(item);
     }
 
+    //设置toolbar的布局
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_edit_user,menu);

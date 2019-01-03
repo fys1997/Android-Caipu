@@ -28,7 +28,7 @@ import java.io.IOException;
 
 public class GetPicUtil {
 
-    private Uri imageUri;
+    private Uri imageUri;               //图片地址
     private BaseActivity activity;
 
     public GetPicUtil(BaseActivity activity){
@@ -46,6 +46,7 @@ public class GetPicUtil {
         }catch(IOException e){
             e.printStackTrace();
         }
+        //sdk大于24时
         if(Build.VERSION.SDK_INT >= 24){
             imageUri =  FileProvider.getUriForFile(activity,"com.example.ado.cookbookuser.fileprovider",outputImage);
         }else{

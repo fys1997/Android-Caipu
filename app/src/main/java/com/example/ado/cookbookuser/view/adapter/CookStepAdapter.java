@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CookStepAdapter extends RecyclerView.Adapter<CookStepAdapter.ViewHolder>{
 
-    private List<String> stepData;
+    private List<String> stepData;          //步骤数组
 
     public CookStepAdapter(List<String> data){
         this.stepData = data;
@@ -38,6 +38,7 @@ public class CookStepAdapter extends RecyclerView.Adapter<CookStepAdapter.ViewHo
         return stepData.size();
     }
 
+    //ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView stepId;
         public EditText stepDetail;
@@ -49,14 +50,15 @@ public class CookStepAdapter extends RecyclerView.Adapter<CookStepAdapter.ViewHo
         }
     }
 
+    //添加步骤
     public void addNewItem() {
 
         stepData.add(stepData.size(), "步骤" + (stepData.size()+1));
 
-        ////更新数据集不是用adapter.notifyDataSetChanged()而是notifyItemInserted(position)与notifyItemRemoved(position) 否则没有动画效果。
         notifyItemInserted(stepData.size());
     }
 
+    //删除步骤
     public void deleteItem() {
         stepData.remove(stepData.size()-1);
         notifyItemRemoved(stepData.size());

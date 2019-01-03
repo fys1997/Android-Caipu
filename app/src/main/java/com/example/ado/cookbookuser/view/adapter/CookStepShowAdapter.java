@@ -16,7 +16,7 @@ import java.util.zip.Inflater;
 
 public class CookStepShowAdapter extends RecyclerView.Adapter<CookStepShowAdapter.ViewHolder> {
 
-    private List<String> createCookBookSteps;
+    private List<String> createCookBookSteps;       //步骤展示数组
 
     public CookStepShowAdapter(List<String> createCookBookSteps){
         this.createCookBookSteps = createCookBookSteps;

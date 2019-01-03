@@ -6,6 +6,8 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
+
+//用户（数据库相关）
 public class User extends DataSupport{
 
     private int id;

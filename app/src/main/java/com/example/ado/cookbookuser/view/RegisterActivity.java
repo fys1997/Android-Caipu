@@ -23,7 +23,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private EditText editNewUserName;                    //输入新用户名
     private EditText editNewUserPassword;                //输入新用户密码
     private EditText editNewUserPasswordCheck;           //再次输入密码
-    private Toolbar toolbarRegister;                     //RegisterActivity的toolbar
+    private Toolbar toolbarRegister;                     //toolbar
     private Button register;                             //注册按键
 
     private RegisterPresenter registerPresenter;
@@ -34,12 +34,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         setContentView(R.layout.activity_register);
         registerPresenter = new RegisterPresenter(this);
 
+        //找到控件
         editNewUserName = findViewById(R.id.edit_new_user_name);
         editNewUserPassword = findViewById(R.id.edit_new_user_password);
         editNewUserPasswordCheck =findViewById(R.id.edit_new_user_password_makeSure);
         toolbarRegister = findViewById(R.id.toolbar_register);
         register = findViewById(R.id.btn_register);
 
+        //设置toolbar
         setToolbar(toolbarRegister);
 
         //设置监听事件
@@ -59,10 +61,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btn_register:{
+                //获取输入框内容
                 String newUserName = editNewUserName.getText().toString();
                 String newUserPassword = editNewUserPassword.getText().toString();
                 String newUserPasswordCheck = editNewUserPasswordCheck.getText().toString();
 
+                //用户注册
                 if(!hasWrongInput(newUserName,newUserPassword,newUserPasswordCheck))
                     registerPresenter.userRegister(newUserName,newUserPassword,newUserPasswordCheck);
             }
@@ -96,7 +100,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         Toast.makeText(RegisterActivity.this,"该用户已存在",Toast.LENGTH_SHORT).show();
     }
 
-    //注册成功
+    //注册成功，将用户信息存储到数据库
     public void onRegisterSucceed(String name,String password){
         //用户默认信息
         User user = new User();
@@ -116,6 +120,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         finish();
     }
 
+    //设置左上角的返回事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){

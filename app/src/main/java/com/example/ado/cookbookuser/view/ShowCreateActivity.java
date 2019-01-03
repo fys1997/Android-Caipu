@@ -24,14 +24,14 @@ import java.util.List;
 
 public class ShowCreateActivity extends BaseActivity {
 
-    private Toolbar toolbarShowCreate;
-    private ImageView cookbookCover;
-    private TextView cookbookName;
-    private TextView cookbookMaterial;
-    private RecyclerView recyclerView;
-    private int cookbookId;
-    private CreateCookBook createCookBook;
-    private List<String> steps;
+    private Toolbar toolbarShowCreate;                      //toolbar
+    private ImageView cookbookCover;                        //食谱封面
+    private TextView cookbookName;                          //食谱名
+    private TextView cookbookMaterial;                      //食谱用料
+    private RecyclerView recyclerView;                      //展示步骤的recyclerView
+    private int cookbookId;                                 //要展示的食谱对应的id
+    private CreateCookBook createCookBook;                  //要展示的食谱
+    private List<String> steps;                             //制作的步骤
 
     private CookStepShowAdapter cookStepShowAdapter;
 
@@ -40,10 +40,13 @@ public class ShowCreateActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_create);
 
+        //获取要展示的食谱的id，并在数据库中找到
         Intent intent = getIntent();
         steps = new ArrayList<>();
         cookbookId = intent.getIntExtra("id",0);
         createCookBook = DataSupport.find(CreateCookBook.class,cookbookId);
+
+        //获取控件
         toolbarShowCreate = findViewById(R.id.toolbar_show_create);
         cookbookCover = findViewById(R.id.cookbook_cover);
         cookbookName = findViewById(R.id.cookbook_name);
@@ -55,9 +58,11 @@ public class ShowCreateActivity extends BaseActivity {
         cookStepShowAdapter = new CookStepShowAdapter(steps);
         recyclerView.setAdapter(cookStepShowAdapter);
 
+        //设置toolbar
         setToolbar(toolbarShowCreate);
     }
 
+    //将获取到的食谱的封面图片，名字，用料展示出来，步骤存储到steps数组中
     private void initData(){
         byte[] coverBytes = createCookBook.getCover();
         //Bitmap bitmap = BitmapFactory.decodeByteArray(coverBytes,0,coverBytes.length);
@@ -76,6 +81,7 @@ public class ShowCreateActivity extends BaseActivity {
         if(createCookBook.getStep10()!=null) steps.add(createCookBook.getStep10());
     }
 
+    //设置左上角的返回事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){

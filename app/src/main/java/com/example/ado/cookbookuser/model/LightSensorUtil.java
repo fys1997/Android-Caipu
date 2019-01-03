@@ -21,17 +21,16 @@ public class LightSensorUtil implements SensorEventListener {
         this.mContext = context;
         this.baseActivity = baseActivity;
 
-
-
         init();
     }
 
+    //判断光照强度
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
 
             if(event.values[0] < 20.0f) {
-                baseActivity.onLightSensorChanged(event.values[0]);
+                baseActivity.onLightSensorChanged(event.values[0]); //调用光感变化后的函数
                 manager.unregisterListener(this);
             }
         }
@@ -42,6 +41,7 @@ public class LightSensorUtil implements SensorEventListener {
 
     }
 
+    //初始化传感器管理
     private void init(){
         manager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         if (isSupportLightSensor()){
@@ -51,6 +51,7 @@ public class LightSensorUtil implements SensorEventListener {
         }
     }
 
+    //判断设备是否支持光照感应
     private boolean isSupportLightSensor(){
         List<Sensor> sensorList = manager.getSensorList(Sensor.TYPE_ALL);
         for(Sensor sensor:sensorList){
@@ -61,6 +62,7 @@ public class LightSensorUtil implements SensorEventListener {
         return false;
     }
 
+    //注册光照传感器
     private void registerLightSensor(){
         if(manager != null) {
             Sensor sensor = manager.getDefaultSensor(Sensor.TYPE_LIGHT);

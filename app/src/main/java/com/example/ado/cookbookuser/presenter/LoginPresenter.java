@@ -17,12 +17,13 @@ public class LoginPresenter {
         this.loginActivity = loginActivity;
     }
 
-
+    //从数据库中找到用户，判断用户名和密码是否匹配
     public void userLogin(String name,String password){
         List<User> users = DataSupport.findAll(User.class);
         for(User user:users){
             if(name.equals(user.getName())){
                 try {
+                    //解码并判断
                     if(password.equals(DES.decryptDES(user.getPassword(), BaseActivity.KEY_PASSWORD))){
                         loginActivity.onLoginSucceed(user);
                         return;
@@ -35,6 +36,7 @@ public class LoginPresenter {
                 }
             }
         }
+        //无用户
         loginActivity.onNotExistUserName();
     }
 }

@@ -24,9 +24,11 @@ public class BootActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_boot);
 
+        //获取指纹功能是否开启
         String storageState = Environment.getExternalStorageState();
         if (storageState.equals(Environment.MEDIA_MOUNTED)) {
 
+            //对应的文件名
             String fingerPointFile = getExternalCacheDir().getAbsolutePath() + File.separator + "isFingerPointAuthOpen.txt";
             File file = new File(fingerPointFile);
             if (!file.exists()) {
@@ -44,6 +46,7 @@ public class BootActivity extends AppCompatActivity {
 
             StringBuilder stringBuilder = new StringBuilder("");
 
+
             try {
                 FileInputStream fileInputStream = new FileInputStream(fingerPointFile);
                 byte[] buffer = new byte[10];
@@ -58,6 +61,7 @@ public class BootActivity extends AppCompatActivity {
 
             String isFingerPointAuthOpen = stringBuilder.toString();
 
+            //根据指纹功能是否打开来进行不同的跳转
             if(isFingerPointAuthOpen.equals("false")){
                 mHandler.postDelayed(switchRunnable,5000);
             }else if(isFingerPointAuthOpen.equals("true")){
@@ -67,17 +71,20 @@ public class BootActivity extends AppCompatActivity {
         
     }
 
+    //跳转到主界面
     private void switchToMain(){
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
         finish();
     }
 
+    //跳转到指纹验证界面
     private void switchToFingerPointAuth(){
         Intent intent = new Intent(this,FingerPointAuthActivity.class);
         startActivity(intent);
         finish();
     }
+
 
     private Runnable switchRunnable = new Runnable() {
         @Override

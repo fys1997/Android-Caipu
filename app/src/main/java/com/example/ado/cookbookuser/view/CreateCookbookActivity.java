@@ -38,22 +38,22 @@ import java.util.List;
 
 public class CreateCookbookActivity extends BaseActivity implements View.OnClickListener{
 
-    private Toolbar toolbarCreateCookbook;
-    private RecyclerView recyclerView;
-    private CookStepAdapter cookStepAdapter;
-    private TextView stepMore;
-    private TextView stepLess;
-    private Button submitCookbook;
-    private EditText inputCookbookMaterial;
-    private TextView inputCookbookName;
-    private ImageView cookbookCover;
-    private TextView placeHolder;
+    private Toolbar toolbarCreateCookbook;          //toolbar
+    private RecyclerView recyclerView;              //存储步骤的toolbar
+    private CookStepAdapter cookStepAdapter;        //adapter
+    private TextView stepMore;                      //加步骤按键
+    private TextView stepLess;                      //减步骤的按键
+    private Button submitCookbook;                  //提交食谱
+    private EditText inputCookbookMaterial;         //输入食材
+    private TextView inputCookbookName;             //输入食谱名
+    private ImageView cookbookCover;                //输入食谱封面
+    private TextView placeHolder;                   //占位（未输入食谱封面前）
     private CreateCookBook cookBook = new CreateCookBook();
 
-    private Bitmap coverBitmap;
+    private Bitmap coverBitmap;                     //封面图的bitmap
     private int stepSize = 0;
     private GetPicUtil getPicUtil;
-    private Uri imageCoverUri;
+    private Uri imageCoverUri;                      //封面图的uri
 
     private List<String> stepIds;
     private List<String> stepDetails;
@@ -66,8 +66,9 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
 
         getPicUtil = new GetPicUtil(this);
         cookStepAdapter = new CookStepAdapter(stepIds);
-        toolbarCreateCookbook = findViewById(R.id.toolbar_create_cookbook);
 
+        //获取控件
+        toolbarCreateCookbook = findViewById(R.id.toolbar_create_cookbook);
         cookbookCover = findViewById(R.id.cookbook_cover);
         placeHolder = findViewById(R.id.place_holder);
         inputCookbookName = findViewById(R.id.select_cookbook_name);
@@ -77,6 +78,7 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
         stepLess = findViewById(R.id.step_less);
         submitCookbook = findViewById(R.id.submit_cookbook);
 
+        //设置点击事件
         cookbookCover.setOnClickListener(this);
         placeHolder.setOnClickListener(this);
         stepMore.setOnClickListener(this);
@@ -86,15 +88,19 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
         initLayout();
     }
 
+    //初始化布局
     private void initLayout(){
+        //设置toolbar
         setToolbar(toolbarCreateCookbook);
 
+        //设置recyclerView
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(cookStepAdapter);
         recyclerView.setItemAnimator( new DefaultItemAnimator());
     }
 
+    //初始化步骤
     private void initData(){
         stepIds = new ArrayList<>();
         stepIds.add("步骤1");
@@ -106,6 +112,7 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.cookbook_cover:{
+                //点击图片来将其移除
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setMessage("确定要移除图片吗");
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -125,10 +132,12 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
                 break;
             }
             case R.id.place_holder:{
+                //弹出选择图片的方式
                 showChoiceOfPic("cook_book_cover.jpg",getPicUtil);
                 break;
             }
             case R.id.step_more:{
+                //添加一个步骤
                 cookStepAdapter.addNewItem();
                 stepSize++;
                 stepLess.setVisibility(View.VISIBLE);
@@ -138,6 +147,7 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
                 break;
             }
             case R.id.step_less:{
+                //减少一个步骤
                 cookStepAdapter.deleteItem();
                 stepSize--;
                 if(stepSize == 0){
@@ -147,7 +157,9 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
                 break;
             }
             case R.id.submit_cookbook:{
+                //提交食谱
                 if(!hasInputError()){
+                    //存储到数据库
                     cookBook.setCover(bitmapToByteArray(coverBitmap));
                     cookBook.setName(inputCookbookName.getText().toString());
                     cookBook.setMaterial(inputCookbookMaterial.getText().toString());
@@ -171,6 +183,7 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
         }
     }
 
+    //是否存在空输入
     private boolean hasInputError(){
         if(cookbookCover.getVisibility() == View.GONE){
             Toast.makeText(this, "请上传食谱封面", Toast.LENGTH_SHORT).show();
@@ -188,6 +201,7 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
         return false;
     }
 
+    //是否存在空步骤
     private boolean hasEmptyStep(){
         stepDetails = new ArrayList<>();
         for(int i = 0;i<recyclerView.getChildCount();i++){
@@ -202,6 +216,7 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
         return false;
     }
 
+    //通过拍照获取图片
     public void onGetPicByTakePhoto(Uri imageUri){
         super.onGetPicByTakePhoto(imageUri);
         this.imageCoverUri = imageUri;
@@ -211,22 +226,24 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch(requestCode){
+            //通过拍照获取图片
             case TAKE_PHOTO:{
                 if(resultCode == RESULT_OK){
                     try {
+                        //展示图片
                         Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(imageCoverUri));
                         Glide.with(this).load(bitmap).into(cookbookCover);
 
                         coverBitmap = bitmap;
                         cookbookCover.setVisibility(View.VISIBLE);
                         placeHolder.setVisibility(View.GONE);
-//                        circleImageView.setImageBitmap(bitmap);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
                 }
                 break;
             }
+            //通过相册选择图片
             case CHOOSE_PHOTO:{
                 if(resultCode == RESULT_OK){
                     if(resultCode == RESULT_OK){
@@ -253,6 +270,7 @@ public class CreateCookbookActivity extends BaseActivity implements View.OnClick
         placeHolder.setVisibility(View.GONE);
     }
 
+    //设置左上角返回事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){

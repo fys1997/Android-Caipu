@@ -4,6 +4,7 @@ import com.example.ado.cookbookuser.model.User;
 
 import org.litepal.crud.DataSupport;
 
+//收藏的食谱（数据库相关）
 public class FavCookBook extends DataSupport {
     private int cookBook_name_id;
     private User user;

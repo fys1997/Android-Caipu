@@ -13,6 +13,7 @@ public class RegisterPresenter {
         this.registerActivity = registerActivity;
     }
 
+
     public void userRegister(String name, String password, String passwordCheck){
         if(!password.equals(passwordCheck)){
             registerActivity.onEnterDifferentPassword();
@@ -23,6 +24,7 @@ public class RegisterPresenter {
         }
     }
 
+    //判断用户名是否存在
     private boolean hasUserName(String name){
         List<User> users = DataSupport.findAll(User.class);
         for(User user:users){

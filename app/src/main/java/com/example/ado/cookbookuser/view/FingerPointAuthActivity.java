@@ -29,6 +29,7 @@ public class FingerPointAuthActivity extends BaseActivity {
 
         fingerprintManager = (FingerprintManager) getSystemService(Context.FINGERPRINT_SERVICE);
 
+        //若无指纹
         if(!fingerprintManager.hasEnrolledFingerprints()){
             startActivity(new Intent(this,MainActivity.class));
             finish();
@@ -36,9 +37,11 @@ public class FingerPointAuthActivity extends BaseActivity {
 
         fingerPointAuthPresent = new FingerPointAuthPresent(this);
 
+        //开始验证指纹
         fingerPointAuthPresent.startFingerPointAuth();
     }
 
+    //验证成功
     public void onAuthenticationSucceeded(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

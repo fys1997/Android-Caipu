@@ -2,6 +2,7 @@ package com.example.ado.cookbookuser.model;
 
 import org.litepal.crud.DataSupport;
 
+//创建的食谱（数据库相关）
 public class CreateCookBook extends DataSupport{
 
     private int id;

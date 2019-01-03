@@ -23,18 +23,19 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
     private ImageView userHandShot;                                //用户头像
     private CollapsingToolbarLayout collapsingToolbarLayout;       //折叠栏
     private AppBarLayout appBarLayout;                             //appBar
-    private TextView headerTitle;                                       //顶部标题
+    private TextView headerTitle;                                  //顶部标题
     private FloatingActionButton fabEditInformation;               //编辑信息按键
-    private TextView tabCreate;                                      //创建的食谱tab
-    private TextView myUserName;
-    private TextView myBirthday;
-    private TextView myGender;
+    private TextView tabCreate;                                    //创建的食谱tab
+    private TextView myUserName;                                   //用户名
+    private TextView myBirthday;                                   //用户生日
+    private TextView myGender;                                     //用户性别
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
 
+        //获取控件
         toolbarUser = findViewById(R.id.toolbar_user);
         userHandShot = findViewById(R.id.user_headShot);
         collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar_layout);
@@ -46,13 +47,14 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
         myBirthday = findViewById(R.id.my_birthday);
         myGender = findViewById(R.id.my_gender);
 
+        //设置toolbar
         setToolbar(toolbarUser);
 
         //设置监听事件
         fabEditInformation.setOnClickListener(this);
         tabCreate.setOnClickListener(this);
 
-        //设置折叠事件
+        //根据用户华东设置折叠事件
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
@@ -68,6 +70,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
 
     }
 
+    //填写当前登录的用户的信息
     private void initMyInformation(){
         myUserName.setText(BaseActivity.userForNow.getName().toString());
         myBirthday.setText(BaseActivity.userForNow.getBirthday().toString());
@@ -85,6 +88,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.fab_edit_information:{
+                //跳转到编辑信息的界面
                 Intent intent = new Intent(UserActivity.this,EditUserActivity.class);
                 startActivity(intent);
                 break;
@@ -94,9 +98,10 @@ public class UserActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
+    //初始化用户头像
     private void initWidget(){
-        //登录状态
-        if(BaseActivity.userForNow != null){
+
+        if(BaseActivity.userForNow != null){  //登录状态
             byte[] userForNowHeadShot = BaseActivity.userForNow.getHeadShot();
             Bitmap bitmap = BitmapFactory.decodeByteArray(userForNowHeadShot,0,userForNowHeadShot.length);
             Glide.with(UserActivity.this).load(bitmap).into(userHandShot);

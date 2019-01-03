@@ -20,26 +20,30 @@ import java.util.List;
 
 public class ChangePwdActivity extends BaseActivity implements View.OnClickListener{
 
-    private Toolbar toolbarChangePwd;
-    private EditText oldPasswordEdit;
-    private EditText newPasswordEdit;
-    private Button submitChange;
+    private Toolbar toolbarChangePwd;               //toolbar
+    private EditText oldPasswordEdit;               //旧密码
+    private EditText newPasswordEdit;               //新密码
+    private Button submitChange;                    //提交按键
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_pwd);
 
+        //获取控件
         toolbarChangePwd = findViewById(R.id.toolbar_change_pwd);
         oldPasswordEdit = findViewById(R.id.old_password);
         newPasswordEdit = findViewById(R.id.new_password);
         submitChange = findViewById(R.id.submit_button);
 
+        //设置toolbar
         setToolbar(toolbarChangePwd);
 
+        //添加点击事件
         submitChange.setOnClickListener(this);
     }
 
+    //清空输入框
     @Override
     protected void onStart() {
         super.onStart();
@@ -52,21 +56,26 @@ public class ChangePwdActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.submit_button:{
                 if(isInputTrue()){
+                    //获取输入框内容
                     String oldPwd = oldPasswordEdit.getText().toString();
                     String newPwd = newPasswordEdit.getText().toString();
                     String name = BaseActivity.userForNow.getName();
+
+                    //从数据库中找到当前用户
                     List<User> users = DataSupport.findAll(User.class);
                     for(User user:users){
                         if(name.equals(user.getName())){
                             try {
+                                //解码
                                 String oldPassword = DES.decryptDES(user.getPassword(), BaseActivity.KEY_PASSWORD);
                                 if(oldPwd.equals(oldPassword)){
                                     try {
+                                        //加密新密码
                                         user.setPassword(DES.encryptDES(newPwd,KEY_PASSWORD));
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
-                                    user.save();
+                                    user.save();        //存储
                                     Toast.makeText(this, "密码修改成功", Toast.LENGTH_SHORT).show();
                                     finish();
                                     return;
@@ -85,6 +94,7 @@ public class ChangePwdActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
+    //判断输入是否为空
     private boolean isInputTrue(){
         if (oldPasswordEdit.getText().toString().equals("")){
             Toast.makeText(this, "请输入您的旧密码", Toast.LENGTH_SHORT).show();
@@ -101,6 +111,7 @@ public class ChangePwdActivity extends BaseActivity implements View.OnClickListe
         return true;
     }
 
+    //设置左上角的返回事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){

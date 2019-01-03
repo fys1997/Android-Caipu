@@ -37,6 +37,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         setContentView(R.layout.activity_login);
         loginPresenter = new LoginPresenter(this);
 
+        //获取控件
         toolbarLogin = findViewById(R.id.toolbar_login);
         editUserName = findViewById(R.id.edit_user_name);
         editUserPassword = findViewById(R.id.edit_user_password);
@@ -47,6 +48,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         btnLogin.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
 
+        //设置toolbar
         setToolbar(toolbarLogin);
     }
 
@@ -64,6 +66,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_login:{
+                //获取输入框内容
                 String userName = editUserName.getText().toString();
                 String userPassword = editUserPassword.getText().toString();
 
@@ -72,6 +75,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                 break;
             }
             case R.id.btn_register_user:{
+                //跳转到注册
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
                 break;
@@ -135,6 +139,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
         finish();
     }
 
+    //设置左上角的返回事件
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){

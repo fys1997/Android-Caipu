@@ -23,6 +23,7 @@ public class FingerPointAuthPresent {
         this.fingerPointAuthActivity = fingerPointAuthActivity;
     }
 
+    //开始验证指纹
     public void startFingerPointAuth(){
         prepareData();
         mFingerprintManager = getFingerprintManager(fingerPointAuthActivity);
@@ -34,6 +35,7 @@ public class FingerPointAuthPresent {
             mCancellationSignal = new CancellationSignal();
         }
         if (mAuthCallback == null) {
+            //状态反馈
             mAuthCallback = new FingerprintManager.AuthenticationCallback() {
                 @Override
                 public void onAuthenticationError(int errMsgId, CharSequence errString) {
@@ -59,6 +61,7 @@ public class FingerPointAuthPresent {
         }
     }
 
+    //获取指纹管理
     public static FingerprintManager getFingerprintManager(Context context) {
         FingerprintManager fingerprintManager = null;
         fingerprintManager = (FingerprintManager) context.getSystemService(Context.FINGERPRINT_SERVICE);

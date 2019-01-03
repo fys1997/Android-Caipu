@@ -38,30 +38,30 @@ import static android.os.Environment.getExternalStorageState;
 
 public class BaseActivity extends AppCompatActivity {
 
-    //当前登录的用户
-    public static User userForNow = null;
+
+    public static User userForNow = null;                   //当前登录的用户
 
     //public final static String KEY_PASSWORD = "9588028820109132570743325311898426347857298773549468758875018579537757772163084478873699447306034466200616411960574122434059469100235892702736860872901247123456";
-    public final static String KEY_PASSWORD = "12345678";
+    public final static String KEY_PASSWORD = "12345678";   //密码加密的key
 
-    private LightSensorUtil lightSensorUtil;
+    private LightSensorUtil lightSensorUtil;                //光照传感器的功能类
 
-    public static Boolean isLightSensorOpen = false;
+    public static Boolean isLightSensorOpen = false;        //是否开启光照
 
-    public static final int TAKE_PHOTO = 1;
-    public static final int CHOOSE_PHOTO = 2;
+    public static final int TAKE_PHOTO = 1;                 //获取图片的模式为拍照
+    public static final int CHOOSE_PHOTO = 2;               //获取图片的模式为从相册中选择
 
 
-    //创建数据库
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
     }
 
-    //从缓存中获得当前的登录用户
     @Override
     protected void onStart() {
         super.onStart();
+        //若光照感应打开，则开始进行光照检测
         int currentNightMode = getResources().getConfiguration().uiMode
                 & Configuration.UI_MODE_NIGHT_MASK;
         if(isLightSensorOpen && currentNightMode == Configuration.UI_MODE_NIGHT_NO){
@@ -125,6 +125,7 @@ public class BaseActivity extends AppCompatActivity {
         return baos.toByteArray();
     }
 
+    //提示用户光照较弱，建议切换模式
     public void onLightSensorChanged(float lightWeight){
         //Toast.makeText(this, "" + lightWeight, Toast.LENGTH_SHORT).show();
 
@@ -135,11 +136,12 @@ public class BaseActivity extends AppCompatActivity {
         snackbar.show();
     }
 
+    //开始进行光照检测
     public void onLightSensorBegin(){
         lightSensorUtil = new LightSensorUtil(getApplicationContext(),this);
     }
 
-
+    //设置toolbar
     public void setToolbar(Toolbar toolbar){
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -187,6 +189,7 @@ public class BaseActivity extends AppCompatActivity {
         startActivityForResult(intent,CHOOSE_PHOTO);
     }
 
+    //展示图片
     public void  onDisplayImage(String imagePath){
 
     }
